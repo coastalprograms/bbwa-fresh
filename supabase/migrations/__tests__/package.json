@@ -1,0 +1,20 @@
+{
+  "name": "swms-migration-tests",
+  "version": "1.0.0",
+  "description": "Tests for SWMS database migrations",
+  "main": "swms-tables.test.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFiles": ["<rootDir>/setup.js"]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "bbwa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "build:prod": "turbo build --env-mode=strict",
+    "start": "npm run start -w apps/web",
+    "lint": "turbo lint",
+    "lint:fix": "turbo lint -- --fix",
+    "format": "turbo format",
+    "format:check": "turbo format -- --check",
+    "test": "turbo test",
+    "test:watch": "turbo test:watch",
+    "test:coverage": "turbo test -- --coverage",
+    "typecheck": "turbo typecheck",
+    "tsc": "npm run typecheck",
+    "env:validate": "turbo env:validate",
+    "env:setup": "node scripts/setup-dev.js",
+    "env:check": "npm run env:validate",
+    "setup": "node scripts/dev-setup.js",
+    "clean": "turbo clean && rm -rf node_modules apps/web/node_modules",
+    "clean:cache": "turbo clean && rm -rf .turbo",
+    "dev:fast": "turbo dev --cache-dir=.turbo --parallel",
+    "build:analyze": "turbo build -- --analyze",
+    "ci:validate": "npm run env:validate && npm run typecheck && npm run lint && npm run test",
+    "precommit": "turbo lint typecheck",
+    "postinstall": "echo \"🎉 Dependencies installed! Run 'npm run setup' for full dev environment setup.\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Bayside Builders WA - Construction compliance and marketing platform",
+  "devDependencies": {
+    "turbo": "^2.5.6"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "packageManager": "npm@10.0.0"
+}

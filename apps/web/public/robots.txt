@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Allow all crawlers to access the site
+# Disallow admin and authentication routes
+Disallow: /admin*
+Disallow: /login*
+Disallow: /api*
+Disallow: /check-in*
+Disallow: /portal*
+Disallow: /induction*
+Disallow: /health*
+Disallow: /db-check*
+Disallow: /design-tokens*
+Disallow: /dev*
+
+# Sitemap location
+Sitemap: https://baysidebuilderswa.com.au/sitemap.xml

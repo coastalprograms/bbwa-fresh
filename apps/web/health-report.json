@@ -1,0 +1,22 @@
+{
+  "timestamp": "2025-08-29T07:27:43.380Z",
+  "status": "unhealthy",
+  "checks": {},
+  "performance": {
+    "memoryUsage": {
+      "rss": "43MB",
+      "heapUsed": "5MB",
+      "heapTotal": "7MB"
+    },
+    "uptime": "0s"
+  },
+  "warnings": [
+    "Database URL not configured"
+  ],
+  "errors": [
+    "Missing environment variables: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY",
+    "Failed to check dependencies: ENOENT: no such file or directory, open 'C:\\Users\\jakes\\Developer\\bbwa\\apps\\web\\apps\\web\\package.json'",
+    "Failed to reach http://localhost:3000/api/health: ",
+    "Failed to reach https://baysidebuilderswa.com.au/api/health: getaddrinfo ENOTFOUND baysidebuilderswa.com.au"
+  ]
+}

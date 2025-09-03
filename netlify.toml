@@ -1,0 +1,223 @@
+# Netlify Configuration for Bayside Builders WA
+# Construction Compliance and Marketing Platform
+
+[build]
+  # Build command runs in the apps/web workspace
+  command = "npm run build"
+  
+  # Next.js builds output to apps/web/.next and apps/web/out
+  publish = "apps/web/.next"
+  
+  # Base directory for all build operations
+  base = "."
+
+[build.environment]
+  # Node.js version for build environment
+  NODE_VERSION = "18"
+  
+  # Specify npm version for consistency
+  NPM_VERSION = "9"
+  
+  # Enable Next.js telemetry opt-out for faster builds
+  NEXT_TELEMETRY_DISABLED = "1"
+  
+  # Optimize build performance
+  NODE_OPTIONS = "--max_old_space_size=4096"
+
+# Next.js plugin configuration
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+  
+  [plugins.inputs]
+    # Enable Next.js Image Optimization
+    nextImageOptimization = true
+    
+    # Enable ISR (Incremental Static Regeneration)
+    nextISR = true
+    
+    # Configure function timeout (max 26 seconds on Netlify)
+    functionTimeout = 26
+
+# Build processing configuration
+[build.processing]
+  # Skip Netlify's default processing since Next.js handles it
+  skip_processing = false
+
+[build.processing.css]
+  # Let Next.js handle CSS processing with Tailwind
+  bundle = false
+  minify = false
+
+[build.processing.js]
+  # Let Next.js handle JavaScript bundling
+  bundle = false
+  minify = false
+
+[build.processing.html]
+  # Let Next.js handle HTML processing
+  pretty_urls = true
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(self)"
+    
+    # Performance headers
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Static assets caching
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# API routes caching
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Image optimization caching
+[[headers]]
+  for = "/_next/image/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Redirects for clean URLs and legacy support
+[[redirects]]
+  # Redirect trailing slashes for consistency
+  from = "/*/"
+  to = "/:splat"
+  status = 301
+  force = false
+
+# SPA fallback for client-side routing
+[[redirects]]
+  # Handle client-side routing fallback
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  
+  # Only apply to non-file requests (preserves API routes and static files)
+  conditions = {Role = ["admin"], Country = ["AU"]}
+  force = false
+
+# Environment-specific redirects
+[[redirects]]
+  # Redirect old domain or development URLs
+  from = "https://old-domain.com/*"
+  to = "https://baysidebuilderswa.netlify.app/:splat"
+  status = 301
+  force = true
+
+# Form handling (Netlify Forms)
+[[redirects]]
+  # Contact form submissions
+  from = "/contact"
+  to = "/api/contact"
+  status = 200
+  force = false
+  
+  # Only for POST requests
+  conditions = {Role = ["admin"]}
+
+# Function configuration
+[functions]
+  # Directory for Netlify Functions (if used alongside Supabase Edge Functions)
+  directory = "netlify/functions"
+  
+  # Function timeout (max 26 seconds)
+  timeout = 26
+  
+  # Memory allocation
+  memory = 1024
+
+# Development server configuration
+[dev]
+  # Command to run local development server
+  command = "npm run dev"
+  
+  # Port for local development
+  port = 3000
+  
+  # Publish directory for local development
+  publish = "apps/web/.next"
+  
+  # Environment file for local development
+  envFile = "apps/web/.env.local"
+
+# Context-specific configurations
+
+# Production environment
+[context.production]
+  # Production-specific environment variables
+  [context.production.environment]
+    NODE_ENV = "production"
+    NEXT_TELEMETRY_DISABLED = "1"
+
+# Deploy previews (branch previews)
+[context.deploy-preview]
+  # Deploy preview specific environment
+  [context.deploy-preview.environment]
+    NODE_ENV = "development"
+    ROBOTS_TXT_CONTENT = "User-agent: *\nDisallow: /"
+
+# Branch-specific configurations
+[context.staging]
+  # Staging branch configuration
+  [context.staging.environment]
+    NODE_ENV = "staging"
+
+# Edge Functions configuration (for Supabase integration)
+[[edge_functions]]
+  function = "edge-handler"
+  path = "/api/edge/*"
+
+# Plugin inputs for advanced configuration
+[plugins.inputs.nextjs]
+  # Custom Next.js configuration
+  distDir = "apps/web/.next"
+  
+  # Enable experimental features
+  experimental = true
+  
+  # Image domains for Next.js Image component
+  imageDomains = ["supabase.co", "googleapis.com"]
+
+# Analytics and monitoring
+[template]
+  # Template configuration for consistent deployments
+  incoming_hooks = ["github"]
+  
+  # Environment variable templates
+  [template.environment]
+    NEXT_PUBLIC_SITE_URL = "https://baysidebuilderswa.netlify.app"
+
+# Split testing (A/B testing) - if needed
+# [[redirects]]
+#   from = "/beta-feature"
+#   to = "/beta-feature-variant"
+#   status = 200
+#   conditions = {Cookie = ["beta_user=true"]}
+
+# Rate limiting for API endpoints (Netlify Pro feature)
+# [[plugins]]
+#   package = "netlify-plugin-rate-limiting"
+#   [plugins.inputs]
+#     routes = ["/api/*"]
+#     limit = 100
+#     window = "1m"
+
+# Performance monitoring
+[plugins.inputs.monitoring]
+  # Enable performance monitoring
+  lighthouse = true
+  
+  # Core Web Vitals tracking
+  webVitals = true

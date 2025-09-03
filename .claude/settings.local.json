@@ -1,0 +1,140 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__serena_check_onboarding_performed",
+      "mcp__serena_list_dir",
+      "mcp__serena_find_file",
+      "mcp__serena_read_memory",
+      "Bash(cat:*)",
+      "Bash(npm start)",
+      "Bash(npm run:*)",
+      "mcp__shadcn-ui__get_component",
+      "Bash(npm install:*)",
+      "Bash(start chrome http://localhost:3000)",
+      "Bash(cmd /c:*)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "mcp__serena__check_onboarding_performed",
+      "mcp__serena__find_file",
+      "mcp__serena__search_for_pattern",
+      "mcp__serena__list_dir",
+      "mcp__serena__list_dir",
+      "Bash(grep:*)",
+      "Bash(sed:*)",
+      "Bash(cp:*)",
+      "Bash(tasklist:*)",
+      "Bash(taskkill:*)",
+      "Bash(rm:*)",
+      "Bash(curl:*)",
+      "Bash(npx tsc:*)",
+      "Bash(start chrome http://localhost:3005)",
+      "mcp__serena__read_memory",
+      "mcp__serena__think_about_collected_information",
+      "mcp__serena__get_symbols_overview",
+      "mcp__serena__find_symbol",
+      "Bash(findstr:*)",
+      "mcp__brave-search__brave_web_search",
+      "Bash(powershell:*)",
+      "Bash(start chrome http://localhost:3007)",
+      "Bash(node:*)",
+      "Bash(npx eslint:*)",
+      "mcp__serena__find_symbol",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(chmod:*)",
+      "Bash(dir)",
+      "Bash(mkdir:*)",
+      "Bash(turbo:*)",
+      "Bash(npx turbo:*)",
+      "Bash(npm test)",
+      "Bash(npm test:*)",
+      "mcp__github__get_file_contents",
+      "mcp__github__create_branch",
+      "mcp__github__create_or_update_file",
+      "Bash(gh repo view:*)",
+      "Bash(gh api:*)",
+      "Bash(python:*)",
+      "Bash(\"C:\\Users\\jakes\\Developer\\bbwa\\finish_flatten.sh\")",
+      "Bash(\"C:\\Users\\jakes\\Developer\\bbwa\\move_large_items.sh\")",
+      "Bash(\"C:\\Users\\jakes\\Developer\\bbwa\\move_directories.sh\")",
+      "mcp__github__create_pull_request",
+      "mcp__github__list_pull_requests",
+      "Bash(dir:*)",
+      "Bash(test -f turbo.json)",
+      "Bash(test:*)",
+      "Bash(npm --version)",
+      "Bash(timeout 120 npm run build)",
+      "Bash(git branch:*)",
+      "Bash(git filter-branch:*)",
+      "Bash(timeout 15 npm run dev)",
+      "Bash(git commit:*)",
+      "Bash(git pull:*)",
+      "mcp__github__create_repository",
+      "Bash(git ls-tree:*)",
+      "Bash(true)",
+      "mcp__supabase__list_projects",
+      "mcp__supabase__list_tables",
+      "mcp__supabase__list_edge_functions",
+      "mcp__sequential-thinking__sequentialthinking",
+      "WebFetch(domain:localhost)",
+      "mcp__serena__think_about_whether_you_are_done",
+      "Bash(mv:*)",
+      "Bash(md-tree:*)",
+      "Bash(find:*)",
+      "Bash(npx supabase migration:*)",
+      "Bash(npx @kayvan/markdown-tree-parser:*)",
+      "Bash(pkill:*)",
+      "Bash(PORT=3010 npm run dev)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(timeout 60 npm test -- --passWithNoTests --verbose)",
+      "Bash(timeout 60 npm test -- --passWithNoTests)",
+      "Bash(timeout 60 npm test)",
+      "Bash(timeout 10 tail -f dev.log)",
+      "WebSearch",
+      "Bash(start chrome http://localhost:3001)",
+      "mcp__serena__replace_symbol_body",
+      "mcp__supabase__apply_migration",
+      "mcp__supabase__execute_sql",
+      "mcp__supabase__generate_typescript_types",
+      "mcp__serena__think_about_task_adherence",
+      "Bash(for f in migrations/20250903000000_create_contractors_table.sql migrations/20250903000001_add_contractor_fk_to_workers.sql migrations/20250903000002_migrate_company_data_to_contractors.sql)",
+      "Bash(do echo \"=== Checking $f ===\")",
+      "Bash(head:*)",
+      "Bash(done)",
+      "mcp__supabase__list_migrations"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [[ \"$CLAUDE_TOOL_USE_INPUT\" == *\".tsx\"* ]] || [[ \"$CLAUDE_TOOL_USE_INPUT\" == *\".ts\"* ]]; then echo 'Auto-fixing TypeScript...'; npm run lint --fix --silent 2>/dev/null || echo 'Lint skipped'; fi"
+          },
+          {
+            "type": "command",
+            "command": "if [[ \"$CLAUDE_TOOL_USE_INPUT\" == *\"supabase/migrations\"* ]]; then echo 'Generating Supabase types...'; npm run generate-types 2>/dev/null || echo 'Types generation skipped'; fi"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if grep -qE 'SERVICE_ROLE_KEY|API_KEY.*=.*[a-zA-Z0-9]{10}' <<< \"$CLAUDE_TOOL_USE_INPUT\" 2>/dev/null; then echo 'ERROR: API key detected in file content!' >&2; exit 2; fi || true"
+          }
+        ]
+      }
+    ]
+  }
+}

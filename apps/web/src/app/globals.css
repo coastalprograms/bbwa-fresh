@@ -1,0 +1,745 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .bg-grid-pattern {
+    background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3Cpattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"%3E%3Cpath d="M 60 0 L 0 0 0 60" fill="none" stroke="%23e5e7eb" stroke-width="0.5" opacity="0.1"/%3E%3C/pattern%3E%3C/defs%3E%3Crect width="100%25" height="100%25" fill="url(%23grid)"/%3E%3C/svg%3E');
+  }
+  
+  .bg-grid-pattern-white {
+    background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3Cpattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"%3E%3Cpath d="M 60 0 L 0 0 0 60" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/%3E%3C/pattern%3E%3C/defs%3E%3Crect width="100%25" height="100%25" fill="url(%23grid)"/%3E%3C/svg%3E');
+  }
+
+  /* Custom animations for components */
+  .animate-button-loading {
+    animation: button-pulse 1.5s ease-in-out infinite;
+  }
+
+  .animate-card-hover {
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  }
+
+  .animate-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .animate-accordion-slide {
+    transition: all var(--transition-normal) ease-in-out;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-in-out;
+  }
+
+  .animate-slide-in-from-top {
+    animation: slide-in-from-top 0.3s ease-out;
+  }
+
+  .animate-slide-in-from-bottom {
+    animation: slide-in-from-bottom 0.3s ease-out;
+  }
+
+  /* Whimsical Construction Utilities */
+  .animate-construction-entrance {
+    animation: construction-entrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .animate-perth-sparkle {
+    animation: perth-sparkle 1.5s ease-in-out infinite;
+  }
+
+  .animate-tool-bounce {
+    animation: tool-bounce 2s ease-in-out infinite;
+  }
+
+  .animate-blueprint-draw {
+    animation: blueprint-draw 2s ease-out forwards;
+  }
+
+  .animate-hammer-strike {
+    animation: hammer-strike 0.6s ease-in-out;
+  }
+
+  .animate-perth-sun-rays {
+    animation: perth-sun-rays 8s linear infinite;
+  }
+
+  .animate-aussie-wave {
+    animation: aussie-wave 3s ease-in-out infinite;
+  }
+
+  /* Interactive Hover Effects */
+  .hover-construction {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .hover-construction:hover {
+    transform: translateY(-8px) rotate(2deg);
+    box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
+  }
+
+  .hover-perth-glow {
+    transition: all 0.3s ease;
+  }
+
+  .hover-perth-glow:hover {
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
+    transform: scale(1.02);
+  }
+
+  /* Staggered animations for lists */
+  .stagger-children > * {
+    animation-fill-mode: both;
+  }
+
+  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+
+  /* Background gradient utilities */
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
+  .bg-gradient-conic {
+    background: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+  }
+
+  /* Enhanced form component animations */
+  .animate-form-focus {
+    transition: all 0.25s ease-out;
+  }
+
+  .animate-form-focus:focus-within {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .animate-switch-toggle {
+    animation: switch-bounce 0.4s ease-out;
+  }
+
+  .animate-checkbox-check {
+    animation: checkbox-pop 0.3s ease-out;
+  }
+
+  @keyframes button-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-in-from-top {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-in-from-bottom {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes switch-bounce {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes checkbox-pop {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Whimsical Construction-themed Animations */
+  @keyframes construction-entrance {
+    0% {
+      transform: translateY(100px) rotate(-10deg) scale(0.8);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(-10px) rotate(2deg) scale(1.05);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(0) rotate(0deg) scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes perth-sparkle {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2) rotate(180deg);
+    }
+  }
+
+  @keyframes tool-bounce {
+    0%, 100% {
+      transform: translateY(0) rotate(-5deg);
+    }
+    25% {
+      transform: translateY(-3px) rotate(5deg);
+    }
+    50% {
+      transform: translateY(-6px) rotate(-2deg);
+    }
+    75% {
+      transform: translateY(-2px) rotate(3deg);
+    }
+  }
+
+  @keyframes blueprint-draw {
+    0% {
+      stroke-dashoffset: 1000;
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes hammer-strike {
+    0%, 100% {
+      transform: rotate(0deg) translateY(0);
+    }
+    25% {
+      transform: rotate(-15deg) translateY(-5px);
+    }
+    50% {
+      transform: rotate(15deg) translateY(0);
+    }
+    75% {
+      transform: rotate(-5deg) translateY(-2px);
+    }
+  }
+
+  /* Perth-specific weather animations */
+  @keyframes perth-sun-rays {
+    0% {
+      transform: rotate(0deg);
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(360deg);
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes aussie-wave {
+    0%, 100% {
+      transform: translateX(-5px) rotate(-1deg);
+    }
+    50% {
+      transform: translateX(5px) rotate(1deg);
+    }
+  }
+
+  /* Additional missing animations */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes float-delayed {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  @keyframes wiggle {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-5deg);
+    }
+    75% {
+      transform: rotate(5deg);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  @keyframes perth-wave {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes slide-in-from-right {
+    0% {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Add utility classes for the missing animations */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float-delayed 5s ease-in-out infinite 2s;
+  }
+
+  .animate-wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite linear;
+  }
+
+  .animate-perth-wave {
+    background-size: 400% 400%;
+    animation: perth-wave 8s ease-in-out infinite;
+  }
+
+  .animate-slide-in-from-right {
+    animation: slide-in-from-right 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes form-field-focus {
+    from {
+      box-shadow: 0 0 0 2px transparent;
+    }
+    to {
+      box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    --background: oklch(0.9900 0 0);
+    --foreground: oklch(0 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0 0 0);
+    --popover: oklch(0.9900 0 0);
+    --popover-foreground: oklch(0 0 0);
+    --primary: oklch(0.4754 0.1955 267.3372);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.9400 0 0);
+    --secondary-foreground: oklch(0 0 0);
+    --muted: oklch(0.9700 0 0);
+    --muted-foreground: oklch(0.4400 0 0);
+    --accent: oklch(0.9400 0 0);
+    --accent-foreground: oklch(0 0 0);
+    --destructive: oklch(0.6300 0.1900 23.0300);
+    --destructive-foreground: oklch(1 0 0);
+    --border: oklch(0.9200 0 0);
+    --input: oklch(0.9400 0 0);
+    --ring: oklch(0 0 0);
+    --chart-1: oklch(0.8100 0.1700 75.3500);
+    --chart-2: oklch(0.5500 0.2200 264.5300);
+    --chart-3: oklch(0.7200 0 0);
+    --chart-4: oklch(0.9200 0 0);
+    --chart-5: oklch(0.5600 0 0);
+    --sidebar: oklch(0.9900 0 0);
+    --sidebar-foreground: oklch(0 0 0);
+    --sidebar-primary: oklch(0 0 0);
+    --sidebar-primary-foreground: oklch(1 0 0);
+    --sidebar-accent: oklch(0.9400 0 0);
+    --sidebar-accent-foreground: oklch(0 0 0);
+    --sidebar-border: oklch(0.9400 0 0);
+    --sidebar-ring: oklch(0 0 0);
+    --font-sans: Geist, sans-serif;
+    --font-serif: Georgia, serif;
+    --font-mono: Geist Mono, monospace;
+    --radius: 0.5rem;
+    --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
+    --shadow-xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
+    --shadow-sm: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
+    --shadow: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
+    --shadow-md: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 2px 4px -1px hsl(0 0% 0% / 0.18);
+    --shadow-lg: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 4px 6px -1px hsl(0 0% 0% / 0.18);
+    --shadow-xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 8px 10px -1px hsl(0 0% 0% / 0.18);
+    --shadow-2xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.45);
+    --tracking-normal: 0em;
+    --spacing: 0.25rem;
+    /* Animation timing variables */
+    --transition-fast: 150ms;
+    --transition-normal: 250ms;
+    --transition-slow: 400ms;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+    /* Optimize rendering */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    /* Performance optimizations */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+    /* Improve scrolling performance */
+    overscroll-behavior-y: none;
+  }
+
+  /* Enhanced form interactions */
+  .induction-form {
+    /* Optimize form animations */
+    contain: layout style paint;
+  }
+
+  .induction-form input,
+  .induction-form textarea,
+  .induction-form select,
+  .induction-form button {
+    transition: all var(--transition-normal) var(--ease-out);
+  }
+
+  .induction-form input:focus,
+  .induction-form textarea:focus,
+  .induction-form select:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Critical performance optimizations */
+  img, video {
+    /* Improve image loading performance */
+    content-visibility: auto;
+  }
+  
+  /* Optimize animations for performance */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* Enhanced focus states for accessibility */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Skip to main content link */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 9999;
+    font-weight: 600;
+    transition: top 0.2s;
+  }
+
+  .skip-link:focus {
+    top: 6px;
+  }
+
+  /* Enhanced keyboard navigation with smooth focus transitions */
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    transition: outline-color 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+
+  /* Enhanced form field focus states */
+  input:focus,
+  select:focus,
+  textarea:focus {
+    animation: form-field-focus 0.3s ease-out;
+  }
+
+  /* Smooth checkbox and radio animations */
+  input[type="checkbox"]:checked,
+  input[type="radio"]:checked {
+    animation: checkbox-pop 0.3s var(--ease-spring);
+  }
+
+  /* Ensure interactive elements meet minimum size requirements */
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Exception for checkboxes and switches - they should maintain their natural size */
+  [role="checkbox"],
+  [data-slot="checkbox"],
+  [data-slot="switch"],
+  [role="switch"],
+  .checkbox,
+  .switch,
+  button[role="switch"],
+  [data-radix-collection-item] {
+    min-height: unset !important;
+    min-width: unset !important;
+  }
+
+  /* Exception for inline text links */
+  a:not([role="button"]):not(.button):not([class*="btn"]) {
+    min-height: auto;
+    min-width: auto;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --border: #000000;
+      --ring: #000000;
+    }
+  }
+  
+  /* Optimize for better Core Web Vitals */
+  [loading="lazy"] {
+    content-visibility: auto;
+  }
+}
+
+/* Fix for induction form components */
+.induction-form [role="checkbox"],
+.induction-form [data-slot="checkbox"],
+.induction-form input[type="checkbox"] {
+  min-height: 22px !important;
+  min-width: 22px !important;
+  max-height: 22px !important;
+  max-width: 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  align-self: flex-start !important;
+  margin-top: 0.25rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Enhanced Switch components in induction form with smooth animations */
+.induction-form button[role="switch"],
+.induction-form [data-radix-switch-root] {
+  min-height: unset !important;
+  min-width: unset !important;
+  width: 2rem !important;
+  height: 1.15rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  border-radius: 9999px !important;
+  position: relative !important;
+  cursor: pointer !important;
+  transition: all var(--transition-normal) var(--ease-out) !important;
+  will-change: transform, box-shadow, background-color !important;
+}
+
+.induction-form button[role="switch"]:hover,
+.induction-form [data-radix-switch-root]:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+}
+
+.induction-form button[role="switch"]:active,
+.induction-form [data-radix-switch-root]:active {
+  transform: scale(0.95) !important;
+  transition-duration: var(--transition-fast) !important;
+}
+
+/* Switch thumb styling with enhanced animations */
+.induction-form button[role="switch"] > span,
+.induction-form [data-radix-switch-thumb] {
+  width: 1rem !important;
+  height: 1rem !important;
+  border-radius: 50% !important;
+  background: white !important;
+  transition: all var(--transition-normal) var(--ease-spring) !important;
+  transform: translateX(0) !important;
+  display: block !important;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !important;
+  will-change: transform, box-shadow !important;
+}
+
+/* Switch thumb when checked - enhanced with bounce */
+.induction-form button[role="switch"][data-state="checked"] > span,
+.induction-form [data-state="checked"] [data-radix-switch-thumb] {
+  transform: translateX(calc(100% - 2px)) !important;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 0.15), 0 1px 2px -1px rgb(0 0 0 / 0.15) !important;
+}
+
+/* Switch background colors with smooth transitions */
+.induction-form button[role="switch"][data-state="checked"] {
+  background-color: hsl(var(--primary)) !important;
+}
+
+.induction-form button[role="switch"][data-state="unchecked"] {
+  background-color: hsl(var(--input)) !important;
+}
+
+.induction-form button[role="switch"][data-state="checked"]:hover {
+  background-color: hsl(var(--primary) / 0.9) !important;
+}
+
+.induction-form button[role="switch"][data-state="unchecked"]:hover {
+  background-color: hsl(var(--input) / 0.8) !important;
+}
+
+/* Focus states for accessibility */
+.induction-form button[role="switch"]:focus-visible,
+.induction-form [data-radix-switch-root]:focus-visible {
+  outline: 2px solid hsl(var(--ring)) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 3px hsl(var(--ring) / 0.2) !important;
+}
+

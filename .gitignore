@@ -1,0 +1,260 @@
+# Dependencies
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Next.js build outputs
+**/.next/
+**/out/
+**/dist/
+**/.nuxt/
+
+# Next.js cache and build info
+**/.next/cache/
+**/.next/static/chunks/
+**/.next/build-manifest.json
+**/.next/export-marker.json
+
+# Environment files (never commit these)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/.env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+# Environment variables that might contain secrets
+.env.*.local
+
+# Logs and debug files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Runtime and temporary files
+pids/
+*.pid
+*.seed
+*.pid.lock
+lib-cov/
+coverage/
+nyc_output/
+.nyc_output/
+
+# Testing coverage and reports
+coverage/
+**/coverage/
+.nyc_output/
+**/.nyc_output/
+test-results/
+**/test-results/
+
+# TypeScript build info
+*.tsbuildinfo
+**/*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Build tools and cache
+.turbo/
+**/.turbo/
+.cache/
+**/.cache/
+.parcel-cache/
+**/.parcel-cache/
+
+# Turborepo cache
+.turbo
+
+# Jest cache
+.jest/
+**/.jest/
+
+# ESLint cache
+.eslintcache
+**/.eslintcache
+
+# Prettier cache
+.prettiercache
+**/.prettiercache
+
+# Stylelint cache
+.stylelintcache
+**/.stylelintcache
+
+# IDE and editor files
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Icon?
+
+# Windows specific
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux specific
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# Package manager lock files (keep package-lock.json, remove others if not used)
+yarn.lock
+pnpm-lock.yaml
+
+# Build artifacts and generated files
+build/
+**/build/
+public/build/
+**/public/build/
+
+# Storybook build outputs
+storybook-static/
+**/storybook-static/
+
+# Webpack bundles
+webpack-stats.json
+**/webpack-stats.json
+
+# Bundle analyzer reports
+.next/analyze/
+**/.next/analyze/
+bundle-analyzer-report.html
+
+# Database and storage
+*.db
+*.sqlite
+*.sqlite3
+data/
+**/data/
+
+# Supabase local development
+**/supabase/.branches/
+**/supabase/.temp/
+
+# Generated API documentation
+api-docs/
+**/api-docs/
+
+# Certificates and keys (security)
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.pfx
+
+# Backup files
+*.backup
+*.bak
+*.old
+*~
+
+# Archive files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Application specific
+memory-*.json
+**/memory-*.json
+
+# Local configuration that shouldn't be shared
+.local/
+**/.local/
+local/
+**/local/
+
+# Error logs
+error.log
+**/error.log
+errors.log
+**/errors.log
+
+# Performance monitoring
+.clinic/
+**/.clinic/
+profile/
+**/profile/
+
+# Sentry
+.sentryclirc
+
+# Vercel
+.vercel
+**/.vercel
+
+# Netlify
+.netlify
+**/.netlify
+
+# Firebase
+.firebase/
+**/.firebase/
+firebase-debug.log
+
+# Local development tools
+.devcontainer/
+**/.devcontainer/
+
+# Nx (if used)
+.nx/
+**/.nx/
+
+# Rush (if used)
+common/temp/
+**/common/temp/
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose*.yml
+
+# Terraform (if used for infrastructure)
+*.tfstate
+*.tfstate.*
+.terraform/
+**/.terraform/
+
+# Analytics and monitoring files
+.next/static/chunks/
+.next/server/
+
+# Miscellaneous
+.tool-versions
+.nvmrc
+.node-version
