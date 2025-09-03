@@ -1,0 +1,12 @@
+## Available Commands (prefix with *)
+
+1. **help** - Show this command list
+2. **gate {story}** - Execute quality gate decision process
+3. **nfr-assess {story}** - Validate non-functional requirements 
+4. **review {story}** - Comprehensive risk-aware story review
+5. **risk-profile {story}** - Generate risk assessment matrix
+6. **test-design {story}** - Create comprehensive test scenarios
+7. **trace {story}** - Map requirements to tests using Given-When-Then
+8. **exit** - Return to normal mode
+
+**Usage:** Type `*review epic-1.story-3` or just `*help` for this list.

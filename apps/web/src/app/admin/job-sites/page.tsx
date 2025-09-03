@@ -4,7 +4,8 @@ import { createClient } from '@/lib/supabase/server'
 import { AppSidebar } from '@/components/admin/AppSidebar'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Plus, MapPin, Edit, Trash2, CheckCircle, XCircle } from 'lucide-react'
+import { Plus, MapPin, Edit, Trash2, CheckCircle, XCircle, Settings2 } from 'lucide-react'
+import { SwmsCompletionBadge } from '@/components/swms/SwmsStatusIndicator'
 import DeleteJobSiteButton from './DeleteJobSiteButton'
 
 export const metadata = {
@@ -33,8 +34,9 @@ export default async function JobSitesPage() {
     redirect('/login')
   }
 
-  // Fetch all job sites (handle missing table gracefully)
+  // Fetch all job sites with SWMS data (handle missing table gracefully)
   let jobSites: any[] = []
+  let jobSitesWithSwms: any[] = []
   let tableExists = true
   
   try {
@@ -51,6 +53,45 @@ export default async function JobSitesPage() {
       }
     } else {
       jobSites = data || []
+
+      // Fetch SWMS statistics for each job site
+      if (jobSites.length > 0) {
+        for (const site of jobSites) {
+          // Get SWMS jobs count
+          const { data: swmsJobs } = await supabase
+            .from('swms_jobs')
+            .select('id, status')
+            .eq('job_site_id', site.id)
+
+          // Get submission statistics
+          const { data: submissions } = await supabase
+            .from('swms_submissions')
+            .select(`
+              id,
+              status,
+              swms_job_id,
+              swms_jobs!inner(job_site_id)
+            `)
+            .eq('swms_jobs.job_site_id', site.id)
+
+          const swmsStats = {
+            total_jobs: swmsJobs?.length || 0,
+            active_jobs: swmsJobs?.filter(j => j.status === 'active').length || 0,
+            total_submissions: submissions?.length || 0,
+            approved_submissions: submissions?.filter(s => s.status === 'approved').length || 0,
+            completion_rate: submissions?.length > 0 
+              ? (submissions.filter(s => s.status === 'approved').length / submissions.length) * 100 
+              : 0
+          }
+
+          jobSitesWithSwms.push({
+            ...site,
+            swms_stats: swmsStats
+          })
+        }
+      } else {
+        jobSitesWithSwms = jobSites
+      }
     }
   } catch (err) {
     console.error('Error accessing job sites table:', err)
@@ -89,7 +130,7 @@ export default async function JobSitesPage() {
               </div>
             </CardContent>
           </Card>
-        ) : !jobSites || jobSites.length === 0 ? (
+        ) : !jobSitesWithSwms || jobSitesWithSwms.length === 0 ? (
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
               <MapPin className="h-12 w-12 text-gray-400 mb-4" />
@@ -107,7 +148,7 @@ export default async function JobSitesPage() {
           </Card>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {jobSites.map((site) => (
+            {jobSitesWithSwms.map((site) => (
               <Card key={site.id} className="relative">
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between">
@@ -128,6 +169,23 @@ export default async function JobSitesPage() {
                       </div>
                     </div>
                   </div>
+
+                  {/* SWMS Status Indicators */}
+                  {site.swms_stats && site.swms_stats.total_jobs > 0 && (
+                    <div className="mt-3 space-y-2">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-gray-500">SWMS Progress:</span>
+                        <SwmsCompletionBadge 
+                          completionRate={site.swms_stats.completion_rate}
+                          size="sm"
+                        />
+                      </div>
+                      <div className="text-xs text-gray-500 space-y-1">
+                        <div>Jobs: {site.swms_stats.total_jobs} ({site.swms_stats.active_jobs} active)</div>
+                        <div>Submissions: {site.swms_stats.approved_submissions}/{site.swms_stats.total_submissions} approved</div>
+                      </div>
+                    </div>
+                  )}
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {/* Address */}
@@ -157,6 +215,12 @@ export default async function JobSitesPage() {
                   {/* Actions */}
                   <div className="flex gap-2 pt-3 border-t">
                     <Button variant="outline" size="sm" asChild className="flex-1">
+                      <Link href={`/admin/job-sites/${site.id}`}>
+                        <Settings2 className="mr-1 h-3 w-3" />
+                        View
+                      </Link>
+                    </Button>
+                    <Button variant="outline" size="sm" asChild className="flex-1">
                       <Link href={`/admin/job-sites/${site.id}/edit`}>
                         <Edit className="mr-1 h-3 w-3" />
                         Edit
@@ -174,7 +238,7 @@ export default async function JobSitesPage() {
         )}
 
         {/* Stats */}
-        {jobSites && jobSites.length > 0 && (
+        {jobSitesWithSwms && jobSitesWithSwms.length > 0 && (
           <div className="grid gap-4 md:grid-cols-3">
             <Card>
               <CardContent className="p-4">
@@ -184,7 +248,7 @@ export default async function JobSitesPage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">Total Sites</p>
-                    <p className="text-2xl font-bold">{jobSites.length}</p>
+                    <p className="text-2xl font-bold">{jobSitesWithSwms.length}</p>
                   </div>
                 </div>
               </CardContent>
@@ -199,7 +263,7 @@ export default async function JobSitesPage() {
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">Active Sites</p>
                     <p className="text-2xl font-bold">
-                      {jobSites.filter(s => s.active).length}
+                      {jobSitesWithSwms.filter(s => s.active).length}
                     </p>
                   </div>
                 </div>
@@ -209,13 +273,13 @@ export default async function JobSitesPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center">
-                  <div className="p-2 bg-gray-100 rounded-lg mr-4">
-                    <XCircle className="h-6 w-6 text-gray-600" />
+                  <div className="p-2 bg-purple-100 rounded-lg mr-4">
+                    <Settings2 className="h-6 w-6 text-purple-600" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Inactive Sites</p>
+                    <p className="text-sm font-medium text-muted-foreground">SWMS Jobs</p>
                     <p className="text-2xl font-bold">
-                      {jobSites.filter(s => !s.active).length}
+                      {jobSitesWithSwms.reduce((total, site) => total + (site.swms_stats?.total_jobs || 0), 0)}
                     </p>
                   </div>
                 </div>

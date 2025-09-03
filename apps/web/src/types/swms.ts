@@ -9,11 +9,11 @@ import type { UUID } from './supabase'
 export type JobSite = {
   id: UUID
   name: string
-  address: string
+  address?: string | null
   lat?: number | null
   lng?: number | null
-  status: 'active' | 'inactive' | 'completed'
-  check_in_radius_meters: number
+  active: boolean
+  radius_m?: number | null
   created_at: string
   updated_at: string
 }
@@ -41,11 +41,13 @@ export type SwmsJobUpdateData = Partial<SwmsJobCreateData>
 export type SwmsSubmission = {
   id: UUID
   swms_job_id: UUID
-  contractor_id: UUID
-  document_name: string
-  file_url: string
+  contractor_id?: UUID | null
+  worker_id?: UUID | null
+  document_name?: string | null
+  file_url?: string | null
+  submission_data?: Record<string, any> | null
   status: 'submitted' | 'under_review' | 'approved' | 'rejected' | 'requires_changes'
-  submitted_at: string
+  submitted_at?: string | null
   reviewed_at?: string | null
   reviewed_by?: UUID | null
   notes?: string | null
@@ -66,6 +68,18 @@ export type Contractor = {
   address?: string | null
   active: boolean
   magic_link_token?: string | null
+  created_at: string
+  updated_at: string
+}
+
+// Worker type (basic worker information for submissions)
+export type Worker = {
+  id: UUID
+  name: string
+  contractor_id?: UUID | null
+  email?: string | null
+  phone?: string | null
+  active: boolean
   created_at: string
   updated_at: string
 }
@@ -154,11 +168,11 @@ export type ContractorSubmissionSummary = {
 // Form Data Types
 export type JobSiteFormData = {
   name: string
-  address: string
+  address?: string
   lat?: number
   lng?: number
-  status: 'active' | 'inactive' | 'completed'
-  check_in_radius_meters: number
+  active: boolean
+  radius_m?: number
 }
 
 export type SwmsJobFormData = {

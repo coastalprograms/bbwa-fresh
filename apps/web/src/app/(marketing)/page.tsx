@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { HeroSection } from "@/components/sections/hero-section"
 
 import Link from "next/link"
 import Image from "next/image"
@@ -73,55 +74,21 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-50 to-white py-20 lg:py-32">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="outline" className="mb-6">
-              <Building2Icon className="mr-2 h-4 w-4" />
-              Professional Construction Services
-            </Badge>
-            
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-              Dunsborough&apos;s Premier Construction Partners
-            </h1>
-            
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              15+ years delivering quality construction projects across the South West. From new homes to renovations, 
-              we bring expertise and reliability to every coastal build.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button size="lg" asChild>
-                <Link href="/contact">
-                  Get Free Quote
-                  <ArrowRightIcon className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/projects">
-                  View Our Work
-                </Link>
-              </Button>
-            </div>
-            
-            <div className="flex flex-wrap justify-center gap-8 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <ShieldCheckIcon className="h-4 w-4 text-primary" />
-                <span>Licensed & Insured</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <AwardIcon className="h-4 w-4 text-primary" />
-                <span>Master Builders WA Member</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <StarIcon className="h-4 w-4 text-primary fill-current" />
-                <span>4.9/5 Customer Rating</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Dunsborough's Premier Construction Partners"
+        subtitle="Building Excellence for 15+ Years"
+        description="Delivering quality construction projects across the South West. From new homes to renovations, we bring expertise and reliability to every coastal build."
+        badge="Professional Construction Services"
+        primaryCta={{
+          text: "Get Free Quote",
+          href: "/contact"
+        }}
+        secondaryCta={{
+          text: "View Our Work",
+          href: "/projects"
+        }}
+        showCarousel={true}
+      />
 
       {/* Services Section */}
       <section id="services-section" className="py-20 bg-background">
