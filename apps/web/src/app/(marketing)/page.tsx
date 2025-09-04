@@ -19,7 +19,10 @@ import {
   ShieldCheckIcon,
   UsersIcon,
   ClockIcon,
-  AwardIcon
+  AwardIcon,
+  CrownIcon,
+  WarehouseIcon,
+  TractorIcon
 } from "lucide-react"
 import { servicesData } from "@/lib/services-data"
 import type { LucideIcon } from "lucide-react"
@@ -55,9 +58,9 @@ const CORE_VALUES: CoreValue[] = [
 ]
 
 const SERVICE_ICON_MAP: Record<string, LucideIcon> = {
-  'new-home-construction': HomeIcon,
-  'home-renovations': ShowerHeadIcon,
-  'extensions-additions': Building2Icon
+  'custom-luxury-homes': CrownIcon,
+  'commercial-construction': WarehouseIcon,
+  'agricultural-farming': TractorIcon
 }
 
 export default function LandingPage() {
@@ -96,35 +99,17 @@ export default function LandingPage() {
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4">
               <Building2Icon className="mr-2 h-3.5 w-3.5" />
-              Our Construction Services
+              Our Services
             </Badge>
             
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Building Excellence Across Dunsborough & South West
+              Professional Construction Solutions
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              From Busselton to Margaret River, Yallingup to Eagle Bay - we deliver quality construction services on time and within budget across all South West communities.
+              From luxury custom homes to commercial developments and agricultural structures - we deliver quality construction services tailored to your specific needs across the South West.
             </p>
           </div>
           
-          <div className="bg-muted/30 rounded-xl p-6 mb-12">
-            <div className="text-center mb-4">
-              <h3 className="text-lg font-semibold mb-2">
-                Proudly Serving South West Communities
-              </h3>
-              
-              <div className="flex flex-wrap justify-center gap-2 text-sm text-muted-foreground">
-                {['Busselton', 'Margaret River', 'Yallingup', 'Eagle Bay', 'Quindalup', 'Vasse', 'Geographe', '& More'].map((suburb) => (
-                  <span 
-                    key={suburb}
-                    className="px-3 py-1 bg-primary/10 text-primary rounded-full"
-                  >
-                    {suburb}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
           
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {servicesData.slice(0, 3).map((service) => {

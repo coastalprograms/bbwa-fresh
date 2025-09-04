@@ -19,184 +19,72 @@ export interface Service {
 
 export const servicesData: Service[] = [
   {
-    slug: 'new-home-construction',
-    title: 'New Home Construction',
+    slug: 'custom-luxury-homes',
+    title: 'Custom Luxury Homes',
     heroImage: '',
-    summary: 'Custom homes built from the ground up with quality craftsmanship and attention to detail',
+    summary: 'Bespoke luxury homes designed and built to your exact specifications with premium finishes',
     description: `
-      <p>Building your dream home from the ground up is one of life's most exciting journeys. At Bayside Builders WA, we specialise in creating custom homes that reflect your unique lifestyle, preferences, and budget.</p>
+      <p>Create your dream luxury home with our custom construction service. We specialise in building high-end residential properties that combine exceptional design with superior craftsmanship and premium materials.</p>
       
-      <p>Our new home construction service covers everything from initial design consultation through to the final handover. We work closely with architects, designers, and you to ensure every detail meets your vision while adhering to the highest building standards.</p>
+      <p>From architectural masterpieces to contemporary coastal retreats, our luxury home construction covers every detail from initial concept through to final handover. We work with leading architects and designers to bring your vision to life.</p>
       
-      <p>Whether you're looking for a modern family home, a luxury estate, or an energy-efficient sustainable build, our experienced team has the expertise to bring your dream home to life.</p>
+      <p>Whether you're building a waterfront estate, a hillside retreat, or a modern family compound, our experienced team delivers luxury homes that exceed expectations in every way.</p>
     `,
     process: [
       {
         step: 1,
-        title: 'Initial Consultation',
-        description: 'Meet with our team to discuss your vision, budget, and timeline. We\'ll assess your land and provide initial guidance.'
+        title: 'Luxury Consultation',
+        description: 'Meet with our design team to discuss your vision, lifestyle needs, and luxury requirements. We\'ll assess your site and explore premium design options.'
       },
       {
         step: 2,
-        title: 'Design & Planning',
-        description: 'Work with architects to create detailed plans, secure permits, and finalise all specifications and materials.'
+        title: 'Architectural Design',
+        description: 'Collaborate with renowned architects to create stunning custom designs that maximise your site\'s potential and reflect your personal style.'
       },
       {
         step: 3,
-        title: 'Site Preparation',
-        description: 'Clear and prepare the site, excavate foundations, and set up temporary services and safety measures.'
+        title: 'Premium Planning',
+        description: 'Develop detailed specifications, select luxury materials, and secure all necessary permits with attention to every detail.'
       },
       {
         step: 4,
-        title: 'Foundation & Frame',
-        description: 'Pour concrete foundations, erect the frame, and install roofing to create the structural shell.'
+        title: 'Foundation & Structure',
+        description: 'Build robust foundations and erect the structural frame using premium materials and advanced construction techniques.'
       },
       {
         step: 5,
-        title: 'Internal Systems',
-        description: 'Install plumbing, electrical, and HVAC systems throughout the home, followed by insulation.'
+        title: 'Luxury Finishes',
+        description: 'Install high-end fixtures, premium finishes, smart home systems, and all luxury amenities to your exact specifications.'
       },
       {
         step: 6,
-        title: 'Finishing Touches',
-        description: 'Complete internal and external finishes, fixtures, and landscaping for move-in readiness.'
+        title: 'Final Presentation',
+        description: 'Complete final touches, conduct thorough quality inspections, and present your completed luxury home ready for occupancy.'
       }
     ],
     gallery: [],
-    relatedServices: ['extensions-additions', 'project-management'],
+    relatedServices: ['commercial-construction', 'project-management'],
     features: [
-      'Custom home design',
-      'Foundation to finish construction',
-      'Quality materials and craftsmanship',
-      'Energy efficient builds',
-      'Full project management',
-      'Warranty and after-sales support'
+      'Bespoke architectural design',
+      'Premium materials and finishes',
+      'Smart home integration',
+      'Luxury amenities',
+      'Energy efficient construction',
+      'Comprehensive warranty'
     ],
-    priceRange: 'From $350,000'
-  },
-  {
-    slug: 'home-renovations',
-    title: 'Home Renovations',
-    heroImage: '',
-    summary: 'Transform your existing space with expert renovation and remodeling services',
-    description: `
-      <p>Transform your existing home into the space you've always dreamed of with our comprehensive renovation services. Whether you're looking to update a single room or undertake a whole-house renovation, our experienced team can help you achieve stunning results.</p>
-      
-      <p>We understand that renovating while living in your home can be challenging. That's why we work efficiently to minimise disruption while maintaining the highest standards of workmanship and safety.</p>
-      
-      <p>From modern kitchen makeovers to luxurious bathroom upgrades, we handle every aspect of your renovation project with attention to detail and respect for your home.</p>
-    `,
-    process: [
-      {
-        step: 1,
-        title: 'Design Consultation',
-        description: 'Assess your current space, understand your needs, and develop renovation concepts that work within your budget.'
-      },
-      {
-        step: 2,
-        title: 'Planning & Permits',
-        description: 'Create detailed plans, source materials, and obtain any necessary permits for structural changes.'
-      },
-      {
-        step: 3,
-        title: 'Preparation',
-        description: 'Protect existing areas, remove old fixtures and finishes, and prepare the space for renovation work.'
-      },
-      {
-        step: 4,
-        title: 'Structural Work',
-        description: 'Complete any structural modifications, electrical and plumbing updates, and install new frameworks.'
-      },
-      {
-        step: 5,
-        title: 'Installation',
-        description: 'Install new fixtures, finishes, cabinetry, and all decorative elements according to your design.'
-      },
-      {
-        step: 6,
-        title: 'Final Details',
-        description: 'Complete final touches, clean up thoroughly, and conduct a walkthrough to ensure your satisfaction.'
-      }
-    ],
-    gallery: [],
-    relatedServices: ['extensions-additions', 'maintenance-repairs'],
-    features: [
-      'Kitchen renovations',
-      'Bathroom remodeling',
-      'Interior upgrades',
-      'Structural modifications',
-      'Minimal disruption approach',
-      'Quality finish guarantee'
-    ],
-    priceRange: 'From $25,000'
-  },
-  {
-    slug: 'extensions-additions',
-    title: 'Extensions & Additions',
-    heroImage: '',
-    summary: 'Add more space and value to your property with professional extensions',
-    description: `
-      <p>Running out of space? Rather than moving house, consider extending your current home to create the additional space you need. Our extension and addition services can seamlessly integrate new spaces with your existing home.</p>
-      
-      <p>From second-story additions to ground-floor extensions, outdoor living spaces to garage conversions, we have the expertise to expand your home while maintaining its character and value.</p>
-      
-      <p>Our extensions are designed to complement your existing architecture while meeting modern building codes and energy efficiency standards.</p>
-    `,
-    process: [
-      {
-        step: 1,
-        title: 'Space Assessment',
-        description: 'Evaluate your property, understand your space needs, and explore extension possibilities within council requirements.'
-      },
-      {
-        step: 2,
-        title: 'Design Development',
-        description: 'Create extension designs that complement your existing home and maximise the available space.'
-      },
-      {
-        step: 3,
-        title: 'Approvals',
-        description: 'Prepare and submit council applications, obtain building permits, and ensure compliance with all regulations.'
-      },
-      {
-        step: 4,
-        title: 'Site Setup',
-        description: 'Prepare the extension site, protect existing structures, and establish safe working areas.'
-      },
-      {
-        step: 5,
-        title: 'Construction',
-        description: 'Build the extension structure, connect utilities, and integrate with existing home systems.'
-      },
-      {
-        step: 6,
-        title: 'Integration',
-        description: 'Complete interior finishes, ensure seamless integration with existing spaces, and final cleanup.'
-      }
-    ],
-    gallery: [],
-    relatedServices: ['new-home-construction', 'home-renovations'],
-    features: [
-      'Second story additions',
-      'Room extensions',
-      'Outdoor living spaces',
-      'Garage conversions',
-      'Seamless integration',
-      'Value-adding solutions'
-    ],
-    priceRange: 'From $45,000'
+    priceRange: 'From $800,000'
   },
   {
     slug: 'commercial-construction',
     title: 'Commercial Construction',
     heroImage: '',
-    summary: 'Professional commercial construction and fit-out services for businesses',
+    summary: 'Professional commercial buildings and fit-outs for businesses across the South West',
     description: `
       <p>We understand that your commercial space needs to work hard for your business. Our commercial construction services are designed to create functional, attractive, and compliant business environments that support your operations and impress your clients.</p>
       
-      <p>From office fit-outs to retail spaces, restaurant build-outs to industrial facilities, we have the expertise to deliver commercial projects on time and on budget.</p>
+      <p>From office buildings to retail spaces, restaurants to industrial facilities, we have the expertise to deliver commercial projects on time and on budget while meeting all regulatory requirements.</p>
       
-      <p>We work closely with business owners, architects, and designers to ensure your commercial space meets all regulatory requirements while reflecting your brand and supporting your business objectives.</p>
+      <p>We work closely with business owners, architects, and designers to ensure your commercial space meets all building codes while reflecting your brand and supporting your business objectives.</p>
     `,
     process: [
       {
@@ -231,11 +119,11 @@ export const servicesData: Service[] = [
       }
     ],
     gallery: [],
-    relatedServices: ['project-management', 'maintenance-repairs'],
+    relatedServices: ['custom-luxury-homes', 'agricultural-farming'],
     features: [
-      'Office fit-outs',
+      'Office buildings',
       'Retail spaces',
-      'Industrial buildings',
+      'Industrial facilities',
       'Restaurant build-outs',
       'Compliance expertise',
       'Minimal business disruption'
@@ -243,116 +131,60 @@ export const servicesData: Service[] = [
     priceRange: 'Contact for quote'
   },
   {
-    slug: 'maintenance-repairs',
-    title: 'Maintenance & Repairs',
+    slug: 'agricultural-farming',
+    title: 'Agricultural & Farming Structures',
     heroImage: '',
-    summary: 'Ongoing maintenance and repair services to keep your property in top condition',
+    summary: 'Specialised agricultural buildings, sheds, and farming infrastructure for rural properties',
     description: `
-      <p>Regular maintenance is key to protecting your property investment and ensuring your home or business remains safe, functional, and attractive. Our maintenance and repair services cover everything from routine upkeep to emergency repairs.</p>
+      <p>Support your agricultural operations with our specialised farming and rural construction services. We build everything from machinery sheds and hay storage to livestock facilities and farm workshops.</p>
       
-      <p>We offer flexible maintenance programs tailored to your property's needs, helping you avoid costly major repairs through proactive care and prompt attention to minor issues.</p>
+      <p>Our agricultural construction expertise covers a wide range of rural buildings designed to withstand the elements while providing practical, functional spaces for your farming operations.</p>
       
-      <p>Our experienced tradesmen can handle a wide range of maintenance tasks, from general repairs to specialised maintenance requirements.</p>
+      <p>From small equipment sheds to large machinery storage facilities, we understand the unique requirements of rural construction and deliver buildings that work hard for your farm.</p>
     `,
     process: [
       {
         step: 1,
-        title: 'Property Assessment',
-        description: 'Conduct a thorough inspection to identify current issues and potential maintenance needs.'
+        title: 'Farm Assessment',
+        description: 'Visit your property to understand your agricultural needs, assess site conditions, and determine the best building solutions.'
       },
       {
         step: 2,
-        title: 'Maintenance Plan',
-        description: 'Develop a customised maintenance schedule that fits your budget and property requirements.'
+        title: 'Design & Planning',
+        description: 'Create functional designs that meet your specific farming requirements while complying with rural building regulations.'
       },
       {
         step: 3,
-        title: 'Priority Repairs',
-        description: 'Address any urgent repairs or safety issues immediately to prevent further damage.'
+        title: 'Permits & Approvals',
+        description: 'Handle all necessary rural building permits and ensure compliance with agricultural building standards.'
       },
       {
         step: 4,
-        title: 'Scheduled Maintenance',
-        description: 'Perform regular maintenance tasks according to the agreed schedule to prevent issues.'
+        title: 'Site Preparation',
+        description: 'Prepare the building site, ensuring proper drainage and access for construction equipment and future use.'
       },
       {
         step: 5,
-        title: 'Monitoring',
-        description: 'Continuously monitor property condition and adjust maintenance plans as needed.'
+        title: 'Construction',
+        description: 'Build your agricultural structure using materials and techniques suited to rural conditions and farming operations.'
       },
       {
         step: 6,
-        title: 'Documentation',
-        description: 'Provide detailed records of all maintenance work for warranty and insurance purposes.'
+        title: 'Handover',
+        description: 'Complete final inspections and hand over your new agricultural building ready for immediate use.'
       }
     ],
     gallery: [],
-    relatedServices: ['home-renovations', 'project-management'],
+    relatedServices: ['commercial-construction', 'project-management'],
     features: [
-      'Emergency repairs',
-      'Preventive maintenance',
-      'Property inspections',
-      'Warranty support',
-      'Flexible scheduling',
-      'Comprehensive service'
+      'Machinery sheds',
+      'Hay storage facilities',
+      'Livestock shelters',
+      'Farm workshops',
+      'Equipment storage',
+      'Rural building expertise'
     ],
-    priceRange: 'From $150/hour'
-  },
-  {
-    slug: 'project-management',
-    title: 'Project Management',
-    heroImage: '',
-    summary: 'End-to-end project management ensuring timely and budget-conscious delivery',
-    description: `
-      <p>Managing a construction project involves coordinating multiple trades, suppliers, permits, and timelines. Our professional project management service takes the stress out of construction by handling all aspects of project coordination for you.</p>
-      
-      <p>Our experienced project managers work as your single point of contact, ensuring clear communication, adherence to schedules, and quality control throughout your project.</p>
-      
-      <p>Whether you're building, renovating, or extending, our project management service ensures your construction project runs smoothly from start to finish.</p>
-    `,
-    process: [
-      {
-        step: 1,
-        title: 'Project Planning',
-        description: 'Develop comprehensive project plans including timelines, resource allocation, and budget management strategies.'
-      },
-      {
-        step: 2,
-        title: 'Team Coordination',
-        description: 'Coordinate all trades, suppliers, and specialists to ensure efficient workflow and quality outcomes.'
-      },
-      {
-        step: 3,
-        title: 'Progress Monitoring',
-        description: 'Monitor project progress against milestones, identify potential issues, and implement corrective actions.'
-      },
-      {
-        step: 4,
-        title: 'Quality Control',
-        description: 'Conduct regular quality inspections and ensure all work meets building standards and specifications.'
-      },
-      {
-        step: 5,
-        title: 'Communication',
-        description: 'Provide regular progress updates and maintain clear communication with all stakeholders throughout.'
-      },
-      {
-        step: 6,
-        title: 'Project Completion',
-        description: 'Oversee final inspections, ensure all documentation is complete, and facilitate smooth project handover.'
-      }
-    ],
-    gallery: [],
-    relatedServices: ['new-home-construction', 'commercial-construction'],
-    features: [
-      'Timeline planning',
-      'Budget management',
-      'Quality assurance',
-      'Permit assistance',
-      'Trade coordination',
-      'Progress reporting'
-    ],
-    priceRange: '5-8% of project cost'
+    priceRange: 'From $15,000'
   }
 ]
 
