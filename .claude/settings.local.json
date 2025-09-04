@@ -133,7 +133,10 @@
       "Bash(timeout 30 npm run build)",
       "Bash(timeout 30 npm run typecheck)",
       "Bash(npx supabase functions:*)",
-      "mcp__serena__insert_after_symbol"
+      "mcp__serena__insert_after_symbol",
+      "mcp__mcp-supermemory-ai__addToSupermemory",
+      "Read(//Users/jakeschepis/.claude/agents/**)",
+      "Bash(rg:*)"
     ],
     "deny": [],
     "ask": []

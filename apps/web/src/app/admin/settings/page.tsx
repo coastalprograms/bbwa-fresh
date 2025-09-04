@@ -251,7 +251,7 @@ export default function SettingsPage() {
                     <Input
                       id="company_email"
                       type="email"
-                      placeholder="info@baysidebuilders.com.au"
+                      placeholder="frank@baysidebuilders.com.au"
                       value={settings.company_email}
                       onChange={(e) => setSettings(prev => ({ ...prev, company_email: e.target.value }))}
                     />
@@ -260,7 +260,7 @@ export default function SettingsPage() {
                     <Label htmlFor="company_phone">Phone Number</Label>
                     <Input
                       id="company_phone"
-                      placeholder="08 9000 0000"
+                      placeholder="0417 927 979"
                       value={settings.company_phone}
                       onChange={(e) => setSettings(prev => ({ ...prev, company_phone: e.target.value }))}
                     />
@@ -310,7 +310,7 @@ export default function SettingsPage() {
                     <Input
                       id="admin_email"
                       type="email"
-                      placeholder="admin@baysidebuilders.com.au"
+                      placeholder="frank@baysidebuilders.com.au"
                       value={settings.admin_email}
                       onChange={(e) => setSettings(prev => ({ ...prev, admin_email: e.target.value }))}
                     />
@@ -673,7 +673,7 @@ export default function SettingsPage() {
                     <Input
                       id="smtp_from_email"
                       type="email"
-                      placeholder="noreply@baysidebuilders.com.au"
+                      placeholder="frank@baysidebuilders.com.au"
                       value={settings.smtp_from_email}
                       onChange={(e) => setSettings(prev => ({ ...prev, smtp_from_email: e.target.value }))}
                     />

@@ -80,18 +80,18 @@ export function Footer() {
             </p>
             <div className="space-y-2">
               <a
-                href="mailto:info@baysidebuilderswa.com.au"
+                href="mailto:frank@baysidebuilders.com.au"
                 className="flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors"
               >
                 <MailIcon className="h-4 w-4" />
-                info@baysidebuilderswa.com.au
+                frank@baysidebuilders.com.au
               </a>
               <a
-                href="tel:+61890001234"
+                href="tel:+61417927979"
                 className="flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors"
               >
                 <PhoneIcon className="h-4 w-4" />
-                (08) 9000 1234
+                0417 927 979
               </a>
               <div className="flex items-center gap-2 text-sm text-slate-300">
                 <MapPinIcon className="h-4 w-4" />

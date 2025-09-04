@@ -690,7 +690,7 @@ SUPABASE_SERVICE_ROLE_KEY=prod-service-key
 SWMS_EMAIL_MODE=live
 SWMS_DOCUMENT_STORAGE=supabase
 SWMS_DEBUG_LOGGING=false
-SWMS_EMAIL_FROM=admin@baysidebuilderswa.com.au
+SWMS_EMAIL_FROM=frank@baysidebuilders.com.au
 ```
 
 ## Security Operations

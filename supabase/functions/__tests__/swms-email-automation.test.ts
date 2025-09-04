@@ -82,8 +82,8 @@ Deno.test('SWMS Email Automation - Valid Request', async () => {
   Deno.env.set('SUPABASE_URL', 'https://test.supabase.co')
   Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'test-key')
   Deno.env.set('SITE_URL', 'https://baysidebuilderswa.com.au')
-  Deno.env.set('BUILDER_CONTACT_PHONE', '(08) 9581 2777')
-  Deno.env.set('BUILDER_CONTACT_EMAIL', 'admin@baysidebuilderswa.com.au')
+  Deno.env.set('BUILDER_CONTACT_PHONE', '0417 927 979')
+  Deno.env.set('BUILDER_CONTACT_EMAIL', 'frank@baysidebuilders.com.au')
   Deno.env.set('AUTOMATION_PROVIDER', 'make')
   Deno.env.set('MAKE_WEBHOOK_URL', 'https://hook.make.com/test')
 

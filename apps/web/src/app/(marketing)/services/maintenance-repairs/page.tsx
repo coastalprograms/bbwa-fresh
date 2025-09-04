@@ -251,7 +251,7 @@ export default function MaintenanceRepairsPage() {
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 border-white/20 text-white" asChild>
-              <Link href="tel:0890001234">
+              <Link href="tel:0417927979">
                 <Phone className="mr-2 h-4 w-4" />
                 Call Emergency Line
               </Link>

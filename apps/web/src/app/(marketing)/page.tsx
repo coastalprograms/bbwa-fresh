@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { HeroSection } from "@/components/sections/hero-section"
+import { AnimatedSection, AnimatedCard, AnimatedIcon, AnimatedText } from "@/components/ui/animated-components"
 
 import Link from "next/link"
 import Image from "next/image"
@@ -67,27 +68,29 @@ export default function LandingPage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <HeroSection
-        title="Dunsborough's Premier Construction Partners"
-        subtitle="Building Excellence for 15+ Years"
-        description="Delivering quality construction projects across the South West. From new homes to renovations, we bring expertise and reliability to every coastal build."
-        badge="Professional Construction Services"
-        primaryCta={{
-          text: "Get Free Quote",
-          href: "/contact"
-        }}
-        secondaryCta={{
-          text: "View Our Work",
-          href: "/projects"
-        }}
-        showCarousel={true}
-      />
+      {/* Hero Section - Slide up from foundation */}
+      <AnimatedSection variant="hero" bidirectional={true}>
+        <HeroSection
+          title="Dunsborough's Premier Construction Partners"
+          subtitle="Building Excellence Across the South West"
+          description="From custom luxury homes to commercial developments and agricultural structures, we deliver quality construction services with expertise and reliability."
+          badge="Trusted Since 2008"
+          primaryCta={{
+            text: "Get Free Quote",
+            href: "/contact"
+          }}
+          secondaryCta={{
+            text: "View Our Work",
+            href: "/projects"
+          }}
+          showCarousel={true}
+        />
+      </AnimatedSection>
 
       {/* Services Section */}
       <section id="services-section" className="py-20 bg-background">
         <div className="container">
-          <div className="text-center mb-16">
+          <AnimatedSection className="text-center mb-16" variant="bidirectional" bidirectional={true}>
             <Badge variant="outline" className="mb-4">
               <Building2Icon className="mr-2 h-3.5 w-3.5" />
               Our Services
@@ -99,45 +102,64 @@ export default function LandingPage() {
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               From luxury custom homes to commercial developments and agricultural structures - we deliver quality construction services tailored to your specific needs across the South West.
             </p>
-          </div>
+          </AnimatedSection>
           
           
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {servicesData.slice(0, 3).map((service) => {
-              const IconComponent = SERVICE_ICON_MAP[service.slug] || Building2Icon
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {servicesData.slice(0, 3).map((service, index) => {
+              const getServiceImage = (slug: string) => {
+                switch (slug) {
+                  case 'custom-luxury-homes':
+                    return 'https://images.unsplash.com/photo-1560184897-ae75f418493e?w=800&h=600&fit=crop&crop=center'
+                  case 'commercial-construction':
+                    return 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop&crop=center'
+                  case 'agricultural-farming':
+                    return 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=600&fit=crop&crop=center'
+                  default:
+                    return 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop&crop=center'
+                }
+              }
               
               return (
-                <Card key={service.slug} className="group hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                      <IconComponent className="h-6 w-6 text-primary" />
+                <AnimatedCard key={service.slug} index={index} stacked={true} className="h-full">
+                  <Card className="group hover:shadow-xl transition-all duration-300 border-0 overflow-hidden h-full min-h-[600px] relative">
+                    <Image
+                      src={getServiceImage(service.slug)}
+                      alt={service.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority={index === 0}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="relative z-10 h-full flex flex-col justify-end p-8">
+                      <CardTitle className="text-2xl font-bold mb-4 text-white">
+                        {service.title}
+                      </CardTitle>
+                      <CardDescription className="text-lg leading-relaxed text-white/90 mb-6">
+                        {service.summary}
+                      </CardDescription>
+                      <Button variant="ghost" className="text-white hover:text-primary hover:bg-white/10 font-semibold p-0 h-auto w-fit" asChild>
+                        <Link href={`/services/${service.slug}` as any}>
+                          Learn More
+                          <ArrowRightIcon className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      </Button>
                     </div>
-                    <CardTitle className="text-xl">{service.title}</CardTitle>
-                    <CardDescription className="text-base">
-                      {service.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button variant="ghost" className="group-hover:text-primary" asChild>
-                      <Link href={`/services/${service.slug}` as any}>
-                        Learn More
-                        <ArrowRightIcon className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </CardContent>
-                </Card>
+                  </Card>
+                </AnimatedCard>
               )
             })}
           </div>
           
-          <div className="text-center mt-12">
+          <AnimatedSection className="text-center mt-12" variant="bidirectional" bidirectional={true} delay={0.6}>
             <Button size="lg" variant="outline" asChild>
               <Link href="/services">
                 View All Construction Services
                 <ArrowRightIcon className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -146,7 +168,7 @@ export default function LandingPage() {
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Text Content - Left Side */}
-            <div className="space-y-6">
+            <AnimatedSection variant="text" bidirectional={true} className="space-y-6">
               <div>
                 <h2 className="text-3xl sm:text-4xl font-bold mb-6">
                   About Bayside Builders WA
@@ -165,10 +187,10 @@ export default function LandingPage() {
                   we bring expertise, reliability, and attention to detail to every build.
                 </p>
               </div>
-            </div>
+            </AnimatedSection>
 
             {/* Images - Right Side */}
-            <div className="relative flex justify-end">
+            <AnimatedSection variant="image" bidirectional={true} className="relative flex justify-end" delay={0.3}>
               {/* First Image - Higher (left side) */}
               <div className="relative z-10 mr-8">
                 <div className="w-64 h-48 bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg shadow-lg overflow-hidden">
@@ -186,7 +208,7 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -197,16 +219,16 @@ export default function LandingPage() {
       {/* Testimonials Section */}
       <section className="py-20 bg-white">
         <div className="container">
-          <div className="text-center mb-12">
+          <AnimatedSection className="text-center mb-12" variant="bidirectional" bidirectional={true}>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900">
               What Our Customers Say
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               We don&apos;t do hype. Just real feedback from real businesses we&apos;ve helped streamline, scale and simplify.
             </p>
-          </div>
+          </AnimatedSection>
           
-          <div className="max-w-4xl mx-auto">
+          <AnimatedSection className="max-w-4xl mx-auto" variant="testimonial" delay={0.2}>
             <div className="bg-white border border-gray-200 rounded-lg p-8 shadow-sm">
               <div className="flex items-center gap-2 mb-6">
                 <div className="flex items-center">
@@ -237,7 +259,7 @@ export default function LandingPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -245,7 +267,7 @@ export default function LandingPage() {
       {/* Core Values Section */}
       <section className="py-20 bg-muted/20">
         <div className="container">
-          <div className="text-center mb-16">
+          <AnimatedSection className="text-center mb-16" variant="bidirectional" bidirectional={true}>
             <Badge variant="outline" className="mb-4">
               Why Choose Us
             </Badge>
@@ -255,20 +277,22 @@ export default function LandingPage() {
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Our commitment to quality, reliability, and customer satisfaction drives everything we do in the South West.
             </p>
-          </div>
+          </AnimatedSection>
           
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {CORE_VALUES.map((value, index) => (
               <div key={index} className="text-center group">
-                <div className="mb-6 p-4 w-fit mx-auto rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                <AnimatedIcon index={index} className="mb-6 p-4 w-fit mx-auto rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
                   <value.icon className="h-8 w-8" />
-                </div>
-                <h3 className="text-lg font-semibold mb-3">
-                  {value.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {value.description}
-                </p>
+                </AnimatedIcon>
+                <AnimatedSection variant="bidirectional" bidirectional={true} delay={index * 0.1 + 0.3}>
+                  <h3 className="text-lg font-semibold mb-3">
+                    {value.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {value.description}
+                  </p>
+                </AnimatedSection>
               </div>
             ))}
           </div>

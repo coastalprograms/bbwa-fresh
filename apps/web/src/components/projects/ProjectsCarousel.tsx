@@ -1,12 +1,13 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { MapPin, Calendar, ArrowRight } from 'lucide-react'
+import { MapPin, Calendar, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { supabaseBrowser } from '@/lib/supabase/client'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface Project {
   id: string
@@ -24,6 +25,9 @@ export function ProjectsCarousel() {
   const [projects, setProjects] = useState<Project[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [isPaused, setIsPaused] = useState(false)
+  const [direction, setDirection] = useState(1) // 1 for forward, -1 for backward
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   // Fetch featured projects
   useEffect(() => {
@@ -56,18 +60,50 @@ export function ProjectsCarousel() {
     fetchProjects()
   }, [])
 
-  // Auto-advance every 2 seconds
+  // Auto-advance every 4 seconds (unless paused)
   useEffect(() => {
-    if (projects.length <= 1) return
+    if (projects.length <= 1 || isPaused) {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+      return
+    }
 
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
+      setDirection(1)
       setCurrentIndex((prevIndex) => 
         prevIndex === projects.length - 1 ? 0 : prevIndex + 1
       )
-    }, 2000)
+    }, 4000)
 
-    return () => clearInterval(interval)
-  }, [projects.length])
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+  }, [projects.length, isPaused])
+
+  // Navigation functions
+  const goToNext = () => {
+    setDirection(1)
+    setCurrentIndex((prevIndex) => 
+      prevIndex === projects.length - 1 ? 0 : prevIndex + 1
+    )
+  }
+
+  const goToPrevious = () => {
+    setDirection(-1)
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? projects.length - 1 : prevIndex - 1
+    )
+  }
+
+  const goToSlide = (index: number) => {
+    setDirection(index > currentIndex ? 1 : -1)
+    setCurrentIndex(index)
+  }
 
   if (loading) {
     return (
@@ -98,6 +134,33 @@ export function ProjectsCarousel() {
   const currentProject = projects[currentIndex]
   const isEvenIndex = currentIndex % 2 === 0
 
+  // Animation variants
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.98
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      scale: 1
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.98
+    })
+  }
+
+  const imageVariants = {
+    enter: { opacity: 0, scale: 1.1 },
+    center: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.95 }
+  }
+
   console.log('Projects count:', projects.length, 'Current index:', currentIndex, 'Current project:', currentProject?.title)
 
   return (
@@ -115,43 +178,90 @@ export function ProjectsCarousel() {
           </p>
         </div>
 
-        <div className="relative">
+        <div 
+          className="relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Navigation Arrows */}
+          {projects.length > 1 && (
+            <>
+              <button
+                onClick={goToPrevious}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full p-3 transition-all duration-200 opacity-0 group-hover:opacity-100"
+                aria-label="Previous project"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={goToNext}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full p-3 transition-all duration-200 opacity-0 group-hover:opacity-100"
+                aria-label="Next project"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </>
+          )}
 
           {/* Project Display */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Image - Alternates sides */}
-            <div className={`order-1 ${isEvenIndex ? 'lg:order-1' : 'lg:order-2'}`}>
-              <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted group">
-                {currentProject.hero_image_url ? (
-                  <Image
-                    src={currentProject.hero_image_url}
-                    alt={`${currentProject.title} - Construction Project by Bayside Builders WA`}
-                    fill
-                    className="object-cover transition-transform group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority
-                  />
-                ) : (
-                  <div className="flex items-center justify-center h-full text-muted-foreground">
-                    <div className="text-center">
-                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                        <Calendar className="w-8 h-8 text-primary" />
+          <div className="relative overflow-hidden group">
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={currentIndex}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.3 },
+                  scale: { duration: 0.3 }
+                }}
+                className="grid lg:grid-cols-2 gap-12 items-center"
+              >
+                {/* Image - Alternates sides */}
+                <div className={`order-1 ${isEvenIndex ? 'lg:order-1' : 'lg:order-2'}`}>
+                  <motion.div 
+                    className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted"
+                    variants={imageVariants}
+                    transition={{ duration: 0.4 }}
+                  >
+                    {currentProject.hero_image_url ? (
+                      <Image
+                        src={currentProject.hero_image_url}
+                        alt={`${currentProject.title} - Construction Project by Bayside Builders WA`}
+                        fill
+                        className="object-cover transition-transform duration-500 hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        priority
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center h-full text-muted-foreground">
+                        <div className="text-center">
+                          <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
+                            <Calendar className="w-8 h-8 text-primary" />
+                          </div>
+                          <p>Image Coming Soon</p>
+                        </div>
                       </div>
-                      <p>Image Coming Soon</p>
-                    </div>
-                  </div>
-                )}
-                
-                {currentProject.featured && (
-                  <Badge className="absolute top-4 left-4 bg-primary/90 backdrop-blur-sm">
-                    Featured
-                  </Badge>
-                )}
-              </div>
-            </div>
+                    )}
+                    
+                    {currentProject.featured && (
+                      <Badge className="absolute top-4 left-4 bg-primary/90 backdrop-blur-sm">
+                        Featured
+                      </Badge>
+                    )}
+                  </motion.div>
+                </div>
 
-            {/* Content - Alternates sides */}
-            <div className={`order-2 ${isEvenIndex ? 'lg:order-2' : 'lg:order-1'}`}>
+                {/* Content - Alternates sides */}
+                <motion.div 
+                  className={`order-2 ${isEvenIndex ? 'lg:order-2' : 'lg:order-1'}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                >
               <div className="space-y-6">
                 <div>
                   <div className="flex items-center gap-4 mb-4">
@@ -227,15 +337,18 @@ export function ProjectsCarousel() {
                   </div>
                 </div>
                 
-                <Button asChild size="sm">
-                  <Link href={`/projects/${currentProject.slug}`}>
-                    View Project Details
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
+                  <Button asChild size="sm">
+                    <Link href={`/projects/${currentProject.slug}`}>
+                      View Project Details
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
 
         </div>
       </div>

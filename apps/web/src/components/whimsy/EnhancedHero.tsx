@@ -163,7 +163,7 @@ export default function EnhancedHero({ onScrollToNext }: EnhancedHeroProps) {
                     value={500} 
                     suffix="+" 
                     shouldStart={showElements}
-                    className="group-hover:text-yellow-300"
+                    className="group-hover:text-white"
                   />
                 </div>
                 <div className="text-sm opacity-90">Projects Completed</div>
@@ -178,7 +178,7 @@ export default function EnhancedHero({ onScrollToNext }: EnhancedHeroProps) {
                     suffix="+" 
                     shouldStart={showElements}
                     duration={1500}
-                    className="group-hover:text-yellow-300"
+                    className="group-hover:text-white"
                   />
                 </div>
                 <div className="text-sm opacity-90">Years Experience</div>
@@ -193,7 +193,7 @@ export default function EnhancedHero({ onScrollToNext }: EnhancedHeroProps) {
                     suffix="%" 
                     shouldStart={showElements}
                     duration={2500}
-                    className="group-hover:text-yellow-300"
+                    className="group-hover:text-white"
                   />
                 </div>
                 <div className="text-sm opacity-90">Client Satisfaction</div>
@@ -201,54 +201,7 @@ export default function EnhancedHero({ onScrollToNext }: EnhancedHeroProps) {
             </ConstructionCursor>
           </div>
           
-          {/* Enhanced Action Buttons with Construction Theme */}
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center mb-12 transition-all duration-1000 delay-1000 ${
-            showElements ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`}>
-            <FloatingSparkles count={3}>
-              <Button 
-                size="lg" 
-                className="group bg-white text-primary hover:bg-white/90 hover-construction relative overflow-hidden" 
-                asChild
-              >
-                <Link href="/contact">
-                  <span className="relative z-10">Get Your Free Quote</span>
-                  <ArrowRightIcon className="ml-2 h-4 w-4 transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                </Link>
-              </Button>
-            </FloatingSparkles>
-            
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="bg-white/10 hover:bg-white/20 border-white/30 text-white backdrop-blur-sm hover-construction" 
-              asChild
-            >
-              <Link href="/projects">
-                <Building2Icon className="mr-2 h-4 w-4 animate-wiggle" />
-                View South West Projects
-              </Link>
-            </Button>
-          </div>
           
-          {/* South West-Specific Features with Animations */}
-          <div className={`flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm opacity-90 stagger-children transition-all duration-1000 delay-1200 ${
-            showElements ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`}>
-            <div className="flex items-center gap-2 animate-construction-entrance">
-              <CheckIcon className="h-4 w-4 text-white animate-sparkle" />
-              <span>Free On-Site Consultation</span>
-            </div>
-            <div className="flex items-center gap-2 animate-construction-entrance">
-              <CheckIcon className="h-4 w-4 text-white animate-sparkle" />
-              <span>Fully Licensed & Insured</span>
-            </div>
-            <div className="flex items-center gap-2 animate-construction-entrance">
-              <CheckIcon className="h-4 w-4 text-white animate-sparkle" />
-              <span>South West Local Knowledge 🌅</span>
-            </div>
-          </div>
         </div>
       </div>
       

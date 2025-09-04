@@ -81,7 +81,7 @@ function generateEmailTemplate(payload: SwmsEmailPayload): { subject: string; bo
         <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #dee2e6;">
           <p style="margin: 0; color: #6c757d; font-size: 14px;">
             For questions or support, contact us at 
-            <a href="mailto:admin@baysidebuilderswa.com.au" style="color: #1a472a;">admin@baysidebuilderswa.com.au</a>
+            <a href="mailto:frank@baysidebuilders.com.au" style="color: #1a472a;">frank@baysidebuilders.com.au</a>
           </p>
           <p style="margin: 10px 0 0 0; color: #6c757d; font-size: 12px;">
             This is an automated message from the Bayside Builders WA SWMS Management System.

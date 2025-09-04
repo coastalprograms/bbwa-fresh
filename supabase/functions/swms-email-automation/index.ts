@@ -209,8 +209,8 @@ Deno.serve(async (req: Request) => {
           days_remaining: Math.max(0, daysRemaining),
           portal_url: `${Deno.env.get('SITE_URL')}/swms-portal/${portalToken}`,
           due_date: new Date(swmsJob.due_date).toLocaleDateString('en-AU'),
-          contact_phone: Deno.env.get('BUILDER_CONTACT_PHONE') || '(08) 9581 2777',
-          contact_email: Deno.env.get('BUILDER_CONTACT_EMAIL') || 'admin@baysidebuilderswa.com.au'
+          contact_phone: Deno.env.get('BUILDER_CONTACT_PHONE') || '0417 927 979',
+          contact_email: Deno.env.get('BUILDER_CONTACT_EMAIL') || 'frank@baysidebuilders.com.au'
         }
 
         // Replace template variables in subject and content

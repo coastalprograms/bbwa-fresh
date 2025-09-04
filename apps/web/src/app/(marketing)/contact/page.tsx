@@ -20,7 +20,7 @@ import {
 
 export const metadata: Metadata = {
   title: 'Contact Us - Free Construction Quote Dunsborough | Bayside Builders WA',
-  description: 'Contact the South West\'s trusted builders for a free quote. Call (08) 9000 1234 or send a message. Licensed builders ready to discuss your construction, renovation, or extension project.',
+  description: 'Contact the South West\'s trusted builders for a free quote. Call 0417 927 979 or send a message. Licensed builders ready to discuss your construction, renovation, or extension project.',
   keywords: ['contact Dunsborough builders', 'free quote construction South West', 'Dunsborough builders phone', 'construction quote Western Australia', 'licensed builders contact', 'renovation quote South West'],
   openGraph: {
     title: 'Contact Bayside Builders WA - Free Construction Quote Dunsborough',
@@ -53,7 +53,7 @@ export default function ContactPage() {
         badge="Free Consultation & Quote"
         primaryCta={{
           text: "Call Now",
-          href: "tel:+61890001234"
+          href: "tel:+61417927979"
         }}
         secondaryCta={{
           text: "Send Message",
@@ -82,22 +82,22 @@ export default function ContactPage() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <a
-                      href="mailto:info@baysidebuilderswa.com.au"
+                      href="mailto:frank@baysidebuilders.com.au"
                       className="flex items-center gap-3 text-sm hover:text-primary transition-colors group"
                     >
                       <div className="p-2 rounded-lg bg-muted group-hover:bg-primary/10 transition-colors">
                         <MailIcon className="h-4 w-4 text-muted-foreground group-hover:text-primary" />
                       </div>
-                      <span>info@baysidebuilderswa.com.au</span>
+                      <span>frank@baysidebuilders.com.au</span>
                     </a>
                     <a
-                      href="tel:+61890001234"
+                      href="tel:+61417927979"
                       className="flex items-center gap-3 text-sm hover:text-primary transition-colors group"
                     >
                       <div className="p-2 rounded-lg bg-muted group-hover:bg-primary/10 transition-colors">
                         <PhoneIcon className="h-4 w-4 text-muted-foreground group-hover:text-primary" />
                       </div>
-                      <span>(08) 9000 1234</span>
+                      <span>0417 927 979</span>
                     </a>
                     <div className="flex items-center gap-3 text-sm group">
                       <div className="p-2 rounded-lg bg-muted">

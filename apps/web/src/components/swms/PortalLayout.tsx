@@ -89,10 +89,10 @@ export function PortalLayout({
               For technical support or questions about this submission portal,
               please contact{' '}
               <a 
-                href="mailto:admin@baysidebuilderswa.com.au" 
+                href="mailto:frank@baysidebuilders.com.au" 
                 className="text-blue-600 hover:underline"
               >
-                admin@baysidebuilderswa.com.au
+                frank@baysidebuilders.com.au
               </a>
             </p>
           </div>

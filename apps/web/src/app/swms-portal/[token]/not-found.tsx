@@ -30,7 +30,7 @@ export default function NotFound() {
             
             <div className="pt-4 space-y-3">
               <Button asChild className="w-full">
-                <Link href="mailto:admin@baysidebuilderswa.com.au">
+                <Link href="mailto:frank@baysidebuilders.com.au">
                   Contact Administration
                 </Link>
               </Button>

@@ -213,8 +213,8 @@ export function SubmissionStatus({ submissions, error }: SubmissionStatusProps) 
         <AlertDescription>
           <strong>Need help?</strong> If you have questions about document requirements or review status, 
           please contact the site administration team at{' '}
-          <a href="mailto:admin@baysidebuilderswa.com.au" className="text-blue-600 hover:underline">
-            admin@baysidebuilderswa.com.au
+          <a href="mailto:frank@baysidebuilders.com.au" className="text-blue-600 hover:underline">
+            frank@baysidebuilders.com.au
           </a>
         </AlertDescription>
       </Alert>
