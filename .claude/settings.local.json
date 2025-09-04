@@ -129,7 +129,11 @@
       "Bash(timeout 30 npm test -- --testNamePattern=\"Syntax Fix Verification\")",
       "Bash(timeout 60 npm test -- --testPathPattern=\"swms-portal\" --passWithNoTests)",
       "mcp__supabase__deploy_edge_function",
-      "Bash(timeout 60 npm test -- --testPathPattern=\"upload-integration\" --passWithNoTests)"
+      "Bash(timeout 60 npm test -- --testPathPattern=\"upload-integration\" --passWithNoTests)",
+      "Bash(timeout 30 npm run build)",
+      "Bash(timeout 30 npm run typecheck)",
+      "Bash(npx supabase functions:*)",
+      "mcp__serena__insert_after_symbol"
     ],
     "deny": [],
     "ask": []

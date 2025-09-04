@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -47,11 +47,7 @@ export function SwmsComplianceTimeline({
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<'all' | 'submissions' | 'emails' | 'audits'>('all')
 
-  useEffect(() => {
-    fetchTimelineEvents()
-  }, [jobSiteId, contractorId, swmsJobId])
-
-  const fetchTimelineEvents = async () => {
+  const fetchTimelineEvents = useCallback(async () => {
     try {
       setIsLoading(true)
       setError(null)
@@ -208,7 +204,11 @@ export function SwmsComplianceTimeline({
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [jobSiteId, contractorId, swmsJobId])
+
+  useEffect(() => {
+    fetchTimelineEvents()
+  }, [fetchTimelineEvents])
 
   const filteredEvents = events.filter(event => {
     if (filter === 'all') return true

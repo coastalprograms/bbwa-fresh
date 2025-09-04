@@ -48,7 +48,7 @@ describe('Sitemap Generation', () => {
     jest.mocked(mockClient.from).mockReturnValue({
       select: jest.fn().mockReturnValue({
         eq: jest.fn().mockReturnValue({
-          then: jest.fn().mockResolvedValue({ data: mockSupabaseData }),
+          then: (jest.fn() as any).mockResolvedValue({ data: mockSupabaseData }),
           catch: jest.fn(),
         }),
       }),
@@ -98,7 +98,7 @@ describe('Sitemap Generation', () => {
     jest.mocked(mockClient.from).mockReturnValue({
       select: jest.fn().mockReturnValue({
         eq: jest.fn().mockReturnValue({
-          then: jest.fn().mockRejectedValue(new Error('Database error')),
+          then: (jest.fn() as any).mockRejectedValue(new Error('Database error')),
           catch: jest.fn(),
         }),
       }),
@@ -118,7 +118,7 @@ describe('Sitemap Generation', () => {
     
     result.forEach(entry => {
       expect(entry.lastModified).toBeInstanceOf(Date)
-      expect(entry.lastModified.getTime()).toBeLessThanOrEqual(Date.now())
+      expect((entry.lastModified as Date).getTime()).toBeLessThanOrEqual(Date.now())
     })
   })
 })

@@ -43,11 +43,12 @@ describe('WebVitals Component', () => {
 
     beforeEach(() => {
       render(<WebVitals />)
-      reportFunction = mockUseReportWebVitals.mock.calls[0][0]
+      reportFunction = mockUseReportWebVitals.mock.calls[0][0] as (metric: any) => void
     })
 
     it('should log metrics in development', () => {
       const originalEnv = process.env.NODE_ENV
+      // @ts-ignore - Temporarily ignore TypeScript for testing
       process.env.NODE_ENV = 'development'
       
       const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
@@ -64,11 +65,13 @@ describe('WebVitals Component', () => {
       expect(consoleSpy).toHaveBeenCalledWith('[Web Vitals]', metric)
       
       consoleSpy.mockRestore()
+      // @ts-ignore - Temporarily ignore TypeScript for testing
       process.env.NODE_ENV = originalEnv
     })
 
     it('should send metrics to Google Analytics in production', () => {
       const originalEnv = process.env.NODE_ENV
+      // @ts-ignore - Temporarily ignore TypeScript for testing
       process.env.NODE_ENV = 'production'
       
       const mockGtag = jest.fn()
@@ -90,14 +93,16 @@ describe('WebVitals Component', () => {
         non_interaction: true,
       }))
       
+      // @ts-ignore - Temporarily ignore TypeScript for testing
       process.env.NODE_ENV = originalEnv
     })
 
     it('should send metrics to analytics endpoint in production', async () => {
       const originalEnv = process.env.NODE_ENV
+      // @ts-ignore - Temporarily ignore TypeScript for testing
       process.env.NODE_ENV = 'production'
       
-      mockFetch.mockResolvedValueOnce({
+      (mockFetch as any).mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve({ success: true }),
       })
@@ -126,11 +131,13 @@ describe('WebVitals Component', () => {
         }),
       })
       
+      // @ts-ignore - Temporarily ignore TypeScript for testing
       process.env.NODE_ENV = originalEnv
     })
 
     it('should handle CLS metric value scaling', () => {
       const originalEnv = process.env.NODE_ENV
+      // @ts-ignore - Temporarily ignore TypeScript for testing
       process.env.NODE_ENV = 'production'
       
       const mockGtag = jest.fn()
@@ -149,14 +156,16 @@ describe('WebVitals Component', () => {
         value: 100, // 0.1 * 1000 = 100
       }))
       
+      // @ts-ignore - Temporarily ignore TypeScript for testing
       process.env.NODE_ENV = originalEnv
     })
 
     it('should handle fetch errors gracefully', async () => {
       const originalEnv = process.env.NODE_ENV
+      // @ts-ignore - Temporarily ignore TypeScript for testing
       process.env.NODE_ENV = 'production'
       
-      mockFetch.mockRejectedValueOnce(new Error('Network error'))
+      (mockFetch as any).mockRejectedValueOnce(new Error('Network error'))
       const consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
 
       const metric = {
@@ -174,6 +183,7 @@ describe('WebVitals Component', () => {
       expect(consoleSpy).toHaveBeenCalledWith('Failed to send web vitals:', expect.any(Error))
       
       consoleSpy.mockRestore()
+      // @ts-ignore - Temporarily ignore TypeScript for testing
       process.env.NODE_ENV = originalEnv
     })
   })

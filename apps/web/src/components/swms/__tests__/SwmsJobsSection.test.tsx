@@ -138,7 +138,9 @@ describe('SwmsJobsSection', () => {
       
       // Check for proper styling classes
       const statsContainer = screen.getByText('Active Jobs').closest('.text-center')?.parentElement
-      expect(statsContainer).toHaveClass('grid', 'grid-cols-3', 'gap-4')
+      expect(statsContainer).toHaveClass('grid')
+      expect(statsContainer).toHaveClass('grid-cols-3')
+      expect(statsContainer).toHaveClass('gap-4')
     })
   })
 
@@ -183,10 +185,14 @@ describe('SwmsJobsSection', () => {
       render(<SwmsJobsSection jobSiteId={jobSiteId} swmsJobs={mockSwmsJobs} />)
       
       // Check that each status type is rendered
-      expect(screen.getByText('Active')).toHaveClass('bg-green-100', 'text-green-800')
-      expect(screen.getByText('Planned')).toHaveClass('bg-yellow-100', 'text-yellow-800')
-      expect(screen.getByText('Completed')).toHaveClass('bg-blue-100', 'text-blue-800')
-      expect(screen.getByText('Cancelled')).toHaveClass('bg-red-100', 'text-red-800')
+      expect(screen.getByText('Active')).toHaveClass('bg-green-100')
+      expect(screen.getByText('Active')).toHaveClass('text-green-800')
+      expect(screen.getByText('Planned')).toHaveClass('bg-yellow-100')
+      expect(screen.getByText('Planned')).toHaveClass('text-yellow-800')
+      expect(screen.getByText('Completed')).toHaveClass('bg-blue-100')
+      expect(screen.getByText('Completed')).toHaveClass('text-blue-800')
+      expect(screen.getByText('Cancelled')).toHaveClass('bg-red-100')
+      expect(screen.getByText('Cancelled')).toHaveClass('text-red-800')
     })
 
     it('handles unknown status gracefully', () => {

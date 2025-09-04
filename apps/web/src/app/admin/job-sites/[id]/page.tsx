@@ -14,6 +14,7 @@ import { SwmsComplianceTimeline } from '@/components/swms/SwmsComplianceTimeline
 import { ComplianceDocumentStorage } from '@/components/swms/ComplianceDocumentStorage'
 import { AuditTrailExport } from '@/components/admin/AuditTrailExport'
 import { ComplianceTemplates } from '@/components/admin/ComplianceTemplates'
+import { SwmsQuickActions } from '@/components/admin/SwmsQuickActions'
 import type { JobSite, SwmsJob, SwmsSubmission } from '@/types/swms'
 
 export const metadata = {
@@ -244,6 +245,7 @@ export default async function JobSiteDetailPage({ params }: JobSiteDetailPagePro
           </TabsList>
           
           <TabsContent value="dashboard" className="space-y-4">
+            <SwmsQuickActions jobSiteId={params.id} />
             <SwmsDashboardWrapper jobSiteId={params.id} />
           </TabsContent>
           

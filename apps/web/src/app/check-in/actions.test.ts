@@ -31,10 +31,10 @@ const mockSupabaseClient = {
 describe('Construction Compliance Check-In System', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-    mockCreateClient.mockResolvedValue(mockSupabaseClient as any)
+    mockCreateClient.mockReturnValue(mockSupabaseClient as any)
     
     // Mock valid CSRF token
-    mockCookies.mockResolvedValue({
+    mockCookies.mockReturnValue({
       get: jest.fn().mockReturnValue({ value: 'valid-csrf-token' })
     } as any)
     
@@ -80,7 +80,7 @@ describe('Construction Compliance Check-In System', () => {
 
   describe('Security Validation', () => {
     it('should reject requests with invalid CSRF tokens', async () => {
-      mockCookies.mockResolvedValue({
+      mockCookies.mockReturnValue({
         get: jest.fn().mockReturnValue({ value: 'different-token' })
       } as any)
 
@@ -564,7 +564,9 @@ describe('Construction Compliance Check-In System', () => {
     })
 
     it('should handle unexpected errors', async () => {
-      mockCreateClient.mockRejectedValue(new Error('Unexpected error'))
+      mockCreateClient.mockImplementation(() => {
+        throw new Error('Unexpected error')
+      })
 
       const result = await checkIn(validCheckInData)
 

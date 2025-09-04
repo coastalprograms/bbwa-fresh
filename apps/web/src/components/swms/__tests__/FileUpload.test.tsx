@@ -330,7 +330,7 @@ describe('FileUpload Component', () => {
         new File(['content'], `file${i}.pdf`, { type: 'application/pdf' })
       )
 
-      render(<FileUpload {...mockProps} maxFiles={5} />)
+      render(<FileUpload {...mockProps} />)
       const dropzone = screen.getByRole('button', { name: /drop files here/i })
 
       const dataTransfer = new DataTransfer()

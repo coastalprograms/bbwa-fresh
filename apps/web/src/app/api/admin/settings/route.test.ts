@@ -53,6 +53,9 @@ describe('/api/admin/settings', () => {
             data: mockSettings, 
             error: null 
           })
+        }),
+        upsert: jest.fn().mockReturnValue({
+          select: jest.fn().mockResolvedValue({ data: [], error: null })
         })
       })
       
@@ -73,6 +76,9 @@ describe('/api/admin/settings', () => {
             data: null, 
             error: { message: 'Database error' }
           })
+        }),
+        upsert: jest.fn().mockReturnValue({
+          select: jest.fn().mockResolvedValue({ data: [], error: null })
         })
       })
       
@@ -125,6 +131,9 @@ describe('/api/admin/settings', () => {
         data: { user: mockUser } 
       })
       mockSupabase.from.mockReturnValue({
+        select: jest.fn().mockReturnValue({
+          order: jest.fn().mockResolvedValue({ data: [], error: null })
+        }),
         upsert: jest.fn().mockReturnValue({
           select: jest.fn().mockResolvedValue({ 
             data: mockData, 
@@ -151,6 +160,9 @@ describe('/api/admin/settings', () => {
         data: { user: { id: 'user123' } } 
       })
       mockSupabase.from.mockReturnValue({
+        select: jest.fn().mockReturnValue({
+          order: jest.fn().mockResolvedValue({ data: [], error: null })
+        }),
         upsert: jest.fn().mockReturnValue({
           select: jest.fn().mockResolvedValue({ 
             data: null, 

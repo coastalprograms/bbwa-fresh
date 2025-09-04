@@ -34,7 +34,7 @@ jest.mock('@/lib/rate-limit', () => ({
 }))
 
 describe('SWMS Portal Token Validation', () => {
-  const mockSupabase = {
+  const mockSupabase: any = {
     from: jest.fn(() => mockSupabase),
     select: jest.fn(() => mockSupabase),
     eq: jest.fn(() => mockSupabase),

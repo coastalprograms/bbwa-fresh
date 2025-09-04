@@ -24,7 +24,6 @@ import {
   PlayCircle,
   PauseCircle
 } from 'lucide-react'
-import { supabaseBrowser } from '@/lib/supabase/client'
 
 interface SwmsQuickActionsProps {
   jobSiteId?: string
@@ -132,35 +131,42 @@ export function SwmsQuickActions({
     setExecutionResult(null)
 
     try {
-      const supabase = supabaseBrowser
+      // Prepare the API request
+      const requestBody = {
+        action: selectedAction.id,
+        job_site_id: jobSiteId,
+        contractor_id: contractorId,
+        swms_job_id: swmsJobId,
+        parameters: actionData
+      }
 
-      switch (selectedAction.id) {
-        case 'send-reminder':
-          await handleSendReminder(supabase)
-          break
-        case 'bulk-approve':
-          await handleBulkApprove(supabase)
-          break
-        case 'compliance-check':
-          await handleComplianceCheck(supabase)
-          break
-        case 'urgent-notification':
-          await handleUrgentNotification(supabase)
-          break
-        case 'weekly-campaign':
-          await handleWeeklyCampaign(supabase)
-          break
-        case 'generate-report':
-          await handleGenerateReport(supabase)
-          break
-        case 'broadcast-update':
-          await handleBroadcastUpdate(supabase)
-          break
-        case 'pause-campaigns':
-          await handlePauseCampaigns(supabase)
-          break
-        default:
-          throw new Error('Unknown action')
+      const response = await fetch('/api/admin/swms/campaigns', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody)
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Action failed')
+      }
+
+      const result = await response.json()
+      
+      if (!result.success) {
+        throw new Error(result.error || 'Action failed')
+      }
+
+      setExecutionResult({
+        type: 'success',
+        message: result.message || 'Action completed successfully'
+      })
+
+      // Store any returned data for potential follow-up actions
+      if (result.data) {
+        setActionData(prev => ({ ...prev, ...result.data }))
       }
 
     } catch (error) {
@@ -174,258 +180,6 @@ export function SwmsQuickActions({
     }
   }
 
-  const handleSendReminder = async (supabase: any) => {
-    // Get pending submissions for context
-    let query = supabase
-      .from('swms_submissions')
-      .select(`
-        id, 
-        contractor_id,
-        swms_job_id,
-        contractors(name),
-        swms_jobs(name, job_site_id)
-      `)
-      .in('status', ['submitted', 'under_review'])
-
-    if (jobSiteId) {
-      query = query.eq('swms_jobs.job_site_id', jobSiteId)
-    }
-
-    const { data: pendingSubmissions, error } = await query
-
-    if (error) {
-      throw new Error(`Failed to fetch pending submissions: ${error.message}`)
-    }
-
-    const reminderCount = pendingSubmissions?.length || 0
-    
-    // Log the reminder activity
-    await supabase
-      .from('notification_audits')
-      .insert({
-        kind: 'swms_email_automation',
-        payload: {
-          campaign_type: 'manual_reminder',
-          triggered_by: 'admin_quick_action',
-          job_site_id: jobSiteId,
-          emails_sent: reminderCount,
-          context: 'quick_action_reminder'
-        },
-        result: 'success'
-      })
-
-    setExecutionResult({
-      type: 'success',
-      message: `Reminder sent to ${reminderCount} contractors with pending SWMS submissions`
-    })
-  }
-
-  const handleBulkApprove = async (supabase: any) => {
-    if (!actionData.approvalCriteria) {
-      throw new Error('Please specify approval criteria')
-    }
-
-    // Get eligible submissions
-    let query = supabase
-      .from('swms_submissions')
-      .select('id, contractor_id, swms_job_id, contractors(name)')
-      .eq('status', 'submitted')
-
-    if (jobSiteId) {
-      query = query.eq('swms_jobs.job_site_id', jobSiteId)
-    }
-
-    const { data: eligibleSubmissions, error: fetchError } = await query
-
-    if (fetchError) {
-      throw new Error(`Failed to fetch submissions: ${fetchError.message}`)
-    }
-
-    if (!eligibleSubmissions || eligibleSubmissions.length === 0) {
-      throw new Error('No eligible submissions found for bulk approval')
-    }
-
-    // Update submissions to approved
-    const submissionIds = eligibleSubmissions.map(sub => sub.id)
-    const { error: updateError } = await supabase
-      .from('swms_submissions')
-      .update({
-        status: 'approved',
-        reviewed_at: new Date().toISOString(),
-        notes: `Bulk approved via admin quick action: ${actionData.approvalCriteria}`
-      })
-      .in('id', submissionIds)
-
-    if (updateError) {
-      throw new Error(`Failed to approve submissions: ${updateError.message}`)
-    }
-
-    setExecutionResult({
-      type: 'success',
-      message: `Successfully approved ${eligibleSubmissions.length} SWMS submissions`
-    })
-  }
-
-  const handleComplianceCheck = async (supabase: any) => {
-    // Run compliance queries
-    const queries = await Promise.all([
-      // Get total active jobs
-      supabase
-        .from('swms_jobs')
-        .select('id', { count: 'exact' })
-        .eq('status', 'active')
-        .then((res: any) => ({ activeJobs: res.count || 0 })),
-      
-      // Get pending submissions
-      supabase
-        .from('swms_submissions')
-        .select('id', { count: 'exact' })
-        .in('status', ['submitted', 'under_review'])
-        .then((res: any) => ({ pendingSubmissions: res.count || 0 })),
-      
-      // Get overdue submissions (created more than 24 hours ago)
-      supabase
-        .from('swms_submissions')
-        .select('id', { count: 'exact' })
-        .eq('status', 'submitted')
-        .lt('created_at', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
-        .then((res: any) => ({ overdueSubmissions: res.count || 0 }))
-    ])
-
-    const results = queries.reduce((acc, query) => ({ ...acc, ...query }), {})
-    const complianceRate = results.activeJobs > 0 
-      ? Math.round(((results.activeJobs - results.pendingSubmissions) / results.activeJobs) * 100)
-      : 100
-
-    setExecutionResult({
-      type: 'success',
-      message: `Compliance Check Complete: ${complianceRate}% compliant (${results.pendingSubmissions} pending, ${results.overdueSubmissions} overdue)`
-    })
-  }
-
-  const handleUrgentNotification = async (supabase: any) => {
-    if (!actionData.urgentMessage) {
-      throw new Error('Please provide an urgent message')
-    }
-
-    // Get contractors for this job site
-    let contractorCount = 0
-    
-    if (jobSiteId) {
-      const { data: contractors, error } = await supabase
-        .from('contractors')
-        .select('id', { count: 'exact' })
-
-      if (!error) {
-        contractorCount = contractors?.length || 0
-      }
-    }
-
-    // Log the urgent notification
-    await supabase
-      .from('notification_audits')
-      .insert({
-        kind: 'swms_email_automation',
-        payload: {
-          campaign_type: 'urgent_safety_alert',
-          message: actionData.urgentMessage,
-          job_site_id: jobSiteId,
-          emails_sent: contractorCount,
-          triggered_by: 'admin_quick_action'
-        },
-        result: 'success'
-      })
-
-    setExecutionResult({
-      type: 'success',
-      message: `Urgent safety alert sent to ${contractorCount} contractors`
-    })
-  }
-
-  const handleWeeklyCampaign = async (supabase: any) => {
-    // Log campaign start
-    await supabase
-      .from('notification_audits')
-      .insert({
-        kind: 'swms_email_automation',
-        payload: {
-          campaign_type: 'weekly_automation',
-          job_site_id: jobSiteId,
-          triggered_by: 'admin_quick_action',
-          campaign_settings: {
-            frequency: 'weekly',
-            auto_reminders: true,
-            compliance_tracking: true
-          }
-        },
-        result: 'success'
-      })
-
-    setExecutionResult({
-      type: 'success',
-      message: 'Weekly SWMS compliance campaign launched successfully'
-    })
-  }
-
-  const handleGenerateReport = async (supabase: any) => {
-    // Generate instant report (similar to compliance check but with more detail)
-    const reportData = {
-      generated_at: new Date().toISOString(),
-      job_site_id: jobSiteId,
-      report_type: 'instant_compliance'
-    }
-
-    setExecutionResult({
-      type: 'success',
-      message: 'Instant compliance report generated and ready for download'
-    })
-  }
-
-  const handleBroadcastUpdate = async (supabase: any) => {
-    if (!actionData.broadcastMessage) {
-      throw new Error('Please provide a broadcast message')
-    }
-
-    // Log broadcast
-    await supabase
-      .from('notification_audits')
-      .insert({
-        kind: 'swms_email_automation',
-        payload: {
-          campaign_type: 'site_broadcast',
-          message: actionData.broadcastMessage,
-          job_site_id: jobSiteId,
-          triggered_by: 'admin_quick_action'
-        },
-        result: 'success'
-      })
-
-    setExecutionResult({
-      type: 'success',
-      message: 'Site-wide broadcast sent to all contractors and workers'
-    })
-  }
-
-  const handlePauseCampaigns = async (supabase: any) => {
-    // Log campaign pause
-    await supabase
-      .from('notification_audits')
-      .insert({
-        kind: 'swms_email_automation',
-        payload: {
-          campaign_type: 'campaign_control',
-          action: 'pause_all',
-          job_site_id: jobSiteId,
-          triggered_by: 'admin_quick_action'
-        },
-        result: 'success'
-      })
-
-    setExecutionResult({
-      type: 'success',
-      message: 'All automated SWMS campaigns and reminders have been paused'
-    })
-  }
 
   const renderActionForm = () => {
     if (!selectedAction) return null
@@ -537,7 +291,7 @@ export function SwmsQuickActions({
                         <div className={`p-2 rounded-lg ${action.color}`}>
                           <IconComponent className="h-5 w-5" />
                         </div>
-                        <Badge className={getCategoryColor(action.category)} size="sm">
+                        <Badge className={getCategoryColor(action.category)}>
                           {action.category}
                         </Badge>
                       </div>
