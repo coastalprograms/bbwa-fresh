@@ -7,8 +7,8 @@ import { CheckIcon, ArrowLeft, Phone, Wrench, Clock, Shield, AlertTriangle } fro
 
 export const metadata: Metadata = {
   title: 'Maintenance & Repairs - Bayside Builders WA',
-  description: 'Ongoing maintenance and repair services to keep your property in top condition. Emergency repairs, preventive maintenance, and property inspections in Perth.',
-  keywords: ['property maintenance Perth', 'home repairs WA', 'emergency repairs Perth', 'building maintenance Western Australia'],
+  description: 'Ongoing maintenance and repair services to keep your property in top condition. Emergency repairs, preventive maintenance, and property inspections in the South West.',
+  keywords: ['property maintenance South West', 'home repairs WA', 'emergency repairs South West', 'building maintenance Western Australia'],
 }
 
 export default function MaintenanceRepairsPage() {

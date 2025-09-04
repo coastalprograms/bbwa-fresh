@@ -7,8 +7,8 @@ import { CheckIcon, ArrowLeft, Phone, Clock, Shield, Award } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'New Home Construction - Bayside Builders WA',
-  description: 'Custom homes built from the ground up with quality craftsmanship and attention to detail. Licensed builders serving Perth and Western Australia.',
-  keywords: ['new home construction Perth', 'custom home builders WA', 'house construction Perth', 'home builders Western Australia'],
+  description: 'Custom homes built from the ground up with quality craftsmanship and attention to detail. Licensed builders serving the South West and Western Australia.',
+  keywords: ['new home construction South West', 'custom home builders WA', 'house construction South West', 'home builders Western Australia'],
 }
 
 export default function NewHomeConstructionPage() {
@@ -227,7 +227,7 @@ export default function NewHomeConstructionPage() {
             Ready to Build Your Dream Home?
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Get a free consultation and quote from Perth&apos;s trusted construction professionals.
+            Get a free consultation and quote from the South West&apos;s trusted construction professionals.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild>

@@ -7,8 +7,8 @@ import { CheckIcon, ArrowLeft, Phone, Maximize, Home, ArrowUp, Trees } from 'luc
 
 export const metadata: Metadata = {
   title: 'Extensions & Additions - Bayside Builders WA',
-  description: 'Add more space and value to your property with professional extensions. Second story additions, room extensions, and outdoor living spaces in Perth.',
-  keywords: ['home extensions Perth', 'second story addition WA', 'room additions Perth', 'house extensions Western Australia'],
+  description: 'Add more space and value to your property with professional extensions. Second story additions, room extensions, and outdoor living spaces in the South West.',
+  keywords: ['home extensions South West', 'second story addition WA', 'room additions South West', 'house extensions Western Australia'],
 }
 
 export default function ExtensionsAdditionsPage() {

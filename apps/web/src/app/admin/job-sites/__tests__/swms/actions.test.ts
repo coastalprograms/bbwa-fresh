@@ -57,6 +57,7 @@ describe('SWMS Job Server Actions', () => {
 
   describe('createSwmsJob', () => {
     const mockSwmsJobData: SwmsJobCreateData = {
+      job_site_id: jobSiteId,
       name: 'Test SWMS Job',
       description: 'Test description',
       start_date: '2025-01-15',
@@ -111,8 +112,10 @@ describe('SWMS Job Server Actions', () => {
 
     it('handles missing optional fields correctly', async () => {
       const minimalData: SwmsJobCreateData = {
+        job_site_id: jobSiteId,
         name: 'Minimal SWMS Job',
-        start_date: '2025-01-15'
+        start_date: '2025-01-15',
+        status: 'planned'
       }
 
       mockSupabaseClient.auth.getUser.mockResolvedValue({
@@ -472,7 +475,7 @@ describe('SWMS Job Server Actions', () => {
       const testError = new Error('Test database error')
       mockQuery.single.mockRejectedValue(testError)
 
-      await createSwmsJob(jobSiteId, { name: 'Test', start_date: '2025-01-01' })
+      await createSwmsJob(jobSiteId, { job_site_id: jobSiteId, name: 'Test', start_date: '2025-01-01', status: 'planned' })
 
       expect(mockConsoleError).toHaveBeenCalledWith('Create SWMS job error:', testError)
     })
@@ -485,7 +488,7 @@ describe('SWMS Job Server Actions', () => {
 
       mockQuery.single.mockRejectedValue('String error')
 
-      const result = await createSwmsJob(jobSiteId, { name: 'Test', start_date: '2025-01-01' })
+      const result = await createSwmsJob(jobSiteId, { job_site_id: jobSiteId, name: 'Test', start_date: '2025-01-01', status: 'planned' })
 
       expect(result).toEqual({
         success: false,
@@ -507,7 +510,7 @@ describe('SWMS Job Server Actions', () => {
         error: null
       })
 
-      await createSwmsJob(jobSiteId, { name: 'Test', start_date: '2025-01-01' })
+      await createSwmsJob(jobSiteId, { job_site_id: jobSiteId, name: 'Test', start_date: '2025-01-01', status: 'planned' })
       expect(mockRevalidatePath).toHaveBeenCalledWith(`/admin/job-sites/${jobSiteId}`)
 
       mockRevalidatePath.mockClear()
@@ -532,7 +535,7 @@ describe('SWMS Job Server Actions', () => {
         error: null
       })
 
-      await createSwmsJob(jobSiteId, { name: 'Test', start_date: '2025-01-01' })
+      await createSwmsJob(jobSiteId, { job_site_id: jobSiteId, name: 'Test', start_date: '2025-01-01', status: 'planned' })
 
       expect(mockRevalidatePath).not.toHaveBeenCalled()
     })
@@ -549,7 +552,7 @@ describe('SWMS Job Server Actions', () => {
       const validationError = new Error('Invalid job site ID')
       mockQuery.single.mockRejectedValue(validationError)
 
-      const result = await createSwmsJob('', { name: 'Test', start_date: '2025-01-01' })
+      const result = await createSwmsJob('', { job_site_id: '', name: 'Test', start_date: '2025-01-01', status: 'planned' })
 
       expect(result).toEqual({
         success: false,

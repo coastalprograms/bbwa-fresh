@@ -18,7 +18,8 @@ const mockSwmsJobs: SwmsJob[] = [
     start_date: '2025-01-15',
     end_date: '2025-01-30',
     status: 'active',
-    created_at: '2025-01-01T00:00:00Z'
+    created_at: '2025-01-01T00:00:00Z',
+    updated_at: '2025-01-01T00:00:00Z'
   },
   {
     id: 'job-2',
@@ -28,7 +29,8 @@ const mockSwmsJobs: SwmsJob[] = [
     start_date: '2025-02-01',
     end_date: '2025-02-10',
     status: 'planned',
-    created_at: '2025-01-02T00:00:00Z'
+    created_at: '2025-01-02T00:00:00Z',
+    updated_at: '2025-01-02T00:00:00Z'
   },
   {
     id: 'job-3',
@@ -38,7 +40,8 @@ const mockSwmsJobs: SwmsJob[] = [
     start_date: '2024-12-01',
     end_date: null,
     status: 'completed',
-    created_at: '2024-12-01T00:00:00Z'
+    created_at: '2024-12-01T00:00:00Z',
+    updated_at: '2024-12-01T00:00:00Z'
   },
   {
     id: 'job-4',
@@ -48,7 +51,8 @@ const mockSwmsJobs: SwmsJob[] = [
     start_date: '2025-01-10',
     end_date: '2025-01-20',
     status: 'cancelled',
-    created_at: '2025-01-01T00:00:00Z'
+    created_at: '2025-01-01T00:00:00Z',
+    updated_at: '2025-01-01T00:00:00Z'
   }
 ]
 
@@ -347,7 +351,8 @@ describe('SwmsJobsSection', () => {
         start_date: '2025-01-01',
         end_date: null,
         status: 'planned',
-        created_at: '2025-01-01T00:00:00Z'
+        created_at: '2025-01-01T00:00:00Z',
+        updated_at: '2025-01-01T00:00:00Z'
       }
       
       render(<SwmsJobsSection jobSiteId={jobSiteId} swmsJobs={[minimalJob]} />)

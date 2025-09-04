@@ -7,8 +7,8 @@ import { CheckIcon, ArrowLeft, Phone, ClipboardList, Calendar, Users, BarChart3 
 
 export const metadata: Metadata = {
   title: 'Project Management - Bayside Builders WA',
-  description: 'Professional project management services for construction projects. From planning to completion, we handle every detail of your build in Perth.',
-  keywords: ['project management Perth', 'construction management WA', 'building project manager Perth', 'construction coordination Western Australia'],
+  description: 'Professional project management services for construction projects. From planning to completion, we handle every detail of your build in the South West.',
+  keywords: ['project management South West', 'construction management WA', 'building project manager South West', 'construction coordination Western Australia'],
 }
 
 export default function ProjectManagementPage() {

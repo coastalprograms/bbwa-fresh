@@ -32,7 +32,7 @@ export default function EnhancedHero({ onScrollToNext }: EnhancedHeroProps) {
   const [showElements, setShowElements] = useState(false)
   const [currentEmoji, setCurrentEmoji] = useState('🏗️')
 
-  const fullText = "Perth's Premier Construction Specialists"
+  const fullText = "Dunsborough's Premier Construction Specialists"
   const constructionEmojis = useMemo(() => ['🏗️', '🔨', '🏠', '⚒️', '🧱'], [])
 
   // Typewriter effect for hero title
@@ -109,19 +109,19 @@ export default function EnhancedHero({ onScrollToNext }: EnhancedHeroProps) {
             showElements ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}>
             <FloatingSparkles count={2}>
-              <Badge variant="outline" className="bg-white/10 text-white border-white/20 backdrop-blur-sm hover-perth-glow">
-                <ShieldCheckIcon className="mr-2 h-3.5 w-3.5 animate-perth-sparkle" />
+              <Badge variant="outline" className="bg-white/10 text-white border-white/20 backdrop-blur-sm hover-glow">
+                <ShieldCheckIcon className="mr-2 h-3.5 w-3.5 animate-sparkle" />
                 Licensed Builder #12345
               </Badge>
             </FloatingSparkles>
-            <Badge variant="outline" className="bg-white/10 text-white border-white/20 backdrop-blur-sm hover-perth-glow">
-              <AwardIcon className="mr-2 h-3.5 w-3.5 animate-tool-bounce" />
+                          <Badge variant="outline" className="bg-white/10 text-white border-white/20 backdrop-blur-sm hover-glow">
+                <AwardIcon className="mr-2 h-3.5 w-3.5 animate-tool-bounce" />
               Master Builders WA
             </Badge>
             <FloatingSparkles count={1}>
-              <Badge variant="outline" className="bg-white/10 text-white border-white/20 backdrop-blur-sm hover-perth-glow">
-                <StarIcon className="mr-2 h-3.5 w-3.5 fill-current animate-perth-sparkle" />
-                5-Star Perth Builders
+              <Badge variant="outline" className="bg-white/10 text-white border-white/20 backdrop-blur-sm hover-glow">
+                <StarIcon className="mr-2 h-3.5 w-3.5 fill-current animate-sparkle" />
+                5-Star South West Builders
               </Badge>
             </FloatingSparkles>
           </div>
@@ -141,12 +141,12 @@ export default function EnhancedHero({ onScrollToNext }: EnhancedHeroProps) {
             </h1>
           </div>
           
-          {/* Enhanced Description with Perth References */}
+          {/* Enhanced Description with South West References */}
           <div className={`transition-all duration-1000 delay-500 ${
             showElements ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}>
             <p className="text-lg sm:text-xl mb-8 max-w-3xl mx-auto leading-relaxed opacity-95">
-              From Cottesloe to Joondalup, we&apos;ve built quality homes and commercial spaces across Perth for over 15 years. 
+              From Busselton to Margaret River, we&apos;ve built quality homes and commercial spaces across the South West for over 15 years. 
               <span className="inline-block animate-aussie-wave"> 🇦🇺 </span>
               Licensed, insured, and committed to exceeding your expectations.
             </p>
@@ -227,35 +227,35 @@ export default function EnhancedHero({ onScrollToNext }: EnhancedHeroProps) {
             >
               <Link href="/projects">
                 <Building2Icon className="mr-2 h-4 w-4 animate-wiggle" />
-                View Perth Projects
+                View South West Projects
               </Link>
             </Button>
           </div>
           
-          {/* Perth-Specific Features with Animations */}
+          {/* South West-Specific Features with Animations */}
           <div className={`flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm opacity-90 stagger-children transition-all duration-1000 delay-1200 ${
             showElements ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}>
             <div className="flex items-center gap-2 animate-construction-entrance">
-              <CheckIcon className="h-4 w-4 text-white animate-perth-sparkle" />
+              <CheckIcon className="h-4 w-4 text-white animate-sparkle" />
               <span>Free On-Site Consultation</span>
             </div>
             <div className="flex items-center gap-2 animate-construction-entrance">
-              <CheckIcon className="h-4 w-4 text-white animate-perth-sparkle" />
+              <CheckIcon className="h-4 w-4 text-white animate-sparkle" />
               <span>Fully Licensed & Insured</span>
             </div>
             <div className="flex items-center gap-2 animate-construction-entrance">
-              <CheckIcon className="h-4 w-4 text-white animate-perth-sparkle" />
-              <span>Perth Local Knowledge 🌅</span>
+              <CheckIcon className="h-4 w-4 text-white animate-sparkle" />
+              <span>South West Local Knowledge 🌅</span>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Enhanced Perth Skyline Decoration */}
+      {/* Enhanced South West Skyline Decoration */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/20 to-transparent">
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 text-white/30">
-          {/* Simple Perth skyline silhouette */}
+          {/* Simple South West skyline silhouette */}
           <div className="w-3 h-12 bg-current rounded-t"></div>
           <div className="w-2 h-8 bg-current rounded-t"></div>
           <div className="w-4 h-16 bg-current rounded-t"></div>

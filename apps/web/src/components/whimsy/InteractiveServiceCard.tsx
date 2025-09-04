@@ -172,16 +172,16 @@ export default function InteractiveServiceCard({ service, index }: InteractiveSe
           {isExpanded && service.features.length > 3 && (
             <div className="mb-4 p-3 bg-primary/5 rounded-lg animate-slide-in-from-top">
               <p className="text-sm text-muted-foreground italic">
-                ✨ Perth local expertise with {service.features.length} specialized features to ensure your project exceeds expectations!
+                ✨ South West local expertise with {service.features.length} specialized features to ensure your project exceeds expectations!
               </p>
             </div>
           )}
 
-          {/* Perth Local Badge */}
+          {/* South West Local Badge */}
           <div className="flex items-center gap-2 mb-4">
             <Badge variant="outline" className="text-xs bg-primary/5 text-primary border-primary/20">
               <StarIcon className="h-3 w-3 mr-1 fill-current" />
-              Perth Local Experts
+              South West Local Experts
             </Badge>
             <Badge variant="outline" className="text-xs">
               🏆 15+ Years Experience

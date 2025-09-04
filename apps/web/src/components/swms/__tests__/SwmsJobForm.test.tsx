@@ -23,8 +23,9 @@ const mockJobSite: JobSite = {
   address: '123 Test Street, Perth WA 6000',
   lat: -31.9505,
   lng: 115.8605,
-  status: 'active',
-  created_at: '2025-01-01T00:00:00Z'
+  active: true,
+  created_at: '2025-01-01T00:00:00Z',
+  updated_at: '2025-01-01T00:00:00Z'
 }
 
 const mockSwmsJob: SwmsJob = {
@@ -35,7 +36,8 @@ const mockSwmsJob: SwmsJob = {
   start_date: '2025-01-15',
   end_date: '2025-01-30',
   status: 'active',
-  created_at: '2025-01-01T00:00:00Z'
+  created_at: '2025-01-01T00:00:00Z',
+  updated_at: '2025-01-01T00:00:00Z'
 }
 
 describe('SwmsJobForm', () => {

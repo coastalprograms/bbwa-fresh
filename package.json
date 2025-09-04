@@ -45,5 +45,9 @@
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
   },
-  "packageManager": "npm@10.0.0"
+  "packageManager": "npm@10.0.0",
+  "dependencies": {
+    "@radix-ui/react-popover": "^1.1.15",
+    "react-day-picker": "^9.9.0"
+  }
 }

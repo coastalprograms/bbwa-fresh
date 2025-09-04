@@ -131,7 +131,7 @@ export function HeroSection({
         </div>
         <div className="flex items-center gap-2">
           <span>•</span>
-          <span>Local Perth Builders</span>
+          <span>Local South West Builders</span>
         </div>
       </div>
     </div>

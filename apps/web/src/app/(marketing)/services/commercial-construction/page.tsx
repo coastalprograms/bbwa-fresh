@@ -7,8 +7,8 @@ import { CheckIcon, ArrowLeft, Phone, Building2, Store, Warehouse, Coffee } from
 
 export const metadata: Metadata = {
   title: 'Commercial Construction - Bayside Builders WA', 
-  description: 'Professional commercial construction and fit-out services for businesses in Perth. Office spaces, retail shops, restaurants, and industrial buildings.',
-  keywords: ['commercial construction Perth', 'office fit out WA', 'retail construction Perth', 'commercial builders Western Australia'],
+  description: 'Professional commercial construction and fit-out services for businesses in the South West. Office spaces, retail shops, restaurants, and industrial buildings.',
+  keywords: ['commercial construction South West', 'office fit out WA', 'retail construction South West', 'commercial builders Western Australia'],
 }
 
 export default function CommercialConstructionPage() {

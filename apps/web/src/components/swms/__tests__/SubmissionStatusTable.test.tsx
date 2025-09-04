@@ -35,7 +35,8 @@ const mockSubmissions: SubmissionWithJob[] = [
       start_date: '2025-01-15',
       end_date: '2025-01-30',
       status: 'active',
-      created_at: '2025-01-01T00:00:00Z'
+      created_at: '2025-01-01T00:00:00Z',
+      updated_at: '2025-01-01T00:00:00Z'
     },
     contractor_name: 'ABC Construction Pty Ltd',
     worker_name: 'John Smith'
@@ -56,7 +57,8 @@ const mockSubmissions: SubmissionWithJob[] = [
       start_date: '2025-02-01',
       end_date: '2025-02-10',
       status: 'planned',
-      created_at: '2025-01-02T00:00:00Z'
+      created_at: '2025-01-02T00:00:00Z',
+      updated_at: '2025-01-02T00:00:00Z'
     },
     contractor_name: 'XYZ Contracting',
     worker_name: 'Jane Doe'
@@ -77,7 +79,8 @@ const mockSubmissions: SubmissionWithJob[] = [
       start_date: '2025-01-20',
       end_date: '2025-01-25',
       status: 'active',
-      created_at: '2025-01-03T00:00:00Z'
+      created_at: '2025-01-03T00:00:00Z',
+      updated_at: '2025-01-03T00:00:00Z'
     },
     contractor_name: 'ElectroTech Services',
     worker_name: 'Bob Wilson'
@@ -98,7 +101,8 @@ const mockSubmissions: SubmissionWithJob[] = [
       start_date: '2025-01-25',
       end_date: '2025-01-30',
       status: 'planned',
-      created_at: '2025-01-04T00:00:00Z'
+      created_at: '2025-01-04T00:00:00Z',
+      updated_at: '2025-01-04T00:00:00Z'
     },
     contractor_name: 'PlumberPro Ltd',
     worker_name: 'Alice Johnson'
@@ -119,7 +123,8 @@ const mockSubmissions: SubmissionWithJob[] = [
       start_date: '2025-02-05',
       end_date: '2025-02-15',
       status: 'planned',
-      created_at: '2025-01-05T00:00:00Z'
+      created_at: '2025-01-05T00:00:00Z',
+      updated_at: '2025-01-05T00:00:00Z'
     },
     contractor_name: 'Climate Control Co',
     worker_name: 'Charlie Brown'
@@ -517,7 +522,8 @@ describe('SubmissionStatusTable', () => {
           start_date: '2025-01-01',
           end_date: null,
           status: 'planned',
-          created_at: '2025-01-01T00:00:00Z'
+          created_at: '2025-01-01T00:00:00Z',
+          updated_at: '2025-01-01T00:00:00Z'
         }
       }
       

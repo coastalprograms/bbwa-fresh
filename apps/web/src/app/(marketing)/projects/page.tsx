@@ -5,25 +5,25 @@ import { HeroSection } from '@/components/sections/hero-section'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 export const metadata: Metadata = {
-  title: 'Construction Projects Perth - Our Portfolio | Bayside Builders WA',
-  description: 'View our portfolio of 200+ completed construction projects in Perth, WA. Custom homes, renovations, extensions & commercial builds. Licensed builders with proven results.',
-  keywords: ['construction projects Perth', 'home construction portfolio Perth', 'renovation projects Perth', 'extension projects Perth', 'commercial construction Perth', 'builder portfolio Western Australia'],
+  title: 'Construction Projects South West - Our Portfolio | Bayside Builders WA',
+  description: 'View our portfolio of 200+ completed construction projects in the South West, WA. Custom homes, renovations, extensions & commercial builds. Licensed builders with proven results.',
+  keywords: ['construction projects South West', 'home construction portfolio South West', 'renovation projects South West', 'extension projects South West', 'commercial construction South West', 'builder portfolio Western Australia'],
   openGraph: {
-    title: 'Construction Projects Perth - Portfolio | Bayside Builders WA',
-    description: 'View our portfolio of 200+ completed projects in Perth. Custom homes, renovations, extensions & commercial builds.',
+    title: 'Construction Projects South West - Portfolio | Bayside Builders WA',
+    description: 'View our portfolio of 200+ completed projects in the South West. Custom homes, renovations, extensions & commercial builds.',
     images: [
       {
         url: '/images/og-projects.jpg',
         width: 1200,
         height: 630,
-        alt: 'Bayside Builders WA Construction Projects Portfolio Perth',
+        alt: 'Bayside Builders WA Construction Projects Portfolio South West',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Construction Projects Perth - Bayside Builders WA Portfolio',
-    description: 'View our portfolio of 200+ completed projects in Perth. Quality construction results.',
+    title: 'Construction Projects South West - Bayside Builders WA Portfolio',
+    description: 'View our portfolio of 200+ completed projects in the South West. Quality construction results.',
     images: ['/images/twitter-projects.jpg'],
   },
 }

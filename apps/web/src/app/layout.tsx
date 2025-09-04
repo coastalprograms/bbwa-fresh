@@ -34,10 +34,10 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://baysidebuilderswa.com.au'),
   title: {
     template: '%s | Bayside Builders WA',
-    default: 'Bayside Builders WA - Quality Construction Services Perth',
+    default: 'Bayside Builders WA - Quality Construction Services Dunsborough',
   },
-  description: 'Premium construction services in Perth, WA. Specialising in new homes, renovations, extensions, and commercial construction. Licensed builders with 20+ years experience.',
-  keywords: ['construction Perth', 'builders Perth WA', 'home renovations Perth', 'new home construction', 'extensions Perth', 'commercial construction Perth', 'building services Western Australia'],
+  description: 'Premium construction services in Dunsborough, WA. Specialising in new homes, renovations, extensions, and commercial construction. Licensed builders with 20+ years experience.',
+  keywords: ['construction Dunsborough', 'builders South West WA', 'home renovations Dunsborough', 'new home construction', 'extensions Dunsborough', 'commercial construction South West', 'building services Western Australia'],
   authors: [{ name: 'Bayside Builders WA' }],
   creator: 'Bayside Builders WA',
   publisher: 'Bayside Builders WA',
@@ -57,8 +57,8 @@ export const metadata: Metadata = {
     locale: 'en_AU',
     url: 'https://baysidebuilderswa.com.au',
     siteName: 'Bayside Builders WA',
-    title: 'Bayside Builders WA - Premium Construction Services Perth',
-    description: 'Premium construction services in Perth, WA. Specialising in new homes, renovations, extensions, and commercial construction.',
+    title: 'Bayside Builders WA - Premium Construction Services Dunsborough',
+    description: 'Premium construction services in Dunsborough, WA. Specialising in new homes, renovations, extensions, and commercial construction.',
     images: [
       {
         url: '/images/og-default.jpg',
@@ -72,8 +72,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@BaysideBuildersWA',
     creator: '@BaysideBuildersWA',
-    title: 'Bayside Builders WA - Premium Construction Services Perth',
-    description: 'Premium construction services in Perth, WA. New homes, renovations, extensions & commercial construction.',
+    title: 'Bayside Builders WA - Premium Construction Services Dunsborough',
+    description: 'Premium construction services in Dunsborough, WA. New homes, renovations, extensions & commercial construction.',
     images: ['/images/twitter-card.jpg'],
   },
   icons: {

@@ -41,8 +41,9 @@ const mockJobSite: JobSite = {
   address: '123 Construction Ave, Perth WA 6000',
   lat: -31.9505,
   lng: 115.8605,
-  status: 'active',
-  created_at: '2025-01-01T00:00:00Z'
+  active: true,
+  created_at: '2025-01-01T00:00:00Z',
+  updated_at: '2025-01-01T00:00:00Z'
 }
 
 const mockSwmsJobs: SwmsJob[] = [
@@ -54,7 +55,8 @@ const mockSwmsJobs: SwmsJob[] = [
     start_date: '2025-01-15',
     end_date: '2025-01-30',
     status: 'active',
-    created_at: '2025-01-01T00:00:00Z'
+    created_at: '2025-01-01T00:00:00Z',
+    updated_at: '2025-01-01T00:00:00Z'
   },
   {
     id: 'swms-job-2',
@@ -64,7 +66,8 @@ const mockSwmsJobs: SwmsJob[] = [
     start_date: '2025-02-01',
     end_date: '2025-02-15',
     status: 'planned',
-    created_at: '2025-01-02T00:00:00Z'
+    created_at: '2025-01-02T00:00:00Z',
+    updated_at: '2025-01-02T00:00:00Z'
   }
 ]
 
@@ -542,7 +545,8 @@ describe('SWMS Admin Workflow Integration Tests', () => {
         start_date: '2025-01-01',
         end_date: '2025-01-15',
         status: i % 2 === 0 ? 'active' : 'planned',
-        created_at: '2025-01-01T00:00:00Z'
+        created_at: '2025-01-01T00:00:00Z',
+        updated_at: '2025-01-01T00:00:00Z'
       }))
       
       const startTime = performance.now()

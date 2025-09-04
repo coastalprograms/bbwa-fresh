@@ -74,7 +74,7 @@ export default function AnimatedTestimonial({ testimonial, index }: TestimonialP
               isHovered ? 'bg-primary text-white border-primary scale-105' : 'text-muted-foreground'
             }`}
           >
-            Verified Perth Client
+            Verified South West Client
           </Badge>
         </div>
 
@@ -134,12 +134,12 @@ export default function AnimatedTestimonial({ testimonial, index }: TestimonialP
               {testimonial.name}
             </div>
             
-            {/* Location with Perth Highlight */}
+            {/* Location with South West Highlight */}
             <div className={`text-sm font-medium transition-all duration-300 flex items-center gap-1 ${
               isHovered ? 'text-primary scale-105 translate-x-1' : 'text-primary'
             }`}>
               <span>📍</span>
-              <span>{testimonial.location}, Perth WA</span>
+              <span>{testimonial.location}, South West WA</span>
             </div>
             
             {/* Verification Status */}
@@ -157,7 +157,7 @@ export default function AnimatedTestimonial({ testimonial, index }: TestimonialP
           </div>
         </div>
 
-        {/* Perth Local Indicators */}
+        {/* South West Local Indicators */}
         {isHovered && (
           <div className="mt-4 p-3 bg-primary/5 rounded-lg animate-slide-in-from-bottom">
             <div className="flex items-center justify-between text-xs">
@@ -166,7 +166,7 @@ export default function AnimatedTestimonial({ testimonial, index }: TestimonialP
                 <span>Project completed in {new Date().getFullYear() - 1}</span>
               </div>
               <div className="flex items-center gap-1">
-                <span className="text-primary font-medium">🌟 Perth Local</span>
+                <span className="text-primary font-medium">🌟 South West Local</span>
               </div>
             </div>
           </div>

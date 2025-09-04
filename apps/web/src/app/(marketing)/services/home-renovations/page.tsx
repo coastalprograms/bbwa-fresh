@@ -7,8 +7,8 @@ import { CheckIcon, ArrowLeft, Phone, Home, Hammer, Paintbrush, Wrench } from 'l
 
 export const metadata: Metadata = {
   title: 'Home Renovations - Bayside Builders WA',
-  description: 'Transform your existing space with expert renovation and remodeling services. Kitchen, bathroom, and whole house renovations in Perth.',
-  keywords: ['home renovations Perth', 'kitchen renovation WA', 'bathroom remodeling Perth', 'house renovations Western Australia'],
+  description: 'Transform your existing space with expert renovation and remodeling services. Kitchen, bathroom, and whole house renovations in the South West.',
+  keywords: ['home renovations South West', 'kitchen renovation WA', 'bathroom remodeling South West', 'house renovations Western Australia'],
 }
 
 export default function HomeRenovationsPage() {
