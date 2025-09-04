@@ -60,7 +60,7 @@ export function Footer() {
   }
   
   return (
-    <footer className="w-full border-t bg-muted/30">
+    <footer className="w-full border-t bg-slate-900 text-white">
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 relative">
           {/* Company Info */}
@@ -74,26 +74,26 @@ export function Footer() {
                 className="h-8 w-auto"
               />
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-slate-300">
               Quality construction services across Western Australia. 
               Building dreams with precision and excellence since 2010.
             </p>
             <div className="space-y-2">
               <a
                 href="mailto:info@baysidebuilderswa.com.au"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors"
               >
                 <MailIcon className="h-4 w-4" />
                 info@baysidebuilderswa.com.au
               </a>
               <a
                 href="tel:+61890001234"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors"
               >
                 <PhoneIcon className="h-4 w-4" />
                 (08) 9000 1234
               </a>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2 text-sm text-slate-300">
                 <MapPinIcon className="h-4 w-4" />
                 Dunsborough, WA 6281
               </div>
@@ -103,13 +103,13 @@ export function Footer() {
           {/* Footer Links */}
           {Object.entries(footerSections).map(([key, section]) => (
             <div key={key} className="space-y-4">
-              <h4 className="text-sm font-semibold">{section.title}</h4>
+              <h4 className="text-sm font-semibold text-white">{section.title}</h4>
               <ul className="space-y-2">
                 {section.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href as any}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      className="text-sm text-slate-300 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -131,7 +131,7 @@ export function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-slate-300 hover:text-white transition-colors"
                 aria-label={social.label}
               >
                 <Icon className="h-5 w-5" />
@@ -143,13 +143,13 @@ export function Footer() {
 
         {/* Bottom Section */}
         <div className="text-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-slate-300">
             © {currentYear} Bayside Builders WA · Website built by{" "}
             <a 
               href="https://coastalprograms.com/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-colors underline"
+              className="hover:text-white transition-colors underline"
             >
               Coastal Programs
             </a>

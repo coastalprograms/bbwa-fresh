@@ -7,7 +7,6 @@ import { HeroSection } from "@/components/sections/hero-section"
 
 import Link from "next/link"
 import Image from "next/image"
-import { useCallback } from "react"
 import { 
   ArrowRightIcon, 
   CheckIcon, 
@@ -25,6 +24,7 @@ import {
   TractorIcon
 } from "lucide-react"
 import { servicesData } from "@/lib/services-data"
+import { ProjectsCarousel } from "@/components/projects/ProjectsCarousel"
 import type { LucideIcon } from "lucide-react"
 
 // Define types for better type safety
@@ -64,15 +64,6 @@ const SERVICE_ICON_MAP: Record<string, LucideIcon> = {
 }
 
 export default function LandingPage() {
-
-
-
-  const scrollToNext = useCallback(() => {
-    const nextSection = document.getElementById('services-section')
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [])
 
   return (
     <div className="flex flex-col">
@@ -150,6 +141,59 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* About Me Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Text Content - Left Side */}
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+                  About Bayside Builders WA
+                </h2>
+                <p className="text-lg text-muted-foreground mb-4">
+                  Bayside Builders WA is a local custom builder specialising in luxury homes, 
+                  commercial construction, and agricultural structures across the South West region.
+                </p>
+                <p className="text-lg text-muted-foreground mb-4">
+                  With over 15 years of experience, we deliver exceptional quality and craftsmanship 
+                  on every project. Our commitment to quality, client satisfaction, and timely delivery 
+                  has made us the trusted choice for construction projects throughout the region.
+                </p>
+                <p className="text-lg text-muted-foreground">
+                  From custom luxury homes to commercial developments and farming infrastructure, 
+                  we bring expertise, reliability, and attention to detail to every build.
+                </p>
+              </div>
+            </div>
+
+            {/* Images - Right Side */}
+            <div className="relative flex justify-end">
+              {/* First Image - Higher (left side) */}
+              <div className="relative z-10 mr-8">
+                <div className="w-64 h-48 bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg shadow-lg overflow-hidden">
+                  <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
+                    <Building2Icon className="w-16 h-16 text-primary/60" />
+                  </div>
+                </div>
+              </div>
+              
+              {/* Second Image - Lower (right side) */}
+              <div className="relative mt-8 z-0">
+                <div className="w-64 h-48 bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg shadow-lg overflow-hidden">
+                  <div className="w-full h-full bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center">
+                    <TractorIcon className="w-16 h-16 text-primary/60" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Projects Section */}
+      <ProjectsCarousel />
+
       {/* Testimonials Section */}
       <section className="py-20 bg-white">
         <div className="container">
@@ -197,135 +241,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Trust Indicators Section */}
-      <section className="py-20 bg-background">
-        <div className="container">
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4">
-              <ShieldCheckIcon className="mr-2 h-3.5 w-3.5" />
-              Licensed & Certified
-            </Badge>
-            
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Why the South West Trusts Us
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Fully licensed, insured, and certified professionals with a proven track record across the South West&apos;s construction industry.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {[
-              {
-                icon: ShieldCheckIcon,
-                title: 'Licensed Builder',
-                details: ['Registration #BC12345', 'Building Commission WA']
-              },
-              {
-                icon: AwardIcon,
-                title: 'Master Builders WA',
-                details: ['Member Since 2009', 'Excellence Awards Winner']
-              },
-              {
-                icon: ShieldCheckIcon,
-                title: 'Fully Insured',
-                details: ['$20M Public Liability', 'Contract Works Coverage']
-              },
-              {
-                icon: AwardIcon,
-                title: 'Quality Certified',
-                details: ['ISO 9001:2015', 'Safety Standards Compliant']
-              }
-            ].map((cert) => (
-              <div key={cert.title} className="text-center group">
-                <div className="w-20 h-20 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                  <cert.icon className="h-10 w-10 text-primary group-hover:text-white" />
-                </div>
-                <h3 className="font-semibold mb-2">{cert.title}</h3>
-                {cert.details.map((detail, i) => (
-                  <p key={i} className="text-sm text-muted-foreground">{detail}</p>
-                ))}
-              </div>
-            ))}
-          </div>
-          
-          <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8 md:p-12">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-              <div>
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">500+</div>
-                <div className="text-lg font-semibold mb-1">Projects Completed</div>
-                <div className="text-sm text-muted-foreground">Across South West & Surrounds</div>
-              </div>
-              
-              <div>
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">15+</div>
-                <div className="text-lg font-semibold mb-1">Years Experience</div>
-                <div className="text-sm text-muted-foreground">South West Construction Industry</div>
-              </div>
-              
-              <div>
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">98%</div>
-                <div className="text-lg font-semibold mb-1">Client Satisfaction</div>
-                <div className="text-sm text-muted-foreground">Would Recommend Us</div>
-              </div>
-              
-              <div>
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">$50M+</div>
-                <div className="text-lg font-semibold mb-1">Projects Value</div>
-                <div className="text-sm text-muted-foreground">Successfully Delivered</div>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              {['Excellence Award 2023', '5-Star Rated', 'South West Champions', 'On-Time Delivery'].map((achievement) => (
-                <Badge key={achievement} variant="outline" className="bg-white/50">
-                  {achievement}
-                </Badge>
-              ))}
-            </div>
-          </div>
-          
-          <div className="mt-16 bg-white rounded-2xl p-8 border">
-            <div className="grid lg:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-2xl font-bold mb-4">
-                  South West Local Expertise
-                </h3>
-                <p className="text-muted-foreground mb-6">
-                  As long-term South West residents and construction professionals, we understand the unique challenges of building in coastal Western Australia&apos;s climate and conditions.
-                </p>
-                <div className="space-y-3">
-                  {[
-                    'Heritage council and council approvals expertise',
-                    'Coastal climate-optimized construction methods', 
-                    'Local supplier and trade relationships',
-                    'Understanding of coastal soil and foundation requirements'
-                  ].map((feature) => (
-                    <div key={feature} className="flex items-center gap-3">
-                      <CheckIcon className="h-5 w-5 text-primary flex-shrink-0" />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6">
-                <div className="text-center mb-6">
-                  <h4 className="text-lg font-semibold mb-2">Our Service Areas</h4>
-                  <p className="text-sm text-muted-foreground">Professional construction services across South West Western Australia</p>
-                </div>
-                <div className="grid grid-cols-2 gap-3 text-sm">
-                  {['Dunsborough', 'Busselton', 'Margaret River', 'Yallingup', 'Eagle Bay', 'Quindalup', 'Vasse', 'Geographe', 'Broadwater', '& Surrounding Areas'].map((area) => (
-                    <div key={area} className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      <span>{area}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Core Values Section */}
       <section className="py-20 bg-muted/20">
@@ -360,81 +275,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container">
-          <Card className="border-0 bg-gradient-to-br from-primary/95 to-primary text-primary-foreground">
-            <CardContent className="p-8 md:p-12 text-center">
-              <Badge variant="secondary" className="mb-6 bg-white/20 text-white border-white/30">
-                <Building2Icon className="mr-2 h-4 w-4" />
-                Ready to Start Building?
-              </Badge>
-              
-              <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-                Your Dream Project Starts With A Free Consultation
-              </h2>
-              
-              <p className="text-lg mb-8 opacity-95 max-w-3xl mx-auto leading-relaxed">
-                Join 500+ satisfied South West families and businesses who chose Bayside Builders WA. 
-                Get your free on-site consultation, detailed quote, and project timeline today.
-              </p>
-              
-              <div className="flex flex-wrap justify-center gap-6 mb-10 text-sm opacity-90">
-                {[
-                  'Free On-Site Consultation',
-                  'Detailed Written Quote', 
-                  'No Obligation',
-                  'Fast Response Time'
-                ].map((benefit) => (
-                  <div key={benefit} className="flex items-center gap-2">
-                    <CheckIcon className="h-4 w-4" />
-                    <span>{benefit}</span>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90 font-semibold" asChild>
-                  <Link href="/contact">
-                    Get Your Free Quote Today
-                    <ArrowRightIcon className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                
-                <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 border-white/30 text-white" asChild>
-                  <Link href="/projects">
-                    <Building2Icon className="mr-2 h-4 w-4" />
-                    View South West Projects
-                  </Link>
-                </Button>
-              </div>
-              
-              <div className="flex flex-wrap justify-center gap-8 text-sm opacity-80">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span>Call: (08) 1234 5678</span>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span>Email: info@baysidebuilderswa.com.au</span>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span>Servicing All South West WA</span>
-                </div>
-              </div>
-
-              <div className="mt-8 flex justify-center">
-                <Badge variant="outline" className="bg-white/10 border-white/30 text-white">
-                  Proudly South West Born & Bred
-                </Badge>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
     </div>
   )
 }

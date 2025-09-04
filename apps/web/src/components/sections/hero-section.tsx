@@ -145,7 +145,7 @@ export function HeroSection({
         autoSlide={true}
         autoSlideInterval={6000}
         showControls={true}
-        showIndicators={true}
+        showIndicators={false}
       >
         {heroContent}
       </HeroCarousel>
