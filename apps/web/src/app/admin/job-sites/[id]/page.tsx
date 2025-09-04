@@ -9,6 +9,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ArrowLeft, Edit, MapPin, CheckCircle, XCircle, Settings2 } from 'lucide-react'
 import { SwmsJobsSection } from '@/components/swms/SwmsJobsSection'
 import { SubmissionStatusTable } from '@/components/swms/SubmissionStatusTable'
+import { SwmsDashboardWrapper } from '@/components/admin/SwmsDashboardWrapper'
+import { SwmsComplianceTimeline } from '@/components/swms/SwmsComplianceTimeline'
+import { ComplianceDocumentStorage } from '@/components/swms/ComplianceDocumentStorage'
+import { AuditTrailExport } from '@/components/admin/AuditTrailExport'
+import { ComplianceTemplates } from '@/components/admin/ComplianceTemplates'
 import type { JobSite, SwmsJob, SwmsSubmission } from '@/types/swms'
 
 export const metadata = {
@@ -85,8 +90,13 @@ export default async function JobSiteDetailPage({ params }: JobSiteDetailPagePro
       swms_jobs!inner(
         id,
         name,
+        description,
+        start_date,
+        end_date,
         status,
-        job_site_id
+        job_site_id,
+        created_at,
+        updated_at
       ),
       contractors(name),
       workers(name)
@@ -95,12 +105,17 @@ export default async function JobSiteDetailPage({ params }: JobSiteDetailPagePro
     .order('created_at', { ascending: false })
 
   // Process submissions data for display
-  const submissionsWithJob = (submissions || []).map(submission => ({
-    ...submission,
-    swms_job: submission.swms_jobs,
-    contractor_name: submission.contractors?.name,
-    worker_name: submission.workers?.name
-  }))
+  const submissionsWithJob = (submissions || []).map(submission => {
+    const contractors = submission.contractors as any
+    const workers = submission.workers as any
+    
+    return {
+      ...submission,
+      swms_job: Array.isArray(submission.swms_jobs) ? submission.swms_jobs[0] : submission.swms_jobs,
+      contractor_name: contractors?.name || (Array.isArray(contractors) ? contractors[0]?.name : null),
+      worker_name: workers?.name || (Array.isArray(workers) ? workers[0]?.name : null)
+    }
+  })
 
   // Calculate stats from submissions
   const stats = submissions || []
@@ -218,12 +233,29 @@ export default async function JobSiteDetailPage({ params }: JobSiteDetailPagePro
         </div>
 
         {/* Main Content Tabs */}
-        <Tabs defaultValue="overview" className="space-y-4">
+        <Tabs defaultValue="dashboard" className="space-y-4">
           <TabsList>
+            <TabsTrigger value="dashboard">SWMS Dashboard</TabsTrigger>
+            <TabsTrigger value="timeline">Compliance Timeline</TabsTrigger>
+            <TabsTrigger value="documents">Documents</TabsTrigger>
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="swms">SWMS Management</TabsTrigger>
             <TabsTrigger value="submissions">Submissions ({submissionStats.total})</TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="dashboard" className="space-y-4">
+            <SwmsDashboardWrapper jobSiteId={params.id} />
+          </TabsContent>
+          
+          <TabsContent value="timeline" className="space-y-4">
+            <SwmsComplianceTimeline jobSiteId={params.id} />
+            <AuditTrailExport jobSiteId={params.id} />
+          </TabsContent>
+          
+          <TabsContent value="documents" className="space-y-4">
+            <ComplianceDocumentStorage jobSiteId={params.id} />
+            <ComplianceTemplates jobSiteId={params.id} />
+          </TabsContent>
           
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-6 md:grid-cols-2">

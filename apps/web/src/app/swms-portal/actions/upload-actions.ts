@@ -2,6 +2,8 @@
 
 import { createClient } from '@/lib/supabase/server'
 import { validateSwmsToken } from '../[token]/actions'
+import { checkRateLimit, RATE_LIMITS } from '@/lib/rate-limit'
+import { headers } from 'next/headers'
 
 interface UploadResult {
   success: boolean
@@ -17,6 +19,19 @@ interface UploadResult {
  */
 export async function uploadSwmsDocument(formData: FormData): Promise<UploadResult> {
   try {
+    // Rate limiting check
+    const headersList = headers()
+    const forwardedFor = headersList.get('x-forwarded-for')
+    const clientIp = forwardedFor?.split(',')[0]?.trim() || 'unknown'
+    
+    const rateLimit = checkRateLimit(clientIp, RATE_LIMITS.FILE_UPLOAD)
+    if (rateLimit.blocked) {
+      return {
+        success: false,
+        error: `Upload limit exceeded. Please wait ${Math.ceil((rateLimit.reset - Date.now()) / 1000)}s before trying again.`
+      }
+    }
+
     // Extract form data
     const file = formData.get('file') as File
     const swmsJobId = formData.get('swmsJobId') as string
@@ -61,7 +76,7 @@ export async function uploadSwmsDocument(formData: FormData): Promise<UploadResu
     const fileName = `${timestamp}_${randomString}.${fileExtension}`
     
     // Storage path: /swms-documents/job-sites/{job_id}/submissions/{contractor_id}/
-    const { swmsJob } = tokenValidation.data
+    const { swmsJob } = tokenValidation.data!
     const storagePath = `swms-documents/job-sites/${swmsJob.job_site_id}/submissions/${contractorId}/${fileName}`
 
     // Upload file to Supabase Storage
@@ -146,7 +161,7 @@ export async function uploadSwmsDocument(formData: FormData): Promise<UploadResu
 
     // Trigger email confirmation
     try {
-      const { swmsJob, jobSite, contractor } = tokenValidation.data
+      const { swmsJob, jobSite, contractor } = tokenValidation.data!
       const confirmationNumber = `SWMS-${swmsJobId.slice(0, 8).toUpperCase()}-${submission.id.slice(0, 8).toUpperCase()}`
       
       await supabase.functions.invoke('swms-email-confirmation', {

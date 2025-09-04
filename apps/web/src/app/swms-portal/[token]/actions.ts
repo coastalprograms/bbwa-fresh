@@ -1,6 +1,8 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import { checkRateLimit, RATE_LIMITS } from '@/lib/rate-limit'
+import { headers } from 'next/headers'
 
 interface TokenValidationResult {
   success: boolean
@@ -38,6 +40,19 @@ interface TokenValidationResult {
  */
 export async function validateSwmsToken(token: string): Promise<TokenValidationResult> {
   try {
+    // Rate limiting check
+    const headersList = headers()
+    const forwardedFor = headersList.get('x-forwarded-for')
+    const clientIp = forwardedFor?.split(',')[0]?.trim() || 'unknown'
+    
+    const rateLimit = checkRateLimit(clientIp, RATE_LIMITS.TOKEN_VALIDATION)
+    if (rateLimit.blocked) {
+      return {
+        success: false,
+        error: 'Too many validation attempts. Please wait before trying again.'
+      }
+    }
+
     // Input validation
     if (!token || typeof token !== 'string') {
       return { 
@@ -148,8 +163,8 @@ export async function validateSwmsToken(token: string): Promise<TokenValidationR
           job_site_id: swmsJob.job_site_id,
           contractor_id: swmsJob.contractor_id
         },
-        jobSite: swmsJob.job_sites,
-        contractor: swmsJob.contractors
+        jobSite: Array.isArray(swmsJob.job_sites) ? swmsJob.job_sites[0] : swmsJob.job_sites,
+        contractor: Array.isArray(swmsJob.contractors) ? swmsJob.contractors[0] : swmsJob.contractors
       }
     }
 

@@ -79,8 +79,8 @@ export default async function JobSitesPage() {
             active_jobs: swmsJobs?.filter(j => j.status === 'active').length || 0,
             total_submissions: submissions?.length || 0,
             approved_submissions: submissions?.filter(s => s.status === 'approved').length || 0,
-            completion_rate: submissions?.length > 0 
-              ? (submissions.filter(s => s.status === 'approved').length / submissions.length) * 100 
+            completion_rate: (submissions?.length ?? 0) > 0 
+              ? (submissions?.filter(s => s.status === 'approved').length ?? 0) / (submissions?.length ?? 1) * 100 
               : 0
           }
 

@@ -20,7 +20,7 @@ const swmsJobSchema = z.object({
   description: z.string().optional(),
   start_date: z.string().min(1, 'Start date is required'),
   end_date: z.string().optional(),
-  status: z.enum(['planned', 'active', 'completed', 'cancelled']).default('planned'),
+  status: z.enum(['planned', 'active', 'completed', 'cancelled']).optional().default('planned'),
 }).refine((data) => {
   if (data.end_date && data.start_date) {
     const startDate = new Date(data.start_date)
@@ -33,7 +33,7 @@ const swmsJobSchema = z.object({
   path: ['end_date']
 })
 
-type SwmsJobFormData = z.infer<typeof swmsJobSchema>
+type LocalSwmsJobFormData = z.infer<typeof swmsJobSchema>
 
 interface SwmsJobFormProps {
   jobSite: JobSite
@@ -47,7 +47,7 @@ export function SwmsJobForm({ jobSite, swmsJob, onCancel, className }: SwmsJobFo
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const form = useForm<SwmsJobFormData>({
+  const form = useForm({
     resolver: zodResolver(swmsJobSchema),
     defaultValues: {
       name: swmsJob?.name || `${jobSite.name} - SWMS`,
@@ -58,7 +58,7 @@ export function SwmsJobForm({ jobSite, swmsJob, onCancel, className }: SwmsJobFo
     },
   })
 
-  async function onSubmit(data: SwmsJobFormData) {
+  async function onSubmit(data: LocalSwmsJobFormData) {
     setIsSubmitting(true)
     setError(null)
 

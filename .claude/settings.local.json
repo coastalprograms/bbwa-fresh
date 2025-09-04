@@ -114,7 +114,22 @@
       "Bash(timeout 30 npm run dev)",
       "Bash(start chrome http://localhost:3004)",
       "Bash(timeout 5 tail -f apps/web/dev.log)",
-      "Bash(timeout 90 npm run build)"
+      "Bash(timeout 90 npm run build)",
+      "Bash(touch:*)",
+      "Bash(timeout 30 npm test)",
+      "Bash(timeout 60 npm test -- --testNamePattern=\"SWMS Portal|FileUpload|Rate Limiting\" --passWithNoTests --verbose)",
+      "Bash(timeout 30 npm test -- --testNamePattern=\"Rate Limiting\" --passWithNoTests)",
+      "Bash(npx jest:*)",
+      "Bash(timeout 60 npm test -- --testNamePattern=\"SWMS Submission Integration Tests\" --passWithNoTests --verbose)",
+      "Bash(timeout 60 npm test -- --testNamePattern=\"SWMS Submission Integration Tests\" --passWithNoTests)",
+      "Bash(timeout 60 npm test -- apps/web/src/app/swms-portal/__tests__/upload-integration.test.ts)",
+      "Bash(timeout 60 npm test -- --testNamePattern=\"SWMS Submission Integration Tests\")",
+      "Bash(timeout 30 npm test -- --testNamePattern=\"sends email confirmation after successful upload\")",
+      "Bash(timeout 30 npm test -- --testNamePattern=\"verify insert chain mock structure\")",
+      "Bash(timeout 30 npm test -- --testNamePattern=\"Syntax Fix Verification\")",
+      "Bash(timeout 60 npm test -- --testPathPattern=\"swms-portal\" --passWithNoTests)",
+      "mcp__supabase__deploy_edge_function",
+      "Bash(timeout 60 npm test -- --testPathPattern=\"upload-integration\" --passWithNoTests)"
     ],
     "deny": [],
     "ask": []

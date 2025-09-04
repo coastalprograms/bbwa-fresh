@@ -42,7 +42,7 @@ async function ConfirmationPageContent({
     notFound()
   }
 
-  const { swmsJob, jobSite, contractor } = validation.data
+  const { swmsJob, jobSite, contractor } = validation.data!
 
   // Get all submissions for this contractor and job
   const submissionStatus = await getSubmissionStatus(swmsJob.id, contractor.id)
@@ -50,8 +50,8 @@ async function ConfirmationPageContent({
 
   // If a specific submission ID is provided, find it
   const specificSubmission = submissionId 
-    ? submissions.find(sub => sub.id === submissionId)
-    : submissions[0] // Get most recent
+    ? submissions?.find(sub => sub.id === submissionId)
+    : submissions?.[0] // Get most recent
 
   // Generate confirmation number
   const confirmationNumber = specificSubmission
@@ -148,9 +148,9 @@ async function ConfirmationPageContent({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {submissions.length > 0 ? (
+            {(submissions?.length ?? 0) > 0 ? (
               <div className="space-y-3">
-                {submissions.slice(0, 5).map((submission) => (
+                {submissions?.slice(0, 5).map((submission) => (
                   <div key={submission.id} className="flex items-center justify-between p-3 border rounded">
                     <div className="flex items-center space-x-3">
                       <FileText className="h-5 w-5 text-gray-600" />
@@ -172,9 +172,9 @@ async function ConfirmationPageContent({
                   </div>
                 ))}
                 
-                {submissions.length > 5 && (
+                {(submissions?.length ?? 0) > 5 && (
                   <p className="text-sm text-gray-600 text-center pt-2">
-                    And {submissions.length - 5} more document{submissions.length - 5 > 1 ? 's' : ''}...
+                    And {(submissions?.length ?? 0) - 5} more document{((submissions?.length ?? 0) - 5) > 1 ? 's' : ''}...
                   </p>
                 )}
               </div>

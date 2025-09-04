@@ -105,7 +105,7 @@ export type JobSiteWithSwmsJobs = JobSite & {
 }
 
 export type SwmsJobWithDetails = SwmsJob & {
-  job_site: Pick<JobSite, 'id' | 'name' | 'address' | 'status'>
+  job_site: Pick<JobSite, 'id' | 'name' | 'address' | 'active'>
   submissions: SwmsSubmissionWithContractor[]
   submission_counts: {
     total: number

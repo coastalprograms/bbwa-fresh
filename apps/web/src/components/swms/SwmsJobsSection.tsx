@@ -136,13 +136,13 @@ export function SwmsJobsSection({ jobSiteId, swmsJobs, className }: SwmsJobsSect
                       <TableCell>
                         <div className="flex items-center gap-2">
                           <Button variant="outline" size="sm" asChild>
-                            <Link href={`/admin/job-sites/${jobSiteId}/swms/${job.id}`}>
+                            <Link href={`/admin/job-sites/${jobSiteId}/swms/${job.id}` as any}>
                               <Eye className="mr-1 h-3 w-3" />
                               View
                             </Link>
                           </Button>
                           <Button variant="outline" size="sm" asChild>
-                            <Link href={`/admin/job-sites/${jobSiteId}/swms/${job.id}/edit`}>
+                            <Link href={`/admin/job-sites/${jobSiteId}/swms/${job.id}/edit` as any}>
                               <Edit className="mr-1 h-3 w-3" />
                               Edit
                             </Link>

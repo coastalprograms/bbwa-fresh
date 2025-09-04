@@ -193,7 +193,9 @@ export function FileUpload({ swmsJobId, contractorId, token }: FileUploadProps) 
           : f
       )
     )
-  }, [])
+    // Actually trigger the upload retry
+    uploadFile(fileToRetry)
+  }, [uploadFile])
 
   const getFileIcon = (file: File) => {
     if (file.type.startsWith('image/')) {
@@ -254,21 +256,21 @@ export function FileUpload({ swmsJobId, contractorId, token }: FileUploadProps) 
             Files to Upload ({files.length})
           </h4>
           
-          {files.map((uploadFile) => {
-            const FileIcon = getFileIcon(uploadFile.file)
-            const StatusIcon = getStatusIcon(uploadFile.status)
+          {files.map((file) => {
+            const FileIcon = getFileIcon(file.file)
+            const StatusIcon = getStatusIcon(file.status)
             
             return (
               <div
-                key={uploadFile.id}
+                key={file.id}
                 className="flex items-center space-x-4 p-4 border rounded-lg bg-white"
               >
                 {/* File Preview/Icon */}
                 <div className="flex-shrink-0">
-                  {uploadFile.previewUrl ? (
+                  {file.previewUrl ? (
                     <img
-                      src={uploadFile.previewUrl}
-                      alt={uploadFile.file.name}
+                      src={file.previewUrl}
+                      alt={file.file.name}
                       className="w-12 h-12 rounded object-cover"
                     />
                   ) : (
@@ -281,28 +283,28 @@ export function FileUpload({ swmsJobId, contractorId, token }: FileUploadProps) 
                 {/* File Details */}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900 truncate">
-                    {uploadFile.file.name}
+                    {file.file.name}
                   </p>
                   <p className="text-xs text-gray-600">
-                    {ACCEPTED_FILE_TYPES[uploadFile.file.type as keyof typeof ACCEPTED_FILE_TYPES]} • {Math.round(uploadFile.file.size / 1024)} KB
+                    {ACCEPTED_FILE_TYPES[file.file.type as keyof typeof ACCEPTED_FILE_TYPES]} • {Math.round(file.file.size / 1024)} KB
                   </p>
                   
                   {/* Progress Bar */}
-                  {uploadFile.status === 'uploading' && (
+                  {file.status === 'uploading' && (
                     <div className="mt-2">
-                      <Progress value={uploadFile.progress} className="h-2" />
+                      <Progress value={file.progress} className="h-2" />
                       <p className="text-xs text-gray-600 mt-1">
-                        Uploading... {uploadFile.progress}%
+                        Uploading... {file.progress}%
                       </p>
                     </div>
                   )}
                   
                   {/* Error Message */}
-                  {uploadFile.status === 'error' && uploadFile.error && (
+                  {file.status === 'error' && file.error && (
                     <Alert className="mt-2 py-2">
                       <AlertCircle className="h-4 w-4" />
                       <AlertDescription className="text-xs">
-                        {uploadFile.error}
+                        {file.error}
                       </AlertDescription>
                     </Alert>
                   )}
@@ -313,28 +315,28 @@ export function FileUpload({ swmsJobId, contractorId, token }: FileUploadProps) 
                   {StatusIcon && (
                     <StatusIcon 
                       className={`h-5 w-5 ${
-                        uploadFile.status === 'success' 
+                        file.status === 'success' 
                           ? 'text-green-600' 
                           : 'text-red-600'
                       }`} 
                     />
                   )}
                   
-                  {uploadFile.status === 'pending' && (
+                  {file.status === 'pending' && (
                     <Button
                       size="sm"
-                      onClick={() => uploadFile(uploadFile)}
-                      disabled={uploadFile.status === 'uploading'}
+                      onClick={() => uploadFile(file)}
+                      disabled={false}
                     >
                       Upload
                     </Button>
                   )}
                   
-                  {uploadFile.status === 'error' && (
+                  {file.status === 'error' && (
                     <Button
                       size="sm"
                       variant="outline"
-                      onClick={() => retryUpload(uploadFile)}
+                      onClick={() => retryUpload(file)}
                     >
                       Retry
                     </Button>
@@ -343,8 +345,8 @@ export function FileUpload({ swmsJobId, contractorId, token }: FileUploadProps) 
                   <Button
                     size="sm"
                     variant="ghost"
-                    onClick={() => removeFile(uploadFile.id)}
-                    disabled={uploadFile.status === 'uploading'}
+                    onClick={() => removeFile(file.id)}
+                    disabled={file.status === 'uploading'}
                   >
                     <X className="h-4 w-4" />
                   </Button>

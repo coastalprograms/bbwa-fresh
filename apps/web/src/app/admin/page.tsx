@@ -3,8 +3,8 @@ import { createClient } from '@/lib/supabase/server'
 import KpiCard from './_components/KpiCard'
 import RecentCheckIns from './_components/RecentCheckIns'
 import UpcomingExpirations from './_components/UpcomingExpirations'
-import type { RecentCheckIn, UpcomingExpiration } from '@/types/dashboard'
-import { Users, ShieldCheck } from 'lucide-react'
+import type { RecentCheckIn, UpcomingExpiration, SwmsDashboardMetrics } from '@/types/dashboard'
+import { Users, ShieldCheck, FileText, Clock, AlertTriangle, CheckCircle, Send } from 'lucide-react'
 import { AppSidebar } from '@/components/admin/AppSidebar'
 import { Card, CardContent } from '@/components/ui/card'
 
@@ -84,13 +84,45 @@ export default async function AdminPage() {
       certification_type: cert.type
     })) || []
 
+    // Fetch SWMS metrics for dashboard
+    const { data: swmsJobs, error: swmsJobsError } = await supabase
+      .from('swms_jobs')
+      .select('id, status')
+      .eq('status', 'active')
+
+    const { data: swmsSubmissions, error: swmsSubmissionsError } = await supabase
+      .from('swms_submissions')
+      .select('id, status, created_at, swms_job_id')
+      .in('status', ['submitted', 'under_review', 'approved', 'rejected'])
+
+    // Calculate SWMS metrics
+    const activeSwmsJobs = swmsJobs?.length || 0
+    const totalSubmissions = swmsSubmissions?.length || 0
+    const pendingSubmissions = swmsSubmissions?.filter(s => s.status === 'submitted' || s.status === 'under_review').length || 0
+    
+    // Calculate overdue submissions (older than 7 days without approval)
+    const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
+    const overdueSubmissions = swmsSubmissions?.filter(s => 
+      (s.status === 'submitted' || s.status === 'under_review') &&
+      new Date(s.created_at) < sevenDaysAgo
+    ).length || 0
+
+    const approvedSubmissions = swmsSubmissions?.filter(s => s.status === 'approved').length || 0
+    const complianceRate = totalSubmissions > 0 ? (approvedSubmissions / totalSubmissions) * 100 : 0
+
+    // Check for active email campaigns (placeholder - will be implemented in Story 1.6 integration)
+    const activeCampaigns = 0
+
     // Log any errors but don't break the page
     if (activeWorkersError) console.error('Error fetching active workers:', activeWorkersError)
     if (checkInsError) console.error('Error fetching recent check-ins:', checkInsError) 
     if (expirationsError) console.error('Error fetching upcoming expirations:', expirationsError)
+    if (swmsJobsError) console.error('Error fetching SWMS jobs:', swmsJobsError)
+    if (swmsSubmissionsError) console.error('Error fetching SWMS submissions:', swmsSubmissionsError)
 
     return (
       <AppSidebar>
+        {/* Primary KPI Cards */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
                 <Card>
                   <CardContent className="p-4">
@@ -136,7 +168,86 @@ export default async function AdminPage() {
                     </div>
                   </CardContent>
                 </Card>
+
+                {/* SWMS Compliance Rate Card */}
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center">
+                      <div className="p-2 bg-purple-100 rounded-lg mr-4">
+                        <CheckCircle className="h-6 w-6 text-purple-600" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground">SWMS Compliance</p>
+                        <p className="text-2xl font-bold">{Math.round(complianceRate)}%</p>
+                        <p className="text-xs text-muted-foreground">Overall completion</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
+
+        {/* SWMS Overview Section */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+          <Card>
+            <CardContent className="p-4">
+              <div className="flex items-center">
+                <div className="p-2 bg-purple-100 rounded-lg mr-4">
+                  <FileText className="h-6 w-6 text-purple-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Active SWMS</p>
+                  <p className="text-2xl font-bold">{activeSwmsJobs}</p>
+                  <p className="text-xs text-muted-foreground">Jobs tracking</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-4">
+              <div className="flex items-center">
+                <div className="p-2 bg-yellow-100 rounded-lg mr-4">
+                  <Clock className="h-6 w-6 text-yellow-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Pending</p>
+                  <p className="text-2xl font-bold">{pendingSubmissions}</p>
+                  <p className="text-xs text-muted-foreground">Awaiting review</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-4">
+              <div className="flex items-center">
+                <div className="p-2 bg-red-100 rounded-lg mr-4">
+                  <AlertTriangle className="h-6 w-6 text-red-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Overdue</p>
+                  <p className="text-2xl font-bold">{overdueSubmissions}</p>
+                  <p className="text-xs text-muted-foreground">Need attention</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-4">
+              <div className="flex items-center">
+                <div className="p-2 bg-blue-100 rounded-lg mr-4">
+                  <Send className="h-6 w-6 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Campaigns</p>
+                  <p className="text-2xl font-bold">{activeCampaigns}</p>
+                  <p className="text-xs text-muted-foreground">Email reminders</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
               {/* Activity Section */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

@@ -22,7 +22,7 @@ async function UploadPageContent({ token }: { token: string }) {
     notFound()
   }
 
-  const { swmsJob, jobSite, contractor } = validation.data
+  const { swmsJob, jobSite, contractor } = validation.data!
 
   // Get existing submissions
   const submissionStatus = await getSubmissionStatus(swmsJob.id, contractor.id)
@@ -71,7 +71,7 @@ async function UploadPageContent({ token }: { token: string }) {
               <CardContent>
                 <RequirementsChecklist 
                   swmsJob={swmsJob}
-                  submissions={submissionStatus.success ? submissionStatus.data : []}
+                  submissions={submissionStatus.success ? (submissionStatus.data ?? []) : []}
                 />
               </CardContent>
             </Card>
@@ -87,7 +87,7 @@ async function UploadPageContent({ token }: { token: string }) {
               </CardHeader>
               <CardContent>
                 <SubmissionStatus 
-                  submissions={submissionStatus.success ? submissionStatus.data : []}
+                  submissions={submissionStatus.success ? (submissionStatus.data ?? []) : []}
                   error={submissionStatus.error}
                 />
               </CardContent>

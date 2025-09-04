@@ -18,7 +18,7 @@ async function SwmsPortalContent({ token }: { token: string }) {
     notFound()
   }
 
-  const { swmsJob, jobSite, contractor } = validation.data
+  const { swmsJob, jobSite, contractor } = validation.data!
 
   return (
     <PortalLayout 
