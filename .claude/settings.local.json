@@ -136,7 +136,9 @@
       "mcp__serena__insert_after_symbol",
       "mcp__mcp-supermemory-ai__addToSupermemory",
       "Read(//Users/jakeschepis/.claude/agents/**)",
-      "Bash(rg:*)"
+      "Bash(rg:*)",
+      "Bash(timeout 60 npm test -- --testPathPattern=\"integration\" --passWithNoTests --verbose)",
+      "Bash(timeout 30 npm test -- --testPathPattern=\"integration\" --passWithNoTests)"
     ],
     "deny": [],
     "ask": []

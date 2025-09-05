@@ -583,5 +583,18 @@
       "Build directory not found"
     ],
     "errors": []
+  },
+  {
+    "timestamp": "2025-09-05T01:30:51.937Z",
+    "buildStart": null,
+    "buildEnd": null,
+    "duration": null,
+    "bundleSize": {},
+    "cacheHits": 4,
+    "cacheMisses": 0,
+    "warnings": [
+      "Build directory not found"
+    ],
+    "errors": []
   }
 ]
