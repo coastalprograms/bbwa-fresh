@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { ProjectCard } from '@/components/projects/ProjectCard'
 import { HeroSection } from '@/components/sections/hero-section'
+import { DiagonalHeroSection } from '@/components/sections/diagonal-hero-section'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 export const metadata: Metadata = {
@@ -112,6 +113,22 @@ export default async function ProjectsPage() {
           </Accordion>
         </div>
       )}
+
+      {/* Call to Action Section */}
+      <DiagonalHeroSection
+        title="Let's start building your dream home"
+        description="Ready to bring your vision to life? Contact us today for a free consultation and let's discuss your project."
+        primaryCta={{
+          text: "CALL US",
+          href: "tel:+61417927979"
+        }}
+        secondaryCta={{
+          text: "SEND US A MESSAGE",
+          href: "/contact"
+        }}
+        imageUrl="https://images.unsplash.com/photo-1560184897-ae75f418493e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+        imageAlt="Modern luxury kitchen with white cabinets and marble island"
+      />
       </div>
     </div>
   )

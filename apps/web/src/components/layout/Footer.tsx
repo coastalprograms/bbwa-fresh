@@ -46,7 +46,7 @@ const footerSections = {
 
 const socialLinks = [
   { href: "https://facebook.com", icon: FacebookIcon, label: "Facebook" },
-  { href: "https://linkedin.com", icon: LinkedinIcon, label: "LinkedIn" },
+  { href: "https://www.linkedin.com/in/frank-giglia-58a775b1/?originalSubdomain=au", icon: LinkedinIcon, label: "LinkedIn" },
   { href: "https://instagram.com", icon: InstagramIcon, label: "Instagram" },
 ]
 

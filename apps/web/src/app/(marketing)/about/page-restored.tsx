@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { HeroSection } from '@/components/sections/hero-section'
-import { DiagonalHeroSection } from '@/components/sections/diagonal-hero-section'
 import { ContactForm } from '@/components/forms/ContactForm'
-import { AnimatedSection } from '@/components/ui/animated-components'
 import { Building2, Users, MapPin, Target } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -41,17 +39,14 @@ export default function AboutPage() {
       {/* Our Story Section */}
       <section id="story" className="relative py-20 bg-white">
         <div className="container mx-auto px-6">
-          <AnimatedSection variant="fade" delay={0.1}>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-6 text-slate-900">Our Story</h2>
-              <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">From humble beginnings to becoming Southwest WA's premier construction company, our journey reflects our commitment to excellence and client satisfaction.</p>
-            </div>
-          </AnimatedSection>
-        </div>
-        
-        <div className="grid grid-cols-1 gap-8 w-full max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-6 text-slate-900">Our Story</h2>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">From humble beginnings to becoming Southwest WA's premier construction company, our journey reflects our commitment to excellence and client satisfaction.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* The Beginning */}
-            <div className="relative h-64 w-full rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
               <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
@@ -59,14 +54,14 @@ export default function AboutPage() {
                 }}
               />
               <div className="absolute inset-0 bg-black/50" />
-              <div className="relative z-10 p-6 h-full flex flex-col justify-center text-white">
-                <h3 className="text-2xl font-bold mb-2">The Beginning</h3>
-                <p className="text-base leading-relaxed">Bayside Builders WA was born from a simple but powerful realization: Southwest WA deserved a construction company that understood both the sophistication of its clientele and the unique demands of its diverse landscape. After spending over two decades in Western Australia's construction industry, founder Frank Giglia recognized a gap in the market. Clients in the Margaret River region and Geographe Bay were seeking a builder who could deliver luxury residential projects with the same precision and professionalism applied to complex commercial developments. They wanted quality craftsmanship, but they also wanted a partner who understood their vision for Southwest living.</p>
+              <div className="relative z-10 p-8 h-full flex flex-col justify-end text-white">
+                <h3 className="text-2xl font-bold mb-4">The Beginning</h3>
+                <p className="text-lg leading-relaxed">Founded with a vision to deliver exceptional construction services, Bayside Builders WA started as a small family business with big dreams. Our commitment to quality and customer satisfaction has been the cornerstone of our success.</p>
               </div>
             </div>
 
             {/* Our Evolution */}
-            <div className="relative h-64 w-full rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
               <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
@@ -74,14 +69,14 @@ export default function AboutPage() {
                 }}
               />
               <div className="absolute inset-0 bg-black/50" />
-              <div className="relative z-10 p-6 h-full flex flex-col justify-center text-white">
-                <h3 className="text-2xl font-bold mb-2">Our Evolution</h3>
-                <p className="text-base leading-relaxed">Since establishing Bayside Builders in 2020, we've deliberately grown as a boutique operation rather than chasing volume. Every project we undertake - whether a sophisticated commercial development or a luxury coastal home - receives the same meticulous attention to detail and commitment to excellence. Our portfolio speaks to our unique position in the Southwest WA market: we're equally at home delivering complex commercial builds as we are creating dream homes where families will make lifelong memories. This dual expertise means we bring commercial-grade project management and precision to every luxury residence, while understanding that every commercial project represents someone's business dreams.</p>
+              <div className="relative z-10 p-8 h-full flex flex-col justify-end text-white">
+                <h3 className="text-2xl font-bold mb-4">Our Evolution</h3>
+                <p className="text-lg leading-relaxed">Over the years, we've grown from a small local builder to a respected name in Southwest WA construction. Our evolution has been marked by continuous learning, adaptation, and an unwavering commitment to excellence.</p>
               </div>
             </div>
 
             {/* Today */}
-            <div className="relative h-64 w-full rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
               <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
@@ -89,16 +84,17 @@ export default function AboutPage() {
                 }}
               />
               <div className="absolute inset-0 bg-black/50" />
-              <div className="relative z-10 p-6 h-full flex flex-col justify-center text-white">
-                <h3 className="text-2xl font-bold mb-2">Today</h3>
-                <p className="text-base leading-relaxed">We've built our reputation one satisfied client at a time. Today, Bayside Builders is recognized as the boutique choice for discerning clients who refuse to compromise on quality, whether they're envisioning their forever home or their next business venture.</p>
+              <div className="relative z-10 p-8 h-full flex flex-col justify-end text-white">
+                <h3 className="text-2xl font-bold mb-4">Today</h3>
+                <p className="text-lg leading-relaxed">Today, we stand as Southwest WA's premier boutique construction company, known for our attention to detail, personalized service, and commitment to delivering exceptional results on every project we undertake.</p>
               </div>
             </div>
+          </div>
         </div>
       </section>
 
       {/* What Sets Bayside Builders Apart */}
-      <section className="relative py-20 pb-32 bg-cover bg-center bg-no-repeat" style={{backgroundImage: 'url("https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80")'}}>
+      <section className="relative py-20 bg-cover bg-center bg-no-repeat" style={{backgroundImage: 'url("https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80")'}}>
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 container mx-auto px-6">
           <div className="text-center mb-16">
@@ -106,49 +102,53 @@ export default function AboutPage() {
             <p className="text-xl text-white/90 max-w-4xl mx-auto leading-relaxed">When you choose Bayside Builders, you're choosing more than construction services - you're choosing a partnership with Southwest WA's most dedicated craftsman.</p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 w-full">
-            {/* Specialized Expertise - Top Left (baseline - stays where it is) */}
-            <div className="bg-white rounded-xl p-6 shadow-lg">
-              <div className="flex items-center mb-4">
-                <div className="bg-primary/10 p-2 rounded-lg mr-3">
-                  <Building2 className="h-6 w-6 text-primary" />
+          <div className="grid md:grid-cols-2 gap-32 w-full">
+            {/* Specialized Expertise */}
+            <div className="bg-white rounded-2xl p-8 shadow-2xl">
+              <div className="flex items-center mb-6">
+                <div className="bg-primary/10 p-3 rounded-xl mr-4">
+                  <Building2 className="h-8 w-8 text-primary" />
                 </div>
+                <h3 className="text-2xl font-bold text-slate-900">Specialized Expertise</h3>
               </div>
-              <p className="text-base text-slate-600 mb-3 font-medium">"Three Sectors, One Standard of Excellence"</p>
-              <p className="text-sm text-slate-600 leading-relaxed">Frank exclusively builds luxury custom homes, commercial developments, and agricultural facilities across Southwest WA. This focused specialization means deep expertise in complex building types rather than generalist approaches. When you choose Bayside Builders, you're choosing a craftsman who understands the unique requirements of sophisticated projects.</p>
+              <p className="text-lg text-slate-600 mb-4">"Three Sectors, One Standard of Excellence"</p>
+              <p className="text-lg text-slate-600 leading-relaxed">Frank exclusively builds luxury custom homes, commercial developments, and agricultural facilities across Southwest WA. This focused specialization means deep expertise in complex building types rather than generalist approaches. When you choose Bayside Builders, you're choosing a craftsman who understands the unique requirements of sophisticated projects.</p>
             </div>
 
-            {/* Personal Craftsmanship - Top Right (20% lower than top left) */}
-            <div className="bg-white rounded-xl p-6 shadow-lg transform md:translate-y-8">
-              <div className="flex items-center mb-4">
-                <div className="bg-primary/10 p-2 rounded-lg mr-3">
-                  <Users className="h-6 w-6 text-primary" />
+            {/* Personal Craftsmanship */}
+            <div className="bg-white rounded-2xl p-8 shadow-2xl">
+              <div className="flex items-center mb-6">
+                <div className="bg-primary/10 p-3 rounded-xl mr-4">
+                  <Users className="h-8 w-8 text-primary" />
                 </div>
+                <h3 className="text-2xl font-bold text-slate-900">Personal Craftsmanship</h3>
               </div>
-              <p className="text-base text-slate-600 mb-3 font-medium">"Direct Access to the Builder"</p>
-              <p className="text-sm text-slate-600 leading-relaxed">No project managers, no middlemen. Frank personally handles every consultation, oversees every build phase, and guarantees every outcome. As both owner and on-site craftsman, he brings 20+ years of hands-on experience to your project. When questions arise or decisions are needed, you get immediate answers from the person responsible.</p>
+              <p className="text-lg text-slate-600 mb-4">"Direct Access to the Builder"</p>
+              <p className="text-lg text-slate-600 leading-relaxed">No project managers, no middlemen. Frank personally handles every consultation, oversees every build phase, and guarantees every outcome. As both owner and on-site craftsman, he brings 20+ years of hands-on experience to your project. When questions arise or decisions are needed, you get immediate answers from the person responsible.</p>
             </div>
 
-            {/* Southwest WA Focus - Bottom Left (20% lower than top right = 40% from baseline) */}
-            <div className="bg-white rounded-xl p-6 shadow-lg transform md:translate-y-16">
-              <div className="flex items-center mb-4">
-                <div className="bg-primary/10 p-2 rounded-lg mr-3">
-                  <MapPin className="h-6 w-6 text-primary" />
+            {/* Southwest WA Focus */}
+            <div className="bg-white rounded-2xl p-8 shadow-2xl">
+              <div className="flex items-center mb-6">
+                <div className="bg-primary/10 p-3 rounded-xl mr-4">
+                  <MapPin className="h-8 w-8 text-primary" />
                 </div>
+                <h3 className="text-2xl font-bold text-slate-900">Southwest WA Focus</h3>
               </div>
-              <p className="text-base text-slate-600 mb-3 font-medium">"Local Knowledge, Premium Results"</p>
-              <p className="text-sm text-slate-600 leading-relaxed">From coastal wind considerations to agricultural zoning requirements, Frank understands what it takes to build successfully in Southwest WA. His local expertise ensures every project meets regional standards and performs beautifully in our climate. Currently managing luxury homes and commercial projects from Dunsborough to Margaret River, with a deliberate focus on quality over quantity.</p>
+              <p className="text-lg text-slate-600 mb-4">"Local Knowledge, Premium Results"</p>
+              <p className="text-lg text-slate-600 leading-relaxed">From coastal wind considerations to agricultural zoning requirements, Frank understands what it takes to build successfully in Southwest WA. His local expertise ensures every project meets regional standards and performs beautifully in our climate. Currently managing luxury homes and commercial projects from Dunsborough to Margaret River, with a deliberate focus on quality over quantity.</p>
             </div>
 
-            {/* Boutique Approach - Bottom Right (20% lower than bottom left = 60% from baseline) */}
-            <div className="bg-white rounded-xl p-6 shadow-lg transform md:translate-y-24">
-              <div className="flex items-center mb-4">
-                <div className="bg-primary/10 p-2 rounded-lg mr-3">
-                  <Target className="h-6 w-6 text-primary" />
+            {/* Boutique Approach */}
+            <div className="bg-white rounded-2xl p-8 shadow-2xl">
+              <div className="flex items-center mb-6">
+                <div className="bg-primary/10 p-3 rounded-xl mr-4">
+                  <Target className="h-8 w-8 text-primary" />
                 </div>
+                <h3 className="text-2xl font-bold text-slate-900">Boutique Approach</h3>
               </div>
-              <p className="text-base text-slate-600 mb-3 font-medium">"Selective Projects, Exceptional Outcomes"</p>
-              <p className="text-sm text-slate-600 leading-relaxed">Frank maintains a deliberately limited project schedule to ensure every build receives complete attention. You're not competing with 20 other builds for attention - you're partnering with a craftsman committed to perfecting your vision. This boutique approach means we're not the cheapest option, but we're the choice for clients who understand that exceptional quality requires focused dedication.</p>
+              <p className="text-lg text-slate-600 mb-4">"Selective Projects, Exceptional Outcomes"</p>
+              <p className="text-lg text-slate-600 leading-relaxed">Frank maintains a deliberately limited project schedule to ensure every build receives complete attention. You're not competing with 20 other builds for attention - you're partnering with a craftsman committed to perfecting your vision. This boutique approach means we're not the cheapest option, but we're the choice for clients who understand that exceptional quality requires focused dedication.</p>
             </div>
           </div>
         </div>
@@ -211,22 +211,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <DiagonalHeroSection
-        title="Let's start building your dream home"
-        description="Ready to bring your vision to life? Contact us today for a free consultation and let's discuss your project."
-        primaryCta={{
-          text: "CALL US",
-          href: "tel:+61417927979"
-        }}
-        secondaryCta={{
-          text: "SEND US A MESSAGE",
-          href: "/contact"
-        }}
-        imageUrl="https://images.unsplash.com/photo-1560184897-ae75f418493e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-        imageAlt="Modern luxury kitchen with white cabinets and marble island"
-      />
-
+      {/* Contact Form */}
+      <section id="contact" className="relative py-20 bg-slate-50 mb-16">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-6 text-slate-900">Get In Touch</h2>
+              <p className="text-lg text-slate-600 leading-relaxed">
+                Ready to discuss your next project? We'd love to hear from you and learn how we can bring your vision to life.
+              </p>
+            </div>
+            <ContactForm />
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

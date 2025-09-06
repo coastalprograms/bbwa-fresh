@@ -12,13 +12,9 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
 
 const services = [
-  'New Home Construction',
-  'Renovations & Extensions',
-  'Commercial Projects',
-  'Heritage Restoration',
-  'Maintenance & Repairs',
-  'Project Management',
-  'Consulting Services',
+  'Custom Luxury Homes',
+  'Commercial Construction',
+  'Agricultural & Farming Structures',
 ]
 
 export function ContactForm() {
@@ -71,7 +67,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-8">
       {/* Honeypot field - hidden from users */}
       <input
         type="text"
@@ -83,68 +79,75 @@ export function ContactForm() {
         autoComplete="off"
       />
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="space-y-2">
-          <Label htmlFor="first_name">First Name *</Label>
-          <Input
-            id="first_name"
-            name="first_name"
-            type="text"
-            required
-            minLength={2}
-            value={formData.first_name}
-            onChange={(e) => handleChange('first_name', e.target.value)}
-            disabled={isSubmitting}
-            placeholder="John"
-          />
-        </div>
+      {/* Name Section */}
+      <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="first_name">First Name *</Label>
+            <Input
+              id="first_name"
+              name="first_name"
+              type="text"
+              required
+              minLength={2}
+              value={formData.first_name}
+              onChange={(e) => handleChange('first_name', e.target.value)}
+              disabled={isSubmitting}
+              placeholder="John"
+            />
+          </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="last_name">Last Name *</Label>
-          <Input
-            id="last_name"
-            name="last_name"
-            type="text"
-            required
-            minLength={2}
-            value={formData.last_name}
-            onChange={(e) => handleChange('last_name', e.target.value)}
-            disabled={isSubmitting}
-            placeholder="Smith"
-          />
-        </div>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="space-y-2">
-          <Label htmlFor="email">Email *</Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            required
-            value={formData.email}
-            onChange={(e) => handleChange('email', e.target.value)}
-            disabled={isSubmitting}
-            placeholder="john@example.com"
-          />
+          <div className="space-y-2">
+            <Label htmlFor="last_name">Last Name *</Label>
+            <Input
+              id="last_name"
+              name="last_name"
+              type="text"
+              required
+              minLength={2}
+              value={formData.last_name}
+              onChange={(e) => handleChange('last_name', e.target.value)}
+              disabled={isSubmitting}
+              placeholder="Smith"
+            />
+          </div>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="space-y-2">
-          <Label htmlFor="phone">Phone</Label>
-          <Input
-            id="phone"
-            name="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={(e) => handleChange('phone', e.target.value)}
-            disabled={isSubmitting}
-            placeholder="0400 000 000"
-          />
-        </div>
+      {/* Contact Section */}
+      <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="email">Email *</Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              required
+              value={formData.email}
+              onChange={(e) => handleChange('email', e.target.value)}
+              disabled={isSubmitting}
+              placeholder="john@example.com"
+            />
+          </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="phone">Phone</Label>
+            <Input
+              id="phone"
+              name="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => handleChange('phone', e.target.value)}
+              disabled={isSubmitting}
+              placeholder="0400 000 000"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Service Interest Section */}
+      <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
         <div className="space-y-2">
           <Label htmlFor="service">Service Interest</Label>
           <Select
@@ -152,13 +155,18 @@ export function ContactForm() {
             onValueChange={(value) => handleChange('service_interest', value)}
             disabled={isSubmitting}
           >
-            <SelectTrigger id="service">
+            <SelectTrigger id="service" className="w-full">
               <SelectValue placeholder="Select a service" />
             </SelectTrigger>
             <SelectContent>
               {services.map((service) => (
                 <SelectItem key={service} value={service}>
-                  {service}
+                  <div className="flex items-center">
+                    <span>{service}</span>
+                    {formData.service_interest === service && (
+                      <CheckCircle2 className="ml-2 h-4 w-4 text-primary" />
+                    )}
+                  </div>
                 </SelectItem>
               ))}
             </SelectContent>
@@ -166,23 +174,26 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="message">Message *</Label>
-        <Textarea
-          id="message"
-          name="message"
-          required
-          minLength={20}
-          rows={5}
-          value={formData.message}
-          onChange={(e) => handleChange('message', e.target.value)}
-          disabled={isSubmitting}
-          placeholder="Tell us about your project..."
-          className="resize-none"
-        />
-        <p className="text-xs text-muted-foreground">
-          Minimum 20 characters
-        </p>
+      {/* Message Section */}
+      <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+        <div className="space-y-2">
+          <Label htmlFor="message">Message *</Label>
+          <Textarea
+            id="message"
+            name="message"
+            required
+            minLength={20}
+            rows={5}
+            value={formData.message}
+            onChange={(e) => handleChange('message', e.target.value)}
+            disabled={isSubmitting}
+            placeholder="Tell us about your project..."
+            className="resize-none"
+          />
+          <p className="text-xs text-muted-foreground">
+            Minimum 20 characters
+          </p>
+        </div>
       </div>
 
       {result && (

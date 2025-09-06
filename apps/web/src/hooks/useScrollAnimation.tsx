@@ -17,7 +17,7 @@ export function useScrollAnimation(options: ScrollAnimationOptions = {}) {
   const isInView = useInView(ref, {
     amount: options.threshold || 0.1,
     once: options.triggerOnce || false,
-    margin: options.rootMargin || "0px 0px -10% 0px"
+    margin: (options.rootMargin || "0px 0px -10% 0px") as any
   })
 
   // Track if element has been in view for bidirectional animations

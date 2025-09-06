@@ -129,13 +129,13 @@ export function HeroSection({
         className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4"
       >
         <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold px-8" asChild>
-          <Link href={primaryCta.href}>
+          <Link href={primaryCta.href as any}>
             {primaryCta.text}
             <ArrowRightIcon className="ml-2 h-4 w-4" />
           </Link>
         </Button>
         <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 font-semibold px-8" asChild>
-          <Link href={secondaryCta.href}>
+          <Link href={secondaryCta.href as any}>
             {secondaryCta.text}
           </Link>
         </Button>

@@ -160,7 +160,7 @@ export default function ContactPage() {
                         <InstagramIcon className="h-5 w-5 text-muted-foreground group-hover:text-primary" />
                       </a>
                       <a
-                        href="https://linkedin.com"
+                        href="https://www.linkedin.com/in/frank-giglia-58a775b1/?originalSubdomain=au"
                         className="p-2 rounded-lg bg-muted hover:bg-primary/10 transition-colors group"
                         aria-label="LinkedIn"
                       >
