@@ -31,6 +31,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'picsum.photos' },
       { protocol: 'https', hostname: 'dslerptraitfgcmxkhkq.supabase.co', pathname: '/storage/v1/object/public/**' },
+      { protocol: 'https', hostname: 'blfvrcjfohyinqfgpzmt.supabase.co', pathname: '/storage/v1/object/public/**' },
       { protocol: 'https', hostname: 'upload.wikimedia.org' },
     ],
     formats: ['image/webp', 'image/avif'],

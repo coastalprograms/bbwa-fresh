@@ -14,7 +14,11 @@ import {
   blueprintTextVariants,
   constructionBuildVariants,
   foundationRiseVariants,
-  heroTextContainerVariants
+  heroTextContainerVariants,
+  slideLeftVariants,
+  slideRightVariants,
+  slideUpVariants,
+  simpleFadeVariants
 } from "@/lib/animations"
 import { forwardRef, ReactNode } from "react"
 
@@ -23,7 +27,7 @@ interface AnimatedSectionProps {
   className?: string
   delay?: number
   staggerChildren?: boolean
-  variant?: "fade" | "hero" | "text" | "image" | "testimonial" | "bidirectional"
+  variant?: "fade" | "hero" | "text" | "image" | "testimonial" | "bidirectional" | "slideLeft" | "slideRight" | "slideUp" | "simpleFade"
   bidirectional?: boolean
 }
 
@@ -49,6 +53,14 @@ export const AnimatedSection = forwardRef<HTMLDivElement, AnimatedSectionProps>(
           return testimonialRiseVariants
         case "bidirectional":
           return bidirectionalFadeVariants
+        case "slideLeft":
+          return slideLeftVariants
+        case "slideRight":
+          return slideRightVariants
+        case "slideUp":
+          return slideUpVariants
+        case "simpleFade":
+          return simpleFadeVariants
         default:
           return sectionFadeInVariants
       }

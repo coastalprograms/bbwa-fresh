@@ -40,22 +40,22 @@ const CORE_VALUES: CoreValue[] = [
   {
     icon: ShieldCheckIcon,
     title: "Quality First",
-    description: "We deliver workmanship that stands the test of time with attention to every detail."
-  },
-  {
-    icon: ClockIcon,
-    title: "On-Time Delivery",
-    description: "Clear schedules and dependable delivery. Your time is valuable to us."
-  },
-  {
-    icon: UsersIcon,
-    title: "Expert Team",
-    description: "Licensed professionals with years of experience in residential construction."
+    description: "Premium materials and precision construction techniques on every project. We deliver workmanship that exceeds industry standards because cutting corners compromises structural integrity and long-term performance."
   },
   {
     icon: AwardIcon,
-    title: "Trusted Service",
-    description: "Open communication, fair pricing, and complete transparency throughout your project."
+    title: "Boutique Focus",
+    description: "Selective project scheduling ensures dedicated resources and attention for each build. Limited concurrent projects mean superior quality control and faster problem resolution throughout construction phases."
+  },
+  {
+    icon: UsersIcon,
+    title: "Multi-Sector Expertise",
+    description: "Specialized construction knowledge across luxury residential, commercial developments, and agricultural facilities. Complex building requirements demand experienced professionals, not generalist contractors attempting unfamiliar work."
+  },
+  {
+    icon: ClockIcon,
+    title: "Direct Access",
+    description: "Communication flows directly with decision-makers who have authority to act immediately. No project managers filtering information or delaying critical choices that impact your timeline and budget."
   }
 ]
 
@@ -76,14 +76,6 @@ export default function LandingPage() {
           subtitle="Building Excellence Across the South West"
           description="From custom luxury homes to commercial developments and agricultural structures, we deliver quality construction services with expertise and reliability."
           badge="Trusted Since 2008"
-          primaryCta={{
-            text: "Get Free Quote",
-            href: "/contact"
-          }}
-          secondaryCta={{
-            text: "View Our Work",
-            href: "/projects"
-          }}
           showCarousel={true}
         />
       </AnimatedSection>
@@ -280,21 +272,21 @@ export default function LandingPage() {
             </p>
           </AnimatedSection>
           
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {CORE_VALUES.map((value, index) => (
-              <div key={index} className="text-center group">
-                <AnimatedIcon index={index} className="mb-6 p-4 w-fit mx-auto rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                  <value.icon className="h-8 w-8" />
-                </AnimatedIcon>
-                <AnimatedSection variant="bidirectional" bidirectional={true} delay={index * 0.1 + 0.3}>
-                  <h3 className="text-lg font-semibold mb-3">
+              <AnimatedSection key={index} variant="slideUp" bidirectional={true} delay={index * 0.1 + 0.3}>
+                <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 text-center group hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+                  <AnimatedIcon index={index} className="mb-4 p-3 w-fit mx-auto rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                    <value.icon className="h-6 w-6" />
+                  </AnimatedIcon>
+                  <h3 className="text-lg font-semibold mb-3 text-slate-900">
                     {value.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-sm text-slate-600 leading-relaxed flex-1">
                     {value.description}
                   </p>
-                </AnimatedSection>
-              </div>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
@@ -312,8 +304,10 @@ export default function LandingPage() {
           text: "SEND US A MESSAGE",
           href: "/contact"
         }}
-        imageUrl="https://images.unsplash.com/photo-1560184897-ae75f418493e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-        imageAlt="Modern luxury kitchen with white cabinets and marble island"
+        imageUrl="https://dslerptraitfgcmxkhkq.supabase.co/storage/v1/object/public/media/hero_images/Mewett%20Road%20-%20Bayside%20Builders%20Med-Res%2013.jpg"
+        imageAlt="Bayside Builders construction project"
+        animated={true}
+        animationVariant="slideUp"
       />
 
     </div>

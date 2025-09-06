@@ -87,7 +87,7 @@ export default function CustomLuxuryHomesPage() {
           text: "SEND US A MESSAGE",
           href: "/contact"
         }}
-        imageUrl="https://images.unsplash.com/photo-1560184897-ae75f418493e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+        imageUrl="https://dslerptraitfgcmxkhkq.supabase.co/storage/v1/object/public/media/hero_images/Mewett%20Road%20-%20Bayside%20Builders%20Med-Res%2013.jpg"
         imageAlt="Luxury custom home interior"
       />
     </div>

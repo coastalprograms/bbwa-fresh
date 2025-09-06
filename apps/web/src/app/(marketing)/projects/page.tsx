@@ -75,14 +75,6 @@ export default async function ProjectsPage() {
         subtitle="Quality Construction Portfolio"
         description="Explore our diverse portfolio of completed projects across Western Australia. From custom homes to commercial builds, see the quality and craftsmanship we deliver."
         badge="200+ Projects Completed"
-        primaryCta={{
-          text: "Start Your Project",
-          href: "/contact"
-        }}
-        secondaryCta={{
-          text: "View Services",
-          href: "/services"
-        }}
         showCarousel={true}
       />
 
@@ -126,8 +118,8 @@ export default async function ProjectsPage() {
           text: "SEND US A MESSAGE",
           href: "/contact"
         }}
-        imageUrl="https://images.unsplash.com/photo-1560184897-ae75f418493e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-        imageAlt="Modern luxury kitchen with white cabinets and marble island"
+        imageUrl="https://dslerptraitfgcmxkhkq.supabase.co/storage/v1/object/public/media/hero_images/Mewett%20Road%20-%20Bayside%20Builders%20Med-Res%2013.jpg"
+        imageAlt="Bayside Builders construction project"
       />
       </div>
     </div>

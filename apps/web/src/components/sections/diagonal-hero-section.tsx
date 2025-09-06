@@ -4,6 +4,7 @@ import * as React from "react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Image from "next/image"
+import { AnimatedSection } from "@/components/ui/animated-components"
 
 interface DiagonalHeroSectionProps {
   title: string
@@ -19,6 +20,8 @@ interface DiagonalHeroSectionProps {
   imageUrl: string
   imageAlt: string
   className?: string
+  animated?: boolean
+  animationVariant?: "fade" | "slideLeft" | "slideRight" | "slideUp" | "simpleFade"
 }
 
 export function DiagonalHeroSection({
@@ -35,9 +38,11 @@ export function DiagonalHeroSection({
   imageUrl,
   imageAlt,
   className,
+  animated = true,
+  animationVariant = "slideUp",
 }: DiagonalHeroSectionProps) {
-  return (
-    <section className={`relative h-[350px] bg-white overflow-hidden ${className || ''}`}>
+  const sectionContent = (
+    <section className={`relative h-[350px] bg-white overflow-hidden mb-12 ${className || ''}`}>
       <div className="relative h-full w-full">
         {/* Left Side - Image with Diagonal Cut */}
         <div className="absolute inset-0 w-1/2">
@@ -48,6 +53,7 @@ export function DiagonalHeroSection({
               fill
               className="object-cover"
               priority
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
             {/* Diagonal Cut Effect - creates the angled line */}
             <div 
@@ -79,9 +85,9 @@ export function DiagonalHeroSection({
               <Button 
                 asChild
                 size="default"
-                className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 text-base font-semibold rounded-lg transition-colors"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 text-base font-semibold rounded-lg transition-colors"
               >
-                <Link href={primaryCta.href}>
+                <Link href={primaryCta.href as any}>
                   {primaryCta.text}
                 </Link>
               </Button>
@@ -90,9 +96,9 @@ export function DiagonalHeroSection({
                 asChild
                 variant="outline"
                 size="default"
-                className="border-teal-600 text-teal-600 hover:bg-teal-50 px-6 py-3 text-base font-semibold rounded-lg transition-colors"
+                className="border-primary text-primary hover:bg-primary/10 px-6 py-3 text-base font-semibold rounded-lg transition-colors"
               >
-                <Link href={secondaryCta.href}>
+                <Link href={secondaryCta.href as any}>
                   {secondaryCta.text}
                 </Link>
               </Button>
@@ -101,5 +107,20 @@ export function DiagonalHeroSection({
         </div>
       </div>
     </section>
+  )
+
+  if (!animated) {
+    return sectionContent
+  }
+
+  return (
+    <AnimatedSection 
+      variant={animationVariant}
+      bidirectional={true}
+      delay={0.2}
+      className=""
+    >
+      {sectionContent}
+    </AnimatedSection>
   )
 }

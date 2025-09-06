@@ -91,14 +91,24 @@ export function HeroCarousel({
         {images.map((image, index) => (
           <div key={image.id} className="min-w-full relative">
             <div className="relative h-screen bg-gradient-to-r from-background/20 to-background/10">
-              <Image
-                src={image.url}
-                alt={image.alt_text || `Hero image ${index + 1}`}
-                fill
-                className="object-cover"
-                priority={index === 0}
-                sizes="100vw"
-              />
+              {/* Use img tag for Supabase URLs to avoid Next.js double encoding */}
+              {image.url.includes('supabase.co') ? (
+                <img
+                  src={image.url}
+                  alt={image.alt_text || `Hero image ${index + 1}`}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              ) : (
+                <Image
+                  src={image.url}
+                  alt={image.alt_text || `Hero image ${index + 1}`}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                  sizes="100vw"
+                />
+              )}
               {/* Overlay for better text readability */}
               <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-black/40" />
             </div>
