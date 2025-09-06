@@ -546,11 +546,16 @@
     "errors": []
   },
   {
+<<<<<<< HEAD
     "timestamp": "2025-09-05T07:16:35.333Z",
+=======
+    "timestamp": "2025-09-05T01:30:51.937Z",
+>>>>>>> 7416480da45cecebc4fc55b4ab9a0991b900836d
     "buildStart": null,
     "buildEnd": null,
     "duration": null,
     "bundleSize": {},
+<<<<<<< HEAD
     "cacheHits": 1,
     "cacheMisses": 0,
     "warnings": [
@@ -643,6 +648,9 @@
     "duration": null,
     "bundleSize": {},
     "cacheHits": 1,
+=======
+    "cacheHits": 4,
+>>>>>>> 7416480da45cecebc4fc55b4ab9a0991b900836d
     "cacheMisses": 0,
     "warnings": [
       "Build directory not found"
